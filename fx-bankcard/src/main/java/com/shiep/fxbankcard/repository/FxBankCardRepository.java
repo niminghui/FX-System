@@ -13,7 +13,7 @@ import java.util.List;
  * @description: FxBankCard的数据访问层
  */
 @Repository
-public interface FxBankCardRepository extends JpaRepository<FxBankCard,String> {
+public interface FxBankCardRepository extends JpaRepository<FxBankCard, String> {
 
     /**
      * description: 通过用户ID查找该用户的银行卡
@@ -54,5 +54,5 @@ public interface FxBankCardRepository extends JpaRepository<FxBankCard,String> {
      * @param endTime
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    List<FxBankCard> findByCreatedTimeBetween(Timestamp beginTime,Timestamp endTime);
+    List<FxBankCard> findByCreatedTimeBetween(Timestamp beginTime, Timestamp endTime);
 }

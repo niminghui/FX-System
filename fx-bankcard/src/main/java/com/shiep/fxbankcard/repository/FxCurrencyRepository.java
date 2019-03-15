@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @description: FxCurrency的数据访问层
  */
 @Repository
-public interface FxCurrencyRepository extends JpaRepository<FxCurrency,String> {
+public interface FxCurrencyRepository extends JpaRepository<FxCurrency, String> {
     /**
      * description: 通过货币的中文名查找
      *

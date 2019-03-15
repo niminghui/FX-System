@@ -17,8 +17,8 @@ public class VerificationIDCardApiTest {
 
     @Test
     public void verify() {
-        Map<String, Object> resultMap=VerificationIDCardApi.verify(testData);
-        Assert.assertEquals(200,resultMap.get("code"));
+        Map<String, Object> resultMap = VerificationIDCardApi.verify(testData);
+        Assert.assertEquals(200, resultMap.get("code"));
         System.out.println(resultMap);
     }
 }

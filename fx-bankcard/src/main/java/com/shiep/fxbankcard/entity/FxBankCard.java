@@ -24,18 +24,18 @@ public class FxBankCard implements Serializable {
     @Column(name = "BANKCARD_ID")
     private String id;
 
-    @Column(name = "BANKCARD_PASSWORD",nullable = false)
+    @Column(name = "BANKCARD_PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "BANKCARD_STATUS",nullable = false)
+    @Column(name = "BANKCARD_STATUS", nullable = false)
     private Integer status;
 
-    @Column(name = "BANKCARD_CREATED_TIME",nullable = false)
+    @Column(name = "BANKCARD_CREATED_TIME", nullable = false)
     private Timestamp createdTime;
 
-    @Column(name = "BANKCARD_CREATED_PLACE",nullable = false)
+    @Column(name = "BANKCARD_CREATED_PLACE", nullable = false)
     private String createdPlace;
 
-    @Column(name = "USER_ID",nullable = false,unique = true)
+    @Column(name = "USER_ID", nullable = false, unique = true)
     private String userID;
 }

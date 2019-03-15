@@ -24,12 +24,12 @@ public class FxAsset implements Serializable {
     @Column(name = "ASSET_ID")
     private String id;
 
-    @Column(name = "CURRENCY_EN_NAME",nullable = false)
+    @Column(name = "CURRENCY_EN_NAME", nullable = false)
     private String currencyCode;
 
-    @Column(name = "ASSET_BALANCE",nullable = false)
+    @Column(name = "ASSET_BALANCE", nullable = false)
     private BigDecimal balance;
 
-    @Column(name = "BANKCARD_ID",nullable = false)
+    @Column(name = "BANKCARD_ID", nullable = false)
     private String bankcardId;
 }

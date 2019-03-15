@@ -13,7 +13,7 @@ import java.util.List;
  * @description: FxTransactionRecord的数据访问层
  */
 @Repository
-public interface FxTransactionRecordRepository extends JpaRepository<FxTransactionRecord,String> {
+public interface FxTransactionRecordRepository extends JpaRepository<FxTransactionRecord, String> {
 
     /**
      * description: 通过银行卡号查询该银行卡所有的交易记录
@@ -30,7 +30,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param currencyCode
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCode(String bankcardID,String currencyCode);
+    List<FxTransactionRecord> findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode);
 
     /**
      * description: 通过银行卡号和交易类型查找该银行卡有关该交易类型的所有交易记录
@@ -39,7 +39,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param type
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAAndType(String bankcardID,Integer type);
+    List<FxTransactionRecord> findByBankcardIdAAndType(String bankcardID, Integer type);
 
     /**
      * description: 通过交易类型查找所有的交易记录
@@ -80,7 +80,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param endTime
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByTransactionTimeBetween(Timestamp beginTime,Timestamp endTime);
+    List<FxTransactionRecord> findByTransactionTimeBetween(Timestamp beginTime, Timestamp endTime);
 
     /**
      * description: 查询该银行卡交易时间在time之前的交易记录
@@ -89,7 +89,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param time
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBefore(String bankcardID,Timestamp time);
+    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBefore(String bankcardID, Timestamp time);
 
     /**
      * description: 查询该银行卡交易时间在time之后的交易记录
@@ -98,7 +98,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param time
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeAfter(String bankcardID,Timestamp time);
+    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeAfter(String bankcardID, Timestamp time);
 
     /**
      * description: 查询该银行卡交易时间在beginTime至endTime之间的记录
@@ -108,5 +108,5 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param endTime
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBetween(String bankcardID,Timestamp beginTime,Timestamp endTime);
+    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBetween(String bankcardID, Timestamp beginTime, Timestamp endTime);
 }

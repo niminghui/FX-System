@@ -25,24 +25,24 @@ public class FxTransactionRecord implements Serializable {
     @Column(name = "TRANSACTION_ID")
     private String id;
 
-    @Column(name = "BANKCARD_ID",nullable = false)
+    @Column(name = "BANKCARD_ID", nullable = false)
     private String bankcardId;
 
-    @Column(name = "TRANSACTION_MONEY",nullable = false)
+    @Column(name = "TRANSACTION_MONEY", nullable = false)
     private BigDecimal money;
 
-    @Column(name = "TRANSACTION_TYPE",nullable = false)
+    @Column(name = "TRANSACTION_TYPE", nullable = false)
     private Integer type;
 
-    @Column(name = "CURRENCY_EN_NAME",nullable = false)
+    @Column(name = "CURRENCY_EN_NAME", nullable = false)
     private String currencyCode;
 
-    @Column(name = "TRANSACTION_TIME",nullable = false)
+    @Column(name = "TRANSACTION_TIME", nullable = false)
     private Timestamp transactionTime;
 
     @Column(name = "TRANSACTION_PLACE")
     private String transactionPlace;
 
-    @Column(name = "TRANSACTION_PEOPLE",nullable = false)
+    @Column(name = "TRANSACTION_PEOPLE", nullable = false)
     private String transactionPeople;
 }

@@ -24,16 +24,17 @@ public class FxCurrency implements Serializable {
     @Column(name = "CURRENCY_ID")
     private String id;
 
-    @Column(name = "CURRENCY_CN_NAME",nullable = false,unique = true)
-    private String chinaName;;
+    @Column(name = "CURRENCY_CN_NAME", nullable = false, unique = true)
+    private String chinaName;
+    ;
 
-    @Column(name = "CURRENCY_EN_NAME",nullable = false,unique = true)
+    @Column(name = "CURRENCY_EN_NAME", nullable = false, unique = true)
     private String englishName;
 
-    @Column(name = "CURRENCY_COUNTRY",nullable = false)
+    @Column(name = "CURRENCY_COUNTRY", nullable = false)
     private String country;
 
-    @Column(name = "CURRENCY_DIR",nullable = false)
+    @Column(name = "CURRENCY_DIR", nullable = false)
     private BigDecimal depositInterestRate;
 
     @Column(name = "CURRENCY_TDR_1")

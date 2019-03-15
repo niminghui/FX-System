@@ -16,15 +16,15 @@ public class FxRateApiTest {
 
     @Test
     public void getRmbRate() {
-        Map<String,Object> resultMap=FxRateApi.getRmbRate();
-        Assert.assertEquals(200,resultMap.get("code"));
+        Map<String, Object> resultMap = FxRateApi.getRmbRate();
+        Assert.assertEquals(200, resultMap.get("code"));
         System.out.println(resultMap);
     }
 
     @Test
     public void getFxRate() {
-        Map<String,Object> resultMap=FxRateApi.getFxRate();
-        Assert.assertEquals(200,resultMap.get("code"));
+        Map<String, Object> resultMap = FxRateApi.getFxRate();
+        Assert.assertEquals(200, resultMap.get("code"));
         System.out.println(resultMap);
     }
 }

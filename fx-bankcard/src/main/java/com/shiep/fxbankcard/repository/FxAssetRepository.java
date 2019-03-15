@@ -12,7 +12,7 @@ import java.util.List;
  * @description: FxAsset的数据访问层
  */
 @Repository
-public interface FxAssetRepository extends JpaRepository<FxAsset,String> {
+public interface FxAssetRepository extends JpaRepository<FxAsset, String> {
 
     /**
      * description: 通过银行卡号查找该银行卡具有的资产
@@ -29,5 +29,5 @@ public interface FxAssetRepository extends JpaRepository<FxAsset,String> {
      * @param currencyCode
      * @return com.shiep.fxbankcard.entity.FxAsset
      */
-    FxAsset findByBankcardIdAndCurrencyCode(String bankcardID,String currencyCode);
+    FxAsset findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode);
 }

@@ -23,31 +23,31 @@ public class FxUser implements Serializable {
     @Column(name = "USER_ID")
     private String id;
 
-    @Column(name = "USER_CN_NAME",nullable = false)
+    @Column(name = "USER_CN_NAME", nullable = false)
     private String chinaName;
 
     @Column(name = "USER_EN_NAME")
     private String englishName;
 
-    @Column(name = "USER_GENDER",nullable = false)
+    @Column(name = "USER_GENDER", nullable = false)
     private String gender;
 
-    @Column(name = "USER_IDENTITY_CARD",nullable = false,unique = true)
+    @Column(name = "USER_IDENTITY_CARD", nullable = false, unique = true)
     private String idCardNum;
 
     @Column(name = "USER_IMAGE")
     private byte[] faceImage;
 
-    @Column(name = "USER_PROV",nullable = false)
+    @Column(name = "USER_PROV", nullable = false)
     private String province;
 
-    @Column(name = "USER_CITY",nullable = false)
+    @Column(name = "USER_CITY", nullable = false)
     private String city;
 
-    @Column(name = "USER_REGION",nullable = false)
+    @Column(name = "USER_REGION", nullable = false)
     private String region;
 
-    @Column(name = "USER_EMAIL",nullable = false,unique = true)
+    @Column(name = "USER_EMAIL", nullable = false, unique = true)
     private String email;
 
     @Column(name = "USER_PHONE")

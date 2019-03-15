@@ -12,7 +12,7 @@ import java.util.List;
  * @description: FxUser的数据访问层
  */
 @Repository
-public interface FxUserRepository extends JpaRepository<FxUser,String> {
+public interface FxUserRepository extends JpaRepository<FxUser, String> {
     /**
      * description: 通过中文名查找用户
      *

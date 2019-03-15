@@ -23,9 +23,9 @@ public class FxCurrencyPairs implements Serializable {
     @Column(name = "CURRENCY_PAIRS_ID")
     private String id;
 
-    @Column(name = "BASIC_CURRENCY",nullable = false)
+    @Column(name = "BASIC_CURRENCY", nullable = false)
     private String basicCurrency;
 
-    @Column(name = "SECONDARY_CURRENCY",nullable = false)
+    @Column(name = "SECONDARY_CURRENCY", nullable = false)
     private String secondaryCurrency;
 }

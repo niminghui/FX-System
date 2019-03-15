@@ -12,19 +12,19 @@ public enum CurrencyEnum {
     /**
      * description: 银行目前可支持的13种货币
      */
-    CNY("CNY","人民币"),
-    AUD("AUD","澳大利亚元"),
-    USD("USD","美元"),
-    EUR("EUR","欧元"),
-    GBP("GBP","英镑"),
-    NZD("NZD","新西兰元"),
-    CAD("CAD","加拿大元"),
-    HKD("HKD","港币"),
-    JPY("JPY","日元"),
-    MYR("MYR","林吉特"),
-    SGD("SGD","新加坡元"),
-    TWD("TWD","新台币"),
-    SEK("SEK","瑞典克朗");
+    CNY("CNY", "人民币"),
+    AUD("AUD", "澳大利亚元"),
+    USD("USD", "美元"),
+    EUR("EUR", "欧元"),
+    GBP("GBP", "英镑"),
+    NZD("NZD", "新西兰元"),
+    CAD("CAD", "加拿大元"),
+    HKD("HKD", "港币"),
+    JPY("JPY", "日元"),
+    MYR("MYR", "林吉特"),
+    SGD("SGD", "新加坡元"),
+    TWD("TWD", "新台币"),
+    SEK("SEK", "瑞典克朗");
 
     /**
      * description: 标准货币符号
@@ -42,9 +42,9 @@ public enum CurrencyEnum {
      * @param name 货币中文名称
      * @return CurrencyEnum
      */
-    CurrencyEnum(String code,String name){
-        this.code=code;
-        this.name=name;
+    CurrencyEnum(String code, String name) {
+        this.code = code;
+        this.name = name;
     }
 
     /**
@@ -53,10 +53,10 @@ public enum CurrencyEnum {
      * @param code 标准货币符号
      * @return com.shiep.fxbankcard.model.CurrencyEnum
      */
-    public static CurrencyEnum parse(String code){
+    public static CurrencyEnum parse(String code) {
         CurrencyEnum[] values = values();
         for (CurrencyEnum value : values) {
-            if(value.getCode().equals(code)){
+            if (value.getCode().equals(code)) {
                 return value;
             }
         }
@@ -69,7 +69,7 @@ public enum CurrencyEnum {
      * @param code 标准货币符号
      * @return java.lang.String
      */
-    public static String getNameByCode(String code){
+    public static String getNameByCode(String code) {
         return parse(code).getName();
     }
 
@@ -79,10 +79,10 @@ public enum CurrencyEnum {
      * @param name
      * @return java.lang.String
      */
-    public static String getCodeByName(String name){
+    public static String getCodeByName(String name) {
         CurrencyEnum[] values = values();
         for (CurrencyEnum value : values) {
-            if(value.getName().equals(name)){
+            if (value.getName().equals(name)) {
                 return value.getCode();
             }
         }
