@@ -35,7 +35,7 @@ public class FxTransactionRecord implements Serializable {
     private Integer type;
 
     @Column(name = "CURRENCY_EN_NAME",nullable = false)
-    private String currencyEnglishName;
+    private String currencyCode;
 
     @Column(name = "TRANSACTION_TIME",nullable = false)
     private Timestamp transactionTime;

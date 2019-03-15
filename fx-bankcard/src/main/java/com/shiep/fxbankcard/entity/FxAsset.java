@@ -25,7 +25,7 @@ public class FxAsset implements Serializable {
     private String id;
 
     @Column(name = "CURRENCY_EN_NAME",nullable = false)
-    private String currencyEnglishName;
+    private String currencyCode;
 
     @Column(name = "ASSET_BALANCE",nullable = false)
     private BigDecimal balance;
