@@ -1,6 +1,9 @@
 package com.shiep.fxbankcard.api;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +17,8 @@ public class VerificationIDCardApiTest {
 
     @Test
     public void verify() {
-        System.out.println(VerificationIDCardApi.verify(testData));
+        Map<String, Object> resultMap=VerificationIDCardApi.verify(testData);
+        Assert.assertEquals(200,resultMap.get("code"));
+        System.out.println(resultMap);
     }
 }

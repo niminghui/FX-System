@@ -11,14 +11,27 @@ import lombok.Getter;
 public enum StatusCodeEnum {
     /**
      * description: 校验身份证api返回的状态码
-     *
-     * @param null
-     * @return
      */
     SUCCESS(200,"成功"),
     ID_NUMBER_INVALID(201,"身份证号无效"),
     ID_NUMBER_WRONG_FORMAT(401,"身份证号格式错误"),
-    ;
+
+    /**
+     * description: 外汇汇率api返回的状态码
+     */
+    QUERY_NO_RESULT(202301,"查询不到结果"),
+    KEY_WRONG(10001,"错误的请求KEY"),
+    KEY_NO_PERMISSION(10002,"该KEY无请求权限"),
+    KEY_EXPIRED(10003,"KEY过期"),
+    OPENID_WRONG(10004,"错误的OPENID"),
+    AUTH_WRONG(10005,"应用未审核"),
+    UNKNOWN_REQUEST_SOURCE(10007,"未知的请求源"),
+    IP_BANNED(10008,"被禁止的IP"),
+    KEY_BANNED(10009,"被禁止的KEY"),
+    IP_REQUEST_EXCEEDS_LIMITT(10011,"当前IP请求超过限制"),
+    REQUEST_EXCEEDS_LIMITT(10012,"请求超过次数限制"),
+    INTERFACE_MAINTAIN(10020,"接口维护"),
+    INTERFACE_DISABLED(10021,"接口停用");
 
     private Integer code;
 
@@ -43,5 +56,15 @@ public enum StatusCodeEnum {
             }
         }
         throw  new RuntimeException("Unknown code of StatusCodeEnum");
+    }
+
+    /**
+     * description: 通过code返回message
+     *
+     * @param code
+     * @return java.lang.String
+     */
+    public static String getMsgByCode(int code){
+        return parse(code).getMessage();
     }
 }
