@@ -16,7 +16,7 @@ public interface IFxAccountService {
     /**
      * description: 通过账户名查找FxAccount
      *
-     * @param accountName
+     * @param accountName 账户名
      * @return com.shiep.fxaccount.entity.FxAccount
      */
     FxAccount find(String accountName);
@@ -24,7 +24,7 @@ public interface IFxAccountService {
     /**
      * description: 通过账户名查找该账户具有的角色列表
      *
-     * @param accountName
+     * @param accountName 账户名
      * @return java.util.List<java.lang.String>
      */
     List<String> getRoles(String accountName);
@@ -32,8 +32,8 @@ public interface IFxAccountService {
     /**
      * description: 通过账户名和密码构建账户（账户初始权限为visitor，bankcardId字段为空）
      *
-     * @param accountName
-     * @param accountPwd
+     * @param accountName 账户名
+     * @param accountPwd 密码
      * @return com.shiep.fxaccount.entity.FxAccount
      */
     FxAccountVo create(String accountName, String accountPwd);
@@ -41,9 +41,19 @@ public interface IFxAccountService {
     /**
      * description: 赋予accountName账户roleName角色（授权）
      *
-     * @param accountName
-     * @param roleName
+     * @param accountName 账户名
+     * @param roleName 角色名
      * @return java.lang.Boolean
      */
     Boolean authorization(String accountName, String roleName);
+
+    /**
+     * description: 创建账户并授权
+     *
+     * @param accountName 账户名
+     * @param accountPwd 密码
+     * @param roles 角色列表
+     * @return com.shiep.fxaccount.vo.FxAccountVo 账户视图对象
+     */
+    FxAccountVo createAndAuth(String accountName, String accountPwd, List<String> roles);
 }

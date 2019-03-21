@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+.operation {	/*登录操作界面*/
+	position: absolute;
+	right: 200px;
+	top: 75px;
+	z-index: 9;
+	background: rgba(255,255,255,0.9);
+	width: 420px;
+	height: 480px;
+	padding: 20px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 20px;
+	border: 1px solid #e6e6e6;
+}
+.myButton{
+	width: 225px;
+	border: 0px solid #9c9c9c;
+	margin: 6px auto;
+	font-size: 20px;
+	line-height: 40px;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	color: #fff!important;	/*字体颜色*/
+	text-shadow: 0px 1px 2px #5b8d2b;
+	background: rgb(131,175,155);
+	position: relative;
+	left: 70px;
+}
+
+#title{
+	font-size: 24px;
+	color: #EB9316;
+	text-align: center;
+}
+
+.input{
+	/*设置div元素的大小*/
+	max-width: 520px;
+	height: 55px;
+	/*设置内外边距*/
+	margin-bottom: 20px;
+	padding: 1px;
+	/*设置元素的内边距和边框不会改变它的宽度*/
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	/*设置元素的边框为圆矩形*/
+	border-radius: 30px;
+	/*设置边界样式*/
+	border: 1px solid #e6e6e6;
+	/*设置背景颜色*/
+	background: #FFF;
+	position: relative;
+}
+.loginImg{
+	position:absolute;
+	left: 15px;
+	top: 10px;
+	height: 32px;
+}
+#yzmImg{
+	position:absolute;
+	right: 18px;
+	top: 0px;
+}
+input[type="text"],input[type="password"]{
+	border: 0px solid #FFF;
+	margin-left: 50px;
+	padding: 2px;
+	width: 78%;
+	height: 95%;
+	font-size: 20px;
+	background: #fff;
+}
+#uyzm{
+	width: 50%;
+}
+
+input:focus {
+	outline:none;
+}
+
+#rememberMeFont{
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	font: 16px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+	text-align: center;
+}
+
+#rememberMeDiv{
+	margin-left: 35px;
+	padding: 2px;
+	display: inline-block;
+}
+#forgetPwdDiv{
+	margin-left: 80px;
+	padding: 2px;
+	display: inline-block;
+}
+#forgetPwd{
+	text-decoration: none;
+	color: #428bca;
+	font-size: 14px;
+}
+#loginDiv{
+	margin-top: 20px;
+}
+
+#forgetPwdLabel:before{
+	content: "";
+    display: inline-block;
+    vertical-align: middle;
+	width: 22px;
+    height: 22px;
+    background-image: url(../img/question-circle.png);
+    background-size: 100%;
+}
+
+.inlineDiv{
+	margin: 10px auto;
+}
+
+.errorDiv{
+	color: red;
+	font-size: 12px;
+	margin-top: 2px;
+	margin-left: 20px;
+}

@@ -1,0 +1,161 @@
+@CHARSET "UTF-8";
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	padding: 0px 0;
+	background-color: #FFF;
+	font-size: 14px;
+	font-family: 'Aveir Next';
+	color: #555;
+	-webkit-font-smoothing: antialiased;
+	/*字体抗锯齿*/
+}
+
+.slider .main .main-i,
+.slider .main,
+.slider {
+	width: 100%;
+	height: 640px;
+	position: relative;
+	top: 0px;
+}
+
+.bottom{
+	text-align: center;
+}
+.bottom #bottom-img{
+	margin: 0 auto;
+}
+
+/*幻灯片区域*/
+
+.slider .main {
+	overflow: hidden;
+}
+
+
+/*每一个幻灯片的样式*/
+
+.main .main-i img {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 1;
+	-webkit-transition: all 1s;
+}
+ .main-i .main-i_right{
+	margin-left: -50%;
+}
+.main .main-i .caption {
+	position: absolute;
+	right: 50%;
+	top: 30%;
+	z-index: 8;
+}
+
+.main .main-i .caption h2 {
+	font-size: 50px;
+	line-height: 50px;
+	color: #FFFFFF;
+	text-align: right;
+	font-family: "宋体",'sans-serif';
+}
+
+.slider .main .main-i .caption h3 {
+	/**/
+	font-size: 50px;
+	line-height: 50px;
+	color: #555555;
+	text-align: right;
+	font-family: 'Helvetica',"微软雅黑",'sans-serif';
+	margin-top: 15px;
+}
+
+
+/*控制按钮区域*/
+
+.ctrl {
+	width: 100%;
+	height: 14px;
+	border-radius:20px;
+	line-height: 14px;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	top: 600px;
+	bottom: 30px;
+	z-index: 10;
+	/*background-color:#D43F3A;*/
+}
+
+.ctrl .ctrl-i {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius:20px;
+	background-color: #666;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	position: relative;
+	margin-left: 20px;
+}
+
+
+/* hover 到控制按钮的样式 */
+/*鼠标指针浮动在其上时的样式：*/
+.ctrl .ctrl-i:hover {	
+	background-color: #F0F0F0;
+}
+
+/*active 当前展现的状态 */
+
+.ctrl .ctrl-i_active:hover,
+.ctrl .ctrl-i_active {
+	background-color: #EB9316;
+}
+
+.ctrl .ctrl-i_active:hover img {
+	opacity: 0;
+}
+
+
+/*幻灯片切换的样式*/
+
+.slider .main .main-i {
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	width: 100%;
+	top: 0;
+	-webkit-transition: all .5s;
+	z-index: 2;
+}
+
+#main_backgroud,
+.slider .main .main-i_active {
+	right: 0;
+	width: 100%;
+	opacity: 1;
+}
+
+.main .main-i .caption {
+	margin-top: 8%;
+	margin-right: 15%;
+}
+
+.slider .main .main-i h2 {
+	margin-right: 45px;
+}
+
+.slider .main .main-i h3 {
+	margin-right: -45px;
+}
+
+.slider .main .main-i_active h2,
+.slider .main .main-i_active h3 {
+	margin-right: 0px;
+	-webkit-transition: all 1s .8s;
+}

@@ -8,6 +8,7 @@ import com.shiep.fxaccount.service.IFxAccountService;
 import com.shiep.fxaccount.utils.UuidTools;
 import com.shiep.fxaccount.vo.FxAccountVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -27,6 +28,9 @@ public class FxAccountServiceImpl implements IFxAccountService {
 
     @Autowired
     FxAccountRoleRepository accountRoleRepository;
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public FxAccount find(String accountName) {
@@ -48,14 +52,7 @@ public class FxAccountServiceImpl implements IFxAccountService {
 
     @Override
     public FxAccountVo create(String accountName, String accountPwd) {
-        FxAccount account = new FxAccount();
-        account.setId(UuidTools.getUUID());
-        account.setName(accountName);
-        account.setPassword(accountPwd);
-        FxAccount accountResult = accountRepository.save(account);
-        if (accountResult==null){
-            return null;
-        }
+        FxAccount account = createAccount(accountName,accountPwd,null);
         if (authorization(accountName,"ROLE_VISITOR")){
             return new FxAccountVo(account,"ROLE_VISITOR");
         }
@@ -70,5 +67,35 @@ public class FxAccountServiceImpl implements IFxAccountService {
         accountRole.setRoleName(roleName);
         accountRole.setCreatedTime(new Timestamp(System.currentTimeMillis()));
         return accountRoleRepository.save(accountRole)!=null;
+    }
+
+    @Override
+    public FxAccountVo createAndAuth(String accountName, String accountPwd, List<String> roles) {
+        FxAccount account = createAccount(accountName,accountPwd,null);
+        List<String> resultRoles = new ArrayList<>();
+        for (String roleName : roles){
+            if (authorization(accountName,roleName)){
+                resultRoles.add(roleName);
+            }
+        }
+        return new FxAccountVo(account,resultRoles);
+    }
+
+    /**
+     * description: 创建账户
+     *
+     * @param accountName 账户名
+     * @param accountPwd 密码
+     * @param bankcardID 银行卡号
+     * @return com.shiep.fxaccount.entity.FxAccount
+     */
+    private FxAccount createAccount(String accountName, String accountPwd, String bankcardID){
+        FxAccount account = new FxAccount();
+        account.setId(UuidTools.getUUID());
+        account.setName(accountName);
+        // 密码加密后存入数据库
+        account.setPassword(passwordEncoder.encode(accountPwd));
+        account.setBankCardId(bankcardID);
+        return accountRepository.save(account);
     }
 }

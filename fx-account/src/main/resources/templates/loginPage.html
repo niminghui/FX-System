@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>外汇业务管理系统</title>
+    <link rel="stylesheet" th:href="@{~/css/index.css}" />
+    <link rel="stylesheet" th:href="@{~/css/login.css}" />
+    <script type="text/javascript" th:src="@{~/js/index.js}"></script>
+    <style type="text/css">
+        .e-selfecheckbox {
+            display: none;
+        }
+
+        .selfecheckbox_label:before {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+            background-image: url(/img/close-circle.png);
+            background-size: 100%;
+        }
+
+        /*在e-selfecheckbox元素被选择的时候，将selfecheckbox_label前面的图片替换成另一张*/
+        .e-selfecheckbox:checked+.selfecheckbox_label:before {
+            background-image: url(/img/check-circle.png);
+        }
+    </style>
+</head>
+
+<body>
+<div class="slider">
+    <div class="main " id="template_main">
+        <div class="main-i {{css}}" id="main_{{index}}">
+            <div class="caption ">
+                <h2>{{h2}}</h2>
+                <h3>{{h3}}</h3>
+            </div>
+            <img th:src="@{~/img/{{index}}.jpg}" class="picture" />
+        </div>
+    </div>
+</div>
+
+<div class="operation">
+    <h2 id="title">Please Sign in</h2>
+    <br />
+    <form th:object="${loginVO}" th:action="@{/login/validate}" id="indexForm" method="post" >
+        <input type="hidden" name="opt" value="login" />
+        <div class="input">
+            <img th:src="@{~/img/login-id.png}" alt="用户账户" class="loginImg" />
+            <input type="text" th:value="*{account_name}" name="account_name" id="account_name" autocomplete="off" placeholder="请输入登录帐号" />
+            <div class="errorDiv" th:errors="${loginVO.account_name}"></div>
+        </div>
+
+
+        <div class="input">
+            <img th:src="@{~/img/login-pwd.png}" alt="用户密码" class="loginImg" />
+            <input type="password" th:value="*{account_pwd}" name="account_pwd" id="account_pwd" placeholder="请输入登录密码" />
+            <div class="errorDiv" th:errors="${loginVO.account_pwd}"></div>
+        </div>
+
+        <div class="input">
+            <img th:src="@{~/img/login-yzm.png}" alt="验证码" class="loginImg" />
+            <input type="text" th:value="*{uyzm}" name="uyzm" id="uyzm" placeholder="请输入验证码" autocomplete="off">
+            <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/yzm}" onclick="changeYZM()" />
+            <div class="errorDiv" th:errors="${loginVO.uyzm}"></div>
+        </div>
+
+        <div class="inlineDiv">
+            <div id="rememberMeDiv">
+                <input type="checkbox" th:value="*{rememberMe}" class="e-selfecheckbox" name="rememberMe" id="rememberMe" onclick="changeValue()" />
+                <label class="selfecheckbox_label" for="rememberMe">
+                    <span id="rememberMeFont">记住我</span>
+                </label>
+            </div>
+            <div id="forgetPwdDiv">
+                <label id="forgetPwdLabel" for="forgetPwd">
+                    <a id="forgetPwd" href="">忘记密码?</a>
+                </label>
+            </div>
+        </div>
+        <div id="loginDiv">
+            <input type="submit" name="submit" class="myButton" value="登录" />
+        </div>
+    </form>
+    <form th:action="@{/enroll}" id="enrollForm" method="post">
+        <input type="submit" name="submit" class="myButton" value="立即注册" />
+    </form>
+</div>
+
+<div class="ctrl" id="template_ctrl">
+    <a class="ctrl-i" id="ctrl_{{index}}" href="javascript:switchSlider({{index}});"> </a>
+</div>
+
+<div class="bottom">
+    <img id="bottom-img" th:src="@{~/img/bottom.jpg}"/>
+</div>
+
+<script>
+    function changeYZM(){
+        document.getElementById("yzmImg").setAttribute('src','/yzm?'+Math.random());
+    }
+    function changeValue(){
+        var check = document.getElementById("rememberMe");
+        if(check.checked == true){
+            document.getElementById("rememberMe").value = true;
+        }else{
+            document.getElementById("rememberMe").value = false;
+        }
+    }
+</script>
+</body>
+</html>

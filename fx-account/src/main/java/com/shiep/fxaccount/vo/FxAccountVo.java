@@ -19,6 +19,10 @@ public class FxAccountVo {
     private String bankcardId;
     private List<String> roles;
 
+    public FxAccountVo(){
+        super();
+    }
+
     public FxAccountVo(FxAccount account,List<String> roles){
         this.accountId=account.getId();
         this.accountName=account.getName();
