@@ -51,6 +51,11 @@ public class FxAccountServiceImpl implements IFxAccountService {
     }
 
     @Override
+    public FxAccountVo getAccountVo(String accountName) {
+        return new FxAccountVo(find(accountName),getRoles(accountName));
+    }
+
+    @Override
     public FxAccountVo create(String accountName, String accountPwd) {
         FxAccount account = createAccount(accountName,accountPwd,null);
         if (authorization(accountName,"ROLE_VISITOR")){

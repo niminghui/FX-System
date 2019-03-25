@@ -1,14 +1,6 @@
 spring:
-  resources:
-    static-locations: classpath:/templates/,classpath:/static/
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML
-    servlet:
-      content-type: text/html
-    cache: false
-
+  profiles:
+    active: dev1
   datasource:
     username: root
     password: 123456
@@ -39,8 +31,6 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
-  profiles:
-    active: dev1
 management:
   endpoints:
     web:

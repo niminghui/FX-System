@@ -1,4 +1,4 @@
-package com.shiep.fxaccount.annotation;
+package com.shiep.fxauth.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -30,6 +30,14 @@ public interface IFxAccountService {
     List<String> getRoles(String accountName);
 
     /**
+     * description: 通过账户名得到该账户的详细信息VO
+     *
+     * @param accountName 账户名
+     * @return com.shiep.fxaccount.vo.FxAccountVo
+     */
+    FxAccountVo getAccountVo(String accountName);
+
+    /**
      * description: 通过账户名和密码构建账户（账户初始权限为visitor，bankcardId字段为空）
      *
      * @param accountName 账户名

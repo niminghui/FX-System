@@ -1,13 +1,13 @@
-package com.shiep.fxaccount.vo;
+package com.shiep.fxauth.model;
 
-import com.shiep.fxaccount.annotation.Password;
+
+import com.shiep.fxauth.annotation.Password;
 import lombok.Data;
-
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author: 倪明辉

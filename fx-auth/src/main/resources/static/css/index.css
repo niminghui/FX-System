@@ -56,20 +56,20 @@ body {
 	top: 30%;
 	z-index: 8;
 }
-
+/*字体样式*/
 .main .main-i .caption h2 {
-	font-size: 50px;
-	line-height: 50px;
-	color: #FFFFFF;
+	font-size: 40px;
+	line-height: 40px;
+	color: #fcefe8;
 	text-align: right;
 	font-family: "宋体",'sans-serif';
 }
-
+/*字体样式*/
 .slider .main .main-i .caption h3 {
-	/**/
-	font-size: 50px;
-	line-height: 50px;
-	color: #555555;
+	/*#84AF9B*/
+	font-size: 30px;
+	line-height: 30px;
+	color: #c0ebd7;
 	text-align: right;
 	font-family: 'Helvetica',"微软雅黑",'sans-serif';
 	margin-top: 15px;
@@ -140,9 +140,9 @@ body {
 	width: 100%;
 	opacity: 1;
 }
-
+/*字体div样式*/
 .main .main-i .caption {
-	margin-top: 8%;
+	margin-top: 3%;
 	margin-right: 15%;
 }
 
