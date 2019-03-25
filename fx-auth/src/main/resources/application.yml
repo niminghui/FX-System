@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev1
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    servlet:
+      content-type: text/html
+    cache: false
