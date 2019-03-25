@@ -39,7 +39,7 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param type
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAAndType(String bankcardID, Integer type);
+    List<FxTransactionRecord> findByBankcardIdAndType(String bankcardID, Integer type);
 
     /**
      * description: 通过交易类型查找所有的交易记录
