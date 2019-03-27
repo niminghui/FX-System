@@ -95,8 +95,8 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtTokenUtils.createToken(jwtUser.getUsername(), roles, isRemember);
         System.out.println("token:"+token);
         // 将Token存入Redis
-        RedisUtils.put(REDIS_TOKEN_KEY,jwtUser.getUsername(),token);
-        System.out.println("redis token:"+ RedisUtils.getHashValue(REDIS_TOKEN_KEY,jwtUser.getUsername()));
+        RedisUtils.hPut(REDIS_TOKEN_KEY,jwtUser.getUsername(),token);
+        System.out.println("redis token:"+ RedisUtils.hGet(REDIS_TOKEN_KEY,jwtUser.getUsername()));
 //        redisTemplate.opsForHash().put("token",jwtUser.getUsername(),token);
 //        System.out.println("Redis Token:"+redisTemplate.opsForHash().get("token",jwtUser.getUsername()));
         // 重定向无法设置header,这里设置header只能设置到/auth/login界面的header

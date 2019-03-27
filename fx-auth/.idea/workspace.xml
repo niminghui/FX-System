@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/utils/HttpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/utils/HttpUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,9 +55,9 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="20" />
-          <entry key="java" value="3072" />
+          <entry key="java" value="4397" />
           <entry key="properties" value="51" />
-          <entry key="txt" value="35" />
+          <entry key="txt" value="47" />
           <entry key="xml" value="25" />
           <entry key="yml" value="12" />
         </counts>
@@ -68,8 +65,8 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="20" />
-          <entry key="JAVA" value="3072" />
-          <entry key="PLAIN_TEXT" value="35" />
+          <entry key="JAVA" value="4397" />
+          <entry key="PLAIN_TEXT" value="47" />
           <entry key="Properties" value="51" />
           <entry key="SQL" value="16" />
           <entry key="XML" value="9" />
@@ -95,10 +92,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="286" column="1" lean-forward="true" selection-start-line="286" selection-start-column="1" selection-end-line="286" selection-end-column="1" />
+            <state relative-caret-position="238">
+              <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#587#611#0" expanded="true" />
+                <element signature="e#794#795#0" expanded="true" />
+                <element signature="e#830#831#0" expanded="true" />
                 <element signature="e#1183#1184#0" expanded="true" />
                 <element signature="e#1253#1254#0" expanded="true" />
                 <element signature="e#1419#1420#0" expanded="true" />
@@ -111,10 +111,30 @@
                 <element signature="e#4546#4547#0" expanded="true" />
                 <element signature="e#4647#4648#0" expanded="true" />
                 <element signature="e#4688#4689#0" expanded="true" />
+                <element signature="e#5997#5998#0" expanded="true" />
+                <element signature="e#6073#6074#0" expanded="true" />
                 <element signature="e#6924#6925#0" expanded="true" />
                 <element signature="e#6983#6984#0" expanded="true" />
                 <element signature="e#7095#7096#0" expanded="true" />
                 <element signature="e#7154#7155#0" expanded="true" />
+                <element signature="e#7466#7467#0" expanded="true" />
+                <element signature="e#7528#7529#0" expanded="true" />
+                <element signature="e#8129#8130#0" expanded="true" />
+                <element signature="e#8192#8193#0" expanded="true" />
+                <element signature="e#9312#9313#0" expanded="true" />
+                <element signature="e#9382#9383#0" expanded="true" />
+                <element signature="e#12208#12209#0" expanded="true" />
+                <element signature="e#12276#12277#0" expanded="true" />
+                <element signature="e#12385#12386#0" expanded="true" />
+                <element signature="e#12462#12463#0" expanded="true" />
+                <element signature="e#14533#14534#0" expanded="true" />
+                <element signature="e#14602#14603#0" expanded="true" />
+                <element signature="e#14892#14893#0" expanded="true" />
+                <element signature="e#14964#14965#0" expanded="true" />
+                <element signature="e#16381#16382#0" expanded="true" />
+                <element signature="e#16458#16459#0" expanded="true" />
+                <element signature="e#21198#21199#0" expanded="true" />
+                <element signature="e#21268#21269#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="97" column="68" lean-forward="true" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
+            <state relative-caret-position="129">
+              <caret line="98" column="59" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -453,7 +473,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553653319466" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553666432817" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -557,7 +577,7 @@
       <workItem from="1553497967131" duration="7224000" />
       <workItem from="1553505285485" duration="2144000" />
       <workItem from="1553563064601" duration="8371000" />
-      <workItem from="1553649628374" duration="3636000" />
+      <workItem from="1553649628374" duration="12283000" />
     </task>
     <task id="LOCAL-00001" summary="fx-auth:实现Token登录认证流程">
       <created>1553498069215</created>
@@ -573,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553501321279</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fx-auth: 初步实现将Token存入Redis">
+      <created>1553653390952</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553653390952</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -609,7 +636,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37210000" />
+    <option name="totallyTimeSpent" value="45857000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -637,7 +664,7 @@
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3286119" />
-      <window_info anchor="bottom" id="Problems" order="14" />
+      <window_info anchor="bottom" id="Problems" order="14" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -659,7 +686,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fx-auth:实现Token登录认证流程" />
     <MESSAGE value="fx-auth: 配置并测试Redis" />
-    <option name="LAST_COMMIT_MESSAGE" value="fx-auth: 配置并测试Redis" />
+    <MESSAGE value="fx-auth: 初步实现将Token存入Redis" />
+    <option name="LAST_COMMIT_MESSAGE" value="fx-auth: 初步实现将Token存入Redis" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev2.properties" />
@@ -891,8 +919,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="97" column="68" lean-forward="true" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
+        <state relative-caret-position="129">
+          <caret line="98" column="59" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -901,10 +929,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="286" column="1" lean-forward="true" selection-start-line="286" selection-start-column="1" selection-end-line="286" selection-end-column="1" />
+        <state relative-caret-position="238">
+          <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#587#611#0" expanded="true" />
+            <element signature="e#794#795#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
             <element signature="e#1183#1184#0" expanded="true" />
             <element signature="e#1253#1254#0" expanded="true" />
             <element signature="e#1419#1420#0" expanded="true" />
@@ -917,10 +948,30 @@
             <element signature="e#4546#4547#0" expanded="true" />
             <element signature="e#4647#4648#0" expanded="true" />
             <element signature="e#4688#4689#0" expanded="true" />
+            <element signature="e#5997#5998#0" expanded="true" />
+            <element signature="e#6073#6074#0" expanded="true" />
             <element signature="e#6924#6925#0" expanded="true" />
             <element signature="e#6983#6984#0" expanded="true" />
             <element signature="e#7095#7096#0" expanded="true" />
             <element signature="e#7154#7155#0" expanded="true" />
+            <element signature="e#7466#7467#0" expanded="true" />
+            <element signature="e#7528#7529#0" expanded="true" />
+            <element signature="e#8129#8130#0" expanded="true" />
+            <element signature="e#8192#8193#0" expanded="true" />
+            <element signature="e#9312#9313#0" expanded="true" />
+            <element signature="e#9382#9383#0" expanded="true" />
+            <element signature="e#12208#12209#0" expanded="true" />
+            <element signature="e#12276#12277#0" expanded="true" />
+            <element signature="e#12385#12386#0" expanded="true" />
+            <element signature="e#12462#12463#0" expanded="true" />
+            <element signature="e#14533#14534#0" expanded="true" />
+            <element signature="e#14602#14603#0" expanded="true" />
+            <element signature="e#14892#14893#0" expanded="true" />
+            <element signature="e#14964#14965#0" expanded="true" />
+            <element signature="e#16381#16382#0" expanded="true" />
+            <element signature="e#16458#16459#0" expanded="true" />
+            <element signature="e#21198#21199#0" expanded="true" />
+            <element signature="e#21268#21269#0" expanded="true" />
           </folding>
         </state>
       </provider>
