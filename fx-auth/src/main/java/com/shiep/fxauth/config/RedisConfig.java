@@ -57,7 +57,6 @@ public class RedisConfig {
      * @param redisConnectionFactory redis的连接工厂
      * @return org.springframework.data.redis.core.RedisTemplate<java.lang.Object,java.lang.Object>
      */
-    //配置RedisTemplate
     @Bean
     public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<Object,Object> redisTemplate=new RedisTemplate<>();
@@ -69,9 +68,8 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(stringRedisSerializer);
         //设置redisTemplate的连接工厂
         redisTemplate.setConnectionFactory(redisConnectionFactory);
+        System.out.println(redisTemplate);
         return redisTemplate;
     }
-
-
 }
 

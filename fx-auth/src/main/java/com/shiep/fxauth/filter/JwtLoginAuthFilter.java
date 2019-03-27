@@ -6,12 +6,16 @@ import com.shiep.fxauth.common.ResultVO;
 import com.shiep.fxauth.model.JwtAuthUser;
 import com.shiep.fxauth.model.LoginVO;
 import com.shiep.fxauth.utils.JwtTokenUtils;
+import com.shiep.fxauth.utils.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,14 +29,11 @@ import java.util.List;
 /**
  * @author: 倪明辉
  * @date: 2019/3/21 14:54
- * @description:
+ * @description: 登录认证过滤器
  */
 public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
+    private static final String REDIS_TOKEN_KEY="token";
 
-    /*
-    AuthenticationManager： 用户认证的管理类，所有的认证请求（比如login）都会通过提交一个token给AuthenticationManager的authenticate()方法来实现。
-    当然事情肯定不是它来做，具体校验动作会由AuthenticationManager将请求转发给具体的实现类来做。根据实现反馈的结果再调用具体的Handler来给用户以反馈。
-     */
     private AuthenticationManager authenticationManager;
 
     private ThreadLocal<Boolean> rememberMe = new ThreadLocal<>();
@@ -63,17 +64,16 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginVO.getAccount_name(), loginVO.getAccount_pwd(), new ArrayList<>())
         );
-
     }
 
     /**
      * description: 登录验证成功后调用，验证成功后将生成Token，并重定向到用户主页home
      * 与AuthenticationSuccessHandler作用相同
      *
-     * @param request
-     * @param response
-     * @param chain
-     * @param authResult
+     * @param request 请求
+     * @param response 响应
+     * @param chain 过滤链
+     * @param authResult 认证结果
      * @return void
      */
     @Override
@@ -94,6 +94,11 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
         System.out.println("roles:"+roles);
         String token = JwtTokenUtils.createToken(jwtUser.getUsername(), roles, isRemember);
         System.out.println("token:"+token);
+        // 将Token存入Redis
+        RedisUtils.put(REDIS_TOKEN_KEY,jwtUser.getUsername(),token);
+        System.out.println("redis token:"+ RedisUtils.getHashValue(REDIS_TOKEN_KEY,jwtUser.getUsername()));
+//        redisTemplate.opsForHash().put("token",jwtUser.getUsername(),token);
+//        System.out.println("Redis Token:"+redisTemplate.opsForHash().get("token",jwtUser.getUsername()));
         // 重定向无法设置header,这里设置header只能设置到/auth/login界面的header
         //response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
 
@@ -106,9 +111,9 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
      * description: 登录验证失败后调用，这里直接Json返回，实际上可以重定向到错误界面等
      * 与AuthenticationFailureHandler作用相同
      *
-     * @param request
-     * @param response
-     * @param failed
+     * @param request 请求
+     * @param response 响应
+     * @param failed 认证异常
      * @return void
      */
     @Override

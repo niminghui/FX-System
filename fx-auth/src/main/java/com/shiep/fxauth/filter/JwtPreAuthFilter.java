@@ -1,6 +1,8 @@
 package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.utils.JwtTokenUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,9 +22,12 @@ import java.util.List;
 /**
  * @author: 倪明辉
  * @date: 2019/3/21 15:07
- * @description:
+ * @description: Basic认证过滤器
  */
 public class JwtPreAuthFilter extends BasicAuthenticationFilter {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public JwtPreAuthFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -31,9 +36,9 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
     /**
      * description: 从request的header部分读取Token
      *
-     * @param request
-     * @param response
-     * @param chain
+     * @param request 请求
+     * @param response 响应
+     * @param chain 过滤链
      * @return void
      */
     @Override
@@ -55,22 +60,28 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
     /**
      * description: 读取Token信息，创建UsernamePasswordAuthenticationToken对象
      *
-     * @param tokenHeader
+     * @param tokenHeader Token字符串
      * @return org.springframework.security.authentication.UsernamePasswordAuthenticationToken
      */
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) {
         //解析Token时将“Bearer ”前缀去掉
-        String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String username = JwtTokenUtils.getUsername(token);
-        List<String> roles = JwtTokenUtils.getUserRole(token);
-        Collection<GrantedAuthority> authorities = new HashSet<>();
-        if (roles != null) {
-            for (String role : roles) {
-                authorities.add(new SimpleGrantedAuthority(role));
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String username = JwtTokenUtils.getUsername(userToken);
+        String token = redisTemplate.opsForHash().get("token",username).toString();
+        // 如果用户传来的Token跟Redis中存储的Token匹配的话
+        if(userToken.equals(token)){
+            List<String> roles = JwtTokenUtils.getUserRole(token);
+            Collection<GrantedAuthority> authorities = new HashSet<>();
+            if (roles != null) {
+                for (String role : roles) {
+                    authorities.add(new SimpleGrantedAuthority(role));
+                }
             }
-        }
-        if (username != null) {
-            return new UsernamePasswordAuthenticationToken(username, null, authorities);
+            if (username != null) {
+                return new UsernamePasswordAuthenticationToken(username, null, authorities);
+            }
+        } else {
+            // 此时应该是用户Token过期，将跳转到登录界面
         }
         return null;
     }

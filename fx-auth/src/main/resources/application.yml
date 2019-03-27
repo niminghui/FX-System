@@ -10,17 +10,3 @@ spring:
     servlet:
       content-type: text/html
     cache: false
-
-  #≈‰÷√Redisµƒª∫¥Êπ‹¿Ì∆˜
-  cache:
-    cache-names: redisCache
-    type: redis
-  #redis≈‰÷√
-  redis:
-    port: 6379
-    host: localhost
-    jedis:
-      pool:
-        min-idle: 5
-        max-active: 10
-        max-idle: 10
