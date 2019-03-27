@@ -36,6 +36,7 @@ import org.apache.http.message.BasicNameValuePair;
  * @date: 2019/3/14 14:36
  * @description: http工具类
  */
+@SuppressWarnings("all")
 public class HttpUtils {
     /**
      * description: get
