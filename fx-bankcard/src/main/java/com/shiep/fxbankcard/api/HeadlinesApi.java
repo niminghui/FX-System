@@ -8,10 +8,6 @@ import com.shiep.fxbankcard.utils.HttpUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +18,7 @@ import java.util.Map;
  * @date: 2019/3/27 16:52
  * @description: 新闻头条Api
  */
+@SuppressWarnings("all")
 public class HeadlinesApi {
     private static final String HOST = "http://toutiao-ali.juheapi.com";
     private static final String PATH = "/toutiao/index";
@@ -32,15 +29,31 @@ public class HeadlinesApi {
     private static final String QUERYS_HEADER = "type";
     private static Map<String, String> headers;
 
+    /**
+     * description: 请求新闻的类型
+     */
+    public static final String TYPE_TOP="top";
+    public static final String TYPE_SOCIETY="shehui";
+    public static final String TYPE_DOMESTIC="guonei";
+    public static final String TYPE_INTERNATIONAL="guoji";
+    public static final String TYPE_RECREATION="yule";
+    public static final String TYPE_SPORTS="tiyu";
+    public static final String TYPE_MILITARY="junshi";
+    public static final String TYPE_SCIENCE="keji";
+    public static final String TYPE_FINANCE="caijing";
+    public static final String TYPE_FASHION="shishang";
+
     static {
         headers = new HashMap<String, String>();
         headers.put(HEADER, APPCODE_HEADER + APPCODE);
     }
 
-    public static void main(String[] args) {
-        getHeadlines("guoji");
-    }
-
+    /**
+     * description: 新闻头条
+     *
+     * @param type 请求的新闻类型
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
     public static Map<String, Object> getHeadlines(String type) {
         Map<String, String> querys = new HashMap<String, String>();
         querys.put(QUERYS_HEADER, type);
@@ -63,6 +76,12 @@ public class HeadlinesApi {
         return null;
     }
 
+    /**
+     * description: 得到数据
+     *
+     * @param str json字符串
+     * @return java.util.List<com.shiep.fxbankcard.api.model.NewsModel>
+     */
     private static List<NewsModel> getDatas(String str) {
         List<NewsModel> dataList = new ArrayList<>();
         JSONObject alljsonObject = (JSONObject) JSON.parse(str);

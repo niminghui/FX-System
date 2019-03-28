@@ -34,7 +34,7 @@ public class VerificationIDCardApi {
     /**
      * description: 进行身份证校验
      *
-     * @param idCardNum
+     * @param idCardNum 身份证号码
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
     public static Map<String, Object> verify(String idCardNum) {
@@ -61,7 +61,7 @@ public class VerificationIDCardApi {
     /**
      * description: 取出数据
      *
-     * @param str
+     * @param str json字符串
      * @return java.util.Map<java.lang.String , java.lang.String>
      */
     private static Map<String, String> getDatas(String str) {
