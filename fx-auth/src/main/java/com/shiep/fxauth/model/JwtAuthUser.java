@@ -50,7 +50,6 @@ public class JwtAuthUser implements UserDetails {
                 authorities.add(new SimpleGrantedAuthority(role));
             }
         }
-        System.out.println("authorities:"+authorities);
         return authorities;
     }
 

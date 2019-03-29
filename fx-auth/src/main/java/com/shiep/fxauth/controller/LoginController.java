@@ -34,7 +34,7 @@ public class LoginController {
 
     @PostMapping("/login/validate")
     public ModelAndView validate(HttpServletRequest request, @Validated LoginVO loginUser,
-                                 Errors errors){
+                                 Errors errors, RedirectAttributes ra){
         ModelAndView mv=new ModelAndView();
         // 如果Errors对象有Field错误的时候，重新跳回注册页面，否则正常提交
         if (errors.hasFieldErrors()){
@@ -46,8 +46,11 @@ public class LoginController {
             mv.setViewName("loginPage");
             return mv;
         }
-        // RedirectAttributes重定向传参取不到值，先用这种方式传递参数
-        mv.setViewName("redirect:/auth/login?name="+loginUser.getAccount_name()+"&password="+loginUser.getAccount_pwd()+"&rememberMe="+loginUser.getRememberMe());
+        // ra.addFlashAttribute()传递参数到过滤器中丢失
+        ra.addAttribute("name",loginUser.getAccount_name());
+        ra.addAttribute("password",loginUser.getAccount_pwd());
+        ra.addAttribute("rememberMe",loginUser.getRememberMe());
+        mv.setViewName("redirect:/auth/login");
         return mv;
     }
 

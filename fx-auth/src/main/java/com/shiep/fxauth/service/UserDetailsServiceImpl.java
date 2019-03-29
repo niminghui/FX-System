@@ -33,7 +33,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             // 实际当用户不存在时，应该页面显示错误信息，并跳转到登录界面
             throw new UsernameNotFoundException("该用户不存在！");
         }
-        System.out.println("UserDetailsServiceImpl==>loadUserByUsername:"+accountVo.toString());
         return new JwtAuthUser(accountVo);
     }
 }

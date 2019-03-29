@@ -1,7 +1,7 @@
 package com.shiep.fxauth.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.shiep.fxauth.common.ResultEnum;
+import com.shiep.fxauth.common.HttpStatusEnum;
 import com.shiep.fxauth.common.ResultVO;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author: 倪明辉
@@ -18,7 +19,10 @@ import java.io.IOException;
  */
 public class FxAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        httpServletResponse.getWriter().write(JSON.toJSONString(ResultVO.result(ResultEnum.USER_NO_ACCESS,false)));
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
+        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_NO_ACCESS,false);
+        request.setAttribute("code",map.get("code"));
+        request.setAttribute("msg",map.get("messageCN"));
+        request.getRequestDispatcher("/error").forward(request,response);
     }
 }

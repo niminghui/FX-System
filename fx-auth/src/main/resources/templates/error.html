@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8" />
+    <title>错误界面</title>
+    <link rel="stylesheet" th:href="@{~/css/bootstrap-magic.css}" />
+    <script type="text/javascript">
+        window.onload = function() {
+            var countdownSpan = document.getElementById("countdownSpan");
+            var timer = 50;
+            var flag;
+            function countdown() {
+                timer = timer - 1;
+                countdownSpan.innerHTML = timer;
+                if(timer == 0) {
+                    location.href = "http://www.baidu.com";
+                    clearInterval(flag);
+                }
+            }
+            flag = setInterval(countdown, 1000);
+        }
+    </script>
+</head>
+<body>
+<div class="col-3" style="margin: 100px auto;">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title">错误界面</h4>
+            <h6 class="card-subtitle text-muted">Something has gone wrong！</h6>
+        </div>
+        <img th:src="@{~/img/404.jpg}" alt="Error Page" style="width: 250px;margin: 0px auto;">
+        <div class="card-body">
+            <p class="card-text"><strong style="color: red;" th:text="${msg}"></strong></p>
+            <p class="card-text">本页面<span id="countdownSpan" style="color: orange;"></span>秒后将自动跳转到首页……</p>
+            <a href="javascript:void(0);" class="btn btn-primary">立即返回</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

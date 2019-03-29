@@ -1,8 +1,9 @@
 package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.utils.JwtTokenUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import com.shiep.fxauth.utils.RedisUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,9 +27,6 @@ import java.util.List;
  */
 public class JwtPreAuthFilter extends BasicAuthenticationFilter {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
     public JwtPreAuthFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -46,7 +44,6 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
         String tokenHeader = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
-        System.out.println("tokenHeader:" + tokenHeader);
         // 如果请求头中没有Authorization信息则直接放行了
         if (tokenHeader == null || !tokenHeader.startsWith(JwtTokenUtils.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
@@ -67,7 +64,7 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
         //解析Token时将“Bearer ”前缀去掉
         String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         String username = JwtTokenUtils.getUsername(userToken);
-        String token = redisTemplate.opsForHash().get("token",username).toString();
+        String token = RedisUtils.hGet("token",username).toString();
         // 如果用户传来的Token跟Redis中存储的Token匹配的话
         if(userToken.equals(token)){
             List<String> roles = JwtTokenUtils.getUserRole(token);

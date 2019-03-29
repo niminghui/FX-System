@@ -15,14 +15,15 @@ public class ResultVO implements Serializable {
     /**
      * description: 返回响应信息
      *
-     * @param respCode
-     * @param success
+     * @param respCode 响应码
+     * @param success 成功与否
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
-    public static Map<String, Object> result(ResultEnum respCode, Boolean success) {
+    public static Map<String, Object> result(HttpStatusEnum respCode, Boolean success) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", respCode.getCode());
-        map.put("message", respCode.getMessage());
+        map.put("messageUS", respCode.getMessageUS());
+        map.put("messageCN", respCode.getMessageCN());
         map.put("data", null);
         map.put("success",success);
         return map;
@@ -31,16 +32,17 @@ public class ResultVO implements Serializable {
     /**
      * description: 返回响应信息及Token
      *
-     * @param respCode
-     * @param jwtToken
-     * @param success
+     * @param respCode 响应码
+     * @param jwtToken Token
+     * @param success 成功与否
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
-    public final static Map<String, Object> result(ResultEnum respCode, String jwtToken, Boolean success) {
+    public static Map<String, Object> result(HttpStatusEnum respCode, String jwtToken, Boolean success) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("jwtToken",jwtToken);
         map.put("code", respCode.getCode());
-        map.put("message", respCode.getMessage());
+        map.put("messageUS", respCode.getMessageUS());
+        map.put("messageCN", respCode.getMessageCN());
         map.put("data", null);
         map.put("success",success);
         return map;

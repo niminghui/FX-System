@@ -17,5 +17,4 @@ public class FxAuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(FxAuthApplication.class, args);
     }
-
 }

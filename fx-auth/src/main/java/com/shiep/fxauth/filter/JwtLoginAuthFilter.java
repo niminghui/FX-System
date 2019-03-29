@@ -1,21 +1,20 @@
 package com.shiep.fxauth.filter;
 
-import com.alibaba.fastjson.JSON;
-import com.shiep.fxauth.common.ResultEnum;
+import com.shiep.fxauth.common.HttpStatusEnum;
 import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.controller.BaseErrorController;
 import com.shiep.fxauth.model.JwtAuthUser;
 import com.shiep.fxauth.model.LoginVO;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: 倪明辉
@@ -32,6 +32,7 @@ import java.util.List;
  * @description: 登录认证过滤器
  */
 public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
+    private static final Logger logger = LoggerFactory.getLogger(JwtLoginAuthFilter.class);
     private static final String REDIS_TOKEN_KEY="token";
 
     private AuthenticationManager authenticationManager;
@@ -54,12 +55,12 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
-        System.out.println("/auth/login");
+        //LoginVO loginVO = (LoginVO) request.getAttribute("loginUser");
         LoginVO loginVO = new LoginVO();
-        loginVO.setAccount_name(request.getParameter("name"));
+        loginVO.setAccount_name(request.getParameter("name").toString());
         loginVO.setAccount_pwd(request.getParameter("password"));
         loginVO.setRememberMe(Boolean.parseBoolean(request.getParameter("rememberMe")));
-        System.out.println(loginVO.toString());
+        logger.info(loginVO.toString());
         rememberMe.set(loginVO.getRememberMe());
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginVO.getAccount_name(), loginVO.getAccount_pwd(), new ArrayList<>())
@@ -84,27 +85,20 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
 
         // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象，这里是JwtAuthUser
         JwtAuthUser jwtUser = (JwtAuthUser) authResult.getPrincipal();
-        System.out.println("JwtAuthUser:" + jwtUser.toString());
+        logger.info(jwtUser.toString());
         boolean isRemember = rememberMe.get();
         List<String> roles = new ArrayList<>();
         Collection<? extends GrantedAuthority> authorities = jwtUser.getAuthorities();
         for (GrantedAuthority authority : authorities){
             roles.add(authority.getAuthority());
         }
-        System.out.println("roles:"+roles);
         String token = JwtTokenUtils.createToken(jwtUser.getUsername(), roles, isRemember);
-        System.out.println("token:"+token);
+        logger.info("token:"+token);
         // 将Token存入Redis
         RedisUtils.hPut(REDIS_TOKEN_KEY,jwtUser.getUsername(),token);
-        System.out.println("redis token:"+ RedisUtils.hGet(REDIS_TOKEN_KEY,jwtUser.getUsername()));
-//        redisTemplate.opsForHash().put("token",jwtUser.getUsername(),token);
-//        System.out.println("Redis Token:"+redisTemplate.opsForHash().get("token",jwtUser.getUsername()));
-        // 重定向无法设置header,这里设置header只能设置到/auth/login界面的header
-        //response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
-
-        // 登录成功重定向到home界面==>(可先跳转到控制层，在控制层设置（Token存到Redis等等），在跳转到页面)
-        // 这里先采用参数传递
-        response.sendRedirect("/home?token="+token);
+        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+        request.getRequestDispatcher("/home").forward(request,response);
+        //response.sendRedirect("/home?token="+token);
     }
 
     /**
@@ -118,8 +112,9 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=utf-8");
-        response.getWriter().write(JSON.toJSONString(ResultVO.result(ResultEnum.USER_LOGIN_FAILED,false)));
+        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_FAILED,false);
+        request.setAttribute("code",map.get("code"));
+        request.setAttribute("msg",map.get("messageCN"));
+        request.getRequestDispatcher("/error").forward(request,response);
     }
 }

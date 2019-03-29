@@ -5,7 +5,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author: 倪明辉
@@ -20,12 +19,8 @@ public class HomeController {
         return "homePage";
     }
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
     @GetMapping("/test")
-    @ResponseBody
     public String toTest(){
-        return redisTemplate.opsForValue().get("key1").toString();
+        return "redirect:/a/account/20150600";
     }
 }
