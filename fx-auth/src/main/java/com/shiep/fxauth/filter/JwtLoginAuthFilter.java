@@ -2,7 +2,6 @@ package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.common.HttpStatusEnum;
 import com.shiep.fxauth.common.ResultVO;
-import com.shiep.fxauth.controller.BaseErrorController;
 import com.shiep.fxauth.model.JwtAuthUser;
 import com.shiep.fxauth.model.LoginVO;
 import com.shiep.fxauth.utils.JwtTokenUtils;
@@ -57,13 +56,13 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
                                                 HttpServletResponse response) throws AuthenticationException {
         //LoginVO loginVO = (LoginVO) request.getAttribute("loginUser");
         LoginVO loginVO = new LoginVO();
-        loginVO.setAccount_name(request.getParameter("name").toString());
-        loginVO.setAccount_pwd(request.getParameter("password"));
+        loginVO.setAccountName(request.getParameter("name"));
+        loginVO.setPassword(request.getParameter("password"));
         loginVO.setRememberMe(Boolean.parseBoolean(request.getParameter("rememberMe")));
         logger.info(loginVO.toString());
         rememberMe.set(loginVO.getRememberMe());
         return authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginVO.getAccount_name(), loginVO.getAccount_pwd(), new ArrayList<>())
+                new UsernamePasswordAuthenticationToken(loginVO.getAccountName(), loginVO.getPassword(), new ArrayList<>())
         );
     }
 

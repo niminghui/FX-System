@@ -1,6 +1,9 @@
 package com.shiep.fxauth.controller;
 
+import com.shiep.fxauth.endpoint.IAccountService;
 import com.shiep.fxauth.model.LoginVO;
+import com.shiep.fxauth.model.RegisterVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,6 +27,9 @@ import java.util.Random;
  */
 @Controller
 public class LoginController {
+    @SuppressWarnings("all")
+    @Autowired
+    private IAccountService accountService;
 
     @GetMapping("/login")
     public String toLoginPage(Model model){
@@ -33,7 +39,7 @@ public class LoginController {
     }
 
     @PostMapping("/login/validate")
-    public ModelAndView validate(HttpServletRequest request, @Validated LoginVO loginUser,
+    public ModelAndView loginValidate(HttpServletRequest request, @Validated LoginVO loginUser,
                                  Errors errors, RedirectAttributes ra){
         ModelAndView mv=new ModelAndView();
         // 如果Errors对象有Field错误的时候，重新跳回注册页面，否则正常提交
@@ -41,21 +47,49 @@ public class LoginController {
             mv.setViewName("loginPage");
             return mv;
         }
-        String yzm = request.getSession().getAttribute("yzm").toString();
-        if (!yzm.equals(loginUser.getUyzm())) {
+        String captcha = request.getSession().getAttribute("captcha").toString();
+        if (!captcha.equals(loginUser.getUserCaptcha())) {
             mv.setViewName("loginPage");
             return mv;
         }
         // ra.addFlashAttribute()传递参数到过滤器中丢失
-        ra.addAttribute("name",loginUser.getAccount_name());
-        ra.addAttribute("password",loginUser.getAccount_pwd());
+        ra.addAttribute("name",loginUser.getAccountName());
+        ra.addAttribute("password",loginUser.getPassword());
         ra.addAttribute("rememberMe",loginUser.getRememberMe());
         mv.setViewName("redirect:/auth/login");
         return mv;
     }
 
-    @GetMapping("/yzm")
-    public void returnYZM(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/register")
+    public String toRegisterPage(Model model){
+        RegisterVO registerVo = new RegisterVO();
+        model.addAttribute("registerVo",registerVo);
+        return "registerPage";
+    }
+
+    @PostMapping("/register/validate")
+    public ModelAndView registerValidate(HttpServletRequest request,RegisterVO registerVo){
+        System.out.println(registerVo);
+        ModelAndView mv = new ModelAndView();
+        String captcha = request.getSession().getAttribute("captcha").toString();
+        if (!captcha.equals(registerVo.getUserCaptcha()) || !registerVo.getPassword().equals(registerVo.getConfirmPassword())) {
+            mv.addObject("captchaError","验证码错误");
+            mv.setViewName("registerPage");
+            return mv;
+        }
+        accountService.createAccount(registerVo.getAccountName(),registerVo.getPassword());
+        mv.setViewName("redirect:/login");
+        return mv;
+    }
+
+    @GetMapping("/check/{accountName}")
+    @ResponseBody
+    public Boolean checkAccountNameExist(@PathVariable("accountName")String accountName){
+        return accountService.getAccountVo(accountName)!=null;
+    }
+
+    @GetMapping("/captcha")
+    public void returnCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 设置页面不缓存
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
@@ -98,10 +132,9 @@ public class LoginController {
             g.drawString(rand, 20 * i + 15, 34);
         }
         // 将认证码存入session
-        request.getSession().setAttribute("yzm", sRand);
+        request.getSession().setAttribute("captcha", sRand);
         g.dispose();
         // 输出图像到页面
         ImageIO.write(image, "JPEG", response.getOutputStream());
-        request.getSession().setAttribute("yzm", sRand);
     }
 }

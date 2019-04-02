@@ -13,7 +13,7 @@
                 timer = timer - 1;
                 countdownSpan.innerHTML = timer;
                 if(timer == 0) {
-                    location.href = "http://www.baidu.com";
+                    location.href = "/login";
                     clearInterval(flag);
                 }
             }
@@ -32,7 +32,7 @@
         <div class="card-body">
             <p class="card-text"><strong style="color: red;" th:text="${msg}"></strong></p>
             <p class="card-text">本页面<span id="countdownSpan" style="color: orange;"></span>秒后将自动跳转到首页……</p>
-            <a href="javascript:void(0);" class="btn btn-primary">立即返回</a>
+            <a th:href="@{/login}" class="btn btn-primary">立即返回</a>
         </div>
     </div>
 </div>

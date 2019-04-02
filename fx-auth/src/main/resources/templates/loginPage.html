@@ -5,6 +5,7 @@
     <title>外汇业务管理系统</title>
     <link rel="stylesheet" th:href="@{~/css/index.css}" />
     <link rel="stylesheet" th:href="@{~/css/login.css}" />
+    <link rel="stylesheet" th:href="@{~/css/bootstrap-magic.css}" />
     <script type="text/javascript" th:src="@{~/js/index.js}"></script>
     <style type="text/css">
         .e-selfecheckbox {
@@ -29,76 +30,188 @@
 </head>
 
 <body>
-<div class="slider">
-    <div class="main " id="template_main">
-        <div class="main-i {{css}}" id="main_{{index}}">
-            <div class="caption ">
-                <h2>{{h2}}</h2>
-                <h3>{{h3}}</h3>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" th:href="@{/login}">FX-System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/login}">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/register}">注册</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">开户</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">关于我们</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</header>
+<main role="main">
+    <div class="slider">
+        <div class="main " id="template_main">
+            <div class="main-i {{css}}" id="main_{{index}}">
+                <div class="caption ">
+                    <h2>{{h2}}</h2>
+                    <h3>{{h3}}</h3>
+                </div>
+                <img th:src="@{~/img/{{index}}.jpg}" class="picture" />
             </div>
-            <img th:src="@{~/img/{{index}}.jpg}" class="picture" />
         </div>
     </div>
-</div>
 
-<div class="operation">
-    <h2 id="title">Please Sign in</h2>
-    <br />
-    <form th:object="${loginVO}" th:action="@{/login/validate}" id="indexForm" method="post" >
-        <input type="hidden" name="opt" value="login" />
-        <div class="input">
-            <img th:src="@{~/img/login-id.png}" alt="用户账户" class="loginImg" />
-            <input type="text" th:value="*{account_name}" name="account_name" id="account_name" autocomplete="off" placeholder="请输入登录帐号" />
-            <div class="errorDiv" th:errors="${loginVO.account_name}"></div>
-        </div>
-
-
-        <div class="input">
-            <img th:src="@{~/img/login-pwd.png}" alt="用户密码" class="loginImg" />
-            <input type="password" th:value="*{account_pwd}" name="account_pwd" id="account_pwd" placeholder="请输入登录密码" />
-            <div class="errorDiv" th:errors="${loginVO.account_pwd}"></div>
-        </div>
-
-        <div class="input">
-            <img th:src="@{~/img/login-yzm.png}" alt="验证码" class="loginImg" />
-            <input type="text" th:value="*{uyzm}" name="uyzm" id="uyzm" placeholder="请输入验证码" autocomplete="off">
-            <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/yzm}" onclick="changeYZM()" />
-            <div class="errorDiv" th:errors="${loginVO.uyzm}"></div>
-        </div>
-
-        <div class="inlineDiv">
-            <div id="rememberMeDiv">
-                <input type="checkbox" th:value="*{rememberMe}" class="e-selfecheckbox" name="rememberMe" id="rememberMe" onclick="changeValue()" />
-                <label class="selfecheckbox_label" for="rememberMe">
-                    <span id="rememberMeFont">记住我</span>
-                </label>
+    <div class="operation">
+        <h2 id="title">Please Sign in</h2>
+        <br />
+        <form th:object="${loginVO}" th:action="@{/login/validate}" th:id="indexForm" th:method="post" >
+            <input type="hidden" name="opt" value="login" />
+            <div class="input">
+                <img th:src="@{~/img/login-id.png}" alt="用户账户" class="loginImg" />
+                <input type="text" th:value="*{accountName}" name="accountName" id="accountName" autocomplete="off" placeholder="请输入登录帐号" />
+                <div class="errorDiv" th:errors="${loginVO.accountName}"></div>
             </div>
-            <div id="forgetPwdDiv">
-                <label id="forgetPwdLabel" for="forgetPwd">
-                    <a id="forgetPwd" href="">忘记密码?</a>
-                </label>
+
+
+            <div class="input">
+                <img th:src="@{~/img/login-pwd.png}" alt="用户密码" class="loginImg" />
+                <input type="password" th:value="*{password}" name="password" id="password" placeholder="请输入登录密码" />
+                <div class="errorDiv" th:errors="${loginVO.password}"></div>
+            </div>
+
+            <div class="input">
+                <img th:src="@{~/img/login-yzm.png}" alt="验证码" class="loginImg" />
+                <input type="text" th:value="*{userCaptcha}" name="userCaptcha" id="userCaptcha" placeholder="请输入验证码" autocomplete="off">
+                <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/captcha}" onclick="changeCaptcha()" />
+                <div class="errorDiv" th:errors="${loginVO.userCaptcha}"></div>
+            </div>
+
+            <div class="inlineDiv">
+                <div id="rememberMeDiv">
+                    <input type="checkbox" th:value="*{rememberMe}" class="e-selfecheckbox" name="rememberMe" id="rememberMe" onclick="changeValue()" />
+                    <label class="selfecheckbox_label" for="rememberMe">
+                        <span id="rememberMeFont">记住我</span>
+                    </label>
+                </div>
+                <div id="forgetPwdDiv">
+                    <label id="forgetPwdLabel" for="forgetPwd">
+                        <a id="forgetPwd" href="">忘记密码?</a>
+                    </label>
+                </div>
+            </div>
+            <div id="loginDiv">
+                <input type="submit" name="submit" class="myButton" value="登录" />
+            </div>
+        </form>
+        <form th:action="@{/register}" id="enrollForm" method="post">
+            <input type="submit" name="submit" class="myButton" value="立即注册" />
+        </form>
+    </div>
+
+    <div class="ctrl" id="template_ctrl">
+        <a class="ctrl-i" id="ctrl_{{index}}" href="javascript:switchSlider({{index}});"> </a>
+    </div>
+
+    <div class="container marketing">
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="rounded" th:src="@{~/img/index-1.JPG}" alt="Generic placeholder image" width="220px" height="220px">
+                <h2>多种交易货币</h2>
+                <p>本行可支持多达13种国际货币的交易，如：澳元，美元，欧元，英镑，新西兰元，加拿大元，日元，马来西亚林吉特，新加坡元等。</p>
+                <p>
+                    <a class="btn btn-secondary" href="#" role="button">了解更多 &raquo;</a>
+                </p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="rounded" th:src="@{~/img/index-2.JPG}" alt="Generic placeholder image" width="220px" height="220px">
+                <h2>多种交易货币对</h2>
+                <p>本行可支持多达23种货币对的换汇服务，如澳元美元，澳元美元，英镑美元，新西兰元美元，美元加元，美元瑞郎，美元日元等。</p>
+                <p>
+                    <a class="btn btn-secondary" href="#" role="button">了解更多 &raquo;</a>
+                </p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="rounded" th:src="@{~/img/index-3.JPG}" alt="Generic placeholder image" width="220px" height="220px">
+                <h2>全天候即时交易</h2>
+                <p>外汇存转取，无需等待，点击即可完成。全天候24小时外汇汇率、人民币牌价即时报价，让您掌握最新动态。</p>
+                <p>
+                    <a class="btn btn-secondary" href="#" role="button">了解更多 &raquo;</a>
+                </p>
             </div>
         </div>
-        <div id="loginDiv">
-            <input type="submit" name="submit" class="myButton" value="登录" />
+        <!-- /.row -->
+        <!-- START THE FEATURETTES -->
+        <hr class="featurette-divider">
+        <div class="row featurette" style="background: url(img/financial-1.jpg); background-size:100%;">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">申请银行卡</h2>
+                <h2 class="featurette-heading"><span class="text-muted">Apply for bank card</span></h2>
+                <br />
+                <p class="lead">在线申请并满足条件可额外获得100元京东卷，限时新户好礼等您来拿！</p>
+                <p class="lead">Online application and meet the conditions can be additional 100 yuan jingdong volume, limited time new good gift for you to take!</p>
+                <br />
+                <p>
+                    <a class="btn btn-info" href="#" role="button">申请银行卡 &raquo;</a>
+                </p>
+            </div>
         </div>
-    </form>
-    <form th:action="@{/enroll}" id="enrollForm" method="post">
-        <input type="submit" name="submit" class="myButton" value="立即注册" />
-    </form>
-</div>
-
-<div class="ctrl" id="template_ctrl">
-    <a class="ctrl-i" id="ctrl_{{index}}" href="javascript:switchSlider({{index}});"> </a>
-</div>
-
-<div class="bottom">
-    <img id="bottom-img" th:src="@{~/img/bottom.jpg}"/>
-</div>
-
+        <hr class="featurette-divider">
+        <div class="row featurette" style="background: url(img/financial-2.jpg); background-size:100%;">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">货币牌价查询</h2>
+                <h2 class="featurette-heading"><span class="text-muted">Currency price inquiry</span></h2>
+                <br />
+                <p class="lead">使用中国银行货币牌价接口，每俩分钟刷新，让您实时掌握最新货币牌价信息。</p>
+                <p class="lead">Use the currency price interface of bank of China, refresh every two minutes, let you master the latest currency price information in real time.</p>
+                <br />
+                <p>
+                    <a class="btn btn-info" href="#" role="button">了解更多 &raquo;</a>
+                </p>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette" style="background: url(img/financial-3.jpg); background-size:100%;">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">国际头条新闻</h2>
+                <h2 class="featurette-heading"><span class="text-muted">International headlines</span></h2>
+                <br />
+                <p class="lead">导入头条新闻接口，每10分钟刷新，让您掌握国内外最新资讯。</p>
+                <p class="lead">Import headlines interface, refresh every 10 minutes, let you master the latest information at home and abroad.</p>
+                <br />
+                <p>
+                    <a class="btn btn-info" href="#" role="button">了解更多 &raquo;</a>
+                </p>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <!-- /END THE FEATURETTES -->
+    </div>
+</main>
+<!-- FOOTER -->
+<footer class="container">
+    <p class="float-right">
+        <a href="#">Back to top</a>
+    </p>
+    <p>&copy; 2019 shiep Graduation design
+        <span>&middot; Foreign exchange business management system</span>
+    </p>
+</footer>
 <script>
-    function changeYZM(){
-        document.getElementById("yzmImg").setAttribute('src','/yzm?'+Math.random());
+    function changeCaptcha(){
+        document.getElementById("yzmImg").setAttribute('src','/captcha?'+Math.random());
     }
     function changeValue(){
         var check = document.getElementById("rememberMe");

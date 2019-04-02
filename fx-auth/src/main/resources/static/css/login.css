@@ -133,3 +133,49 @@ input:focus {
 	margin-top: 2px;
 	margin-left: 20px;
 }
+
+<!--  -->
+.marketing{
+	margin-top: 30px;
+}
+.marketing .col-lg-4 {
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.marketing h2 {
+	font-weight: 400;
+	margin-top: 20px;
+}
+
+.marketing .col-lg-4 p {
+	margin-right: 0.75rem;
+	margin-left: 0.75rem;
+}
+
+.featurette-divider {
+	margin: 3rem 0;
+}
+
+.featurette-heading {
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -0.05rem;
+}
+
+@media (min-width: 40em) {
+	.carousel-caption p {
+		margin-bottom: 1.25rem;
+		font-size: 1.25rem;
+		line-height: 1.4;
+	}
+	.featurette-heading {
+		font-size: 50px;
+	}
+}
+
+@media (min-width: 62em) {
+	.featurette-heading {
+		margin-top: 7rem;
+	}
+}

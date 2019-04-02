@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    @SuppressWarnings("all")
     @Autowired
     private IAccountService accountService;
 

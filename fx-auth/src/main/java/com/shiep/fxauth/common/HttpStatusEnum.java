@@ -85,7 +85,7 @@ public enum HttpStatusEnum {
     USER_LOGIN_FAILED(451,"Incorrect user account or password","用户账号或密码错误"),
     USER_NO_ACCESS(452,"User has no access","用户无权访问"),
     USER_TOKEN_BLACKLIST(453,"This token is a blacklist","此token为黑名单"),
-    USER_LOGIN_OVERDUE(454,"Login failed","登录已失效");
+    USER_LOGIN_OVERDUE(454,"Login failed","登录已失效，请重新登录");
 
     private final int code;
     private final String messageUS;

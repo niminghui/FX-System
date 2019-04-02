@@ -1,5 +1,7 @@
 package com.shiep.fxauth.filter;
 
+import com.shiep.fxauth.common.HttpStatusEnum;
+import com.shiep.fxauth.common.ResultVO;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: 倪明辉
@@ -50,7 +53,15 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
             return;
         }
         // 如果请求头中有token，则进行解析，并且设置认证信息
-        SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = getAuthentication(tokenHeader);
+        if (usernamePasswordAuthenticationToken == null){
+            // 此时应该是用户Token过期，将跳转到登录界面
+            Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_OVERDUE,false);
+            request.setAttribute("code",map.get("code"));
+            request.setAttribute("msg",map.get("messageCN"));
+            request.getRequestDispatcher("/error").forward(request,response);
+        }
+        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         super.doFilterInternal(request, response, chain);
     }
 
@@ -77,8 +88,6 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
             if (username != null) {
                 return new UsernamePasswordAuthenticationToken(username, null, authorities);
             }
-        } else {
-            // 此时应该是用户Token过期，将跳转到登录界面
         }
         return null;
     }
