@@ -86,6 +86,24 @@ public class FxAccountServiceImpl implements IFxAccountService {
         return new FxAccountVo(account,resultRoles);
     }
 
+    @Override
+    public FxAccount updatePassword(String accountName,  String newPassword) {
+        FxAccount account = accountRepository.findByName(accountName);
+        if (account==null)
+            return null;
+        account.setPassword(passwordEncoder.encode(newPassword));
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public FxAccount bindBankCard(String accountName, String bankCard) {
+        FxAccount account = accountRepository.findByName(accountName);
+        if(account==null)
+            return null;
+        account.setBankCardId(bankCard);
+        return accountRepository.save(account);
+    }
+
     /**
      * description: 创建账户
      *
