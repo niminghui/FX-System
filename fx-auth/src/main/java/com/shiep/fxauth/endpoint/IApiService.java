@@ -32,6 +32,16 @@ public interface IApiService {
     Map<String, Object> getFxRate();
 
     /**
+     * description: 返回带分页的新闻头条
+     *
+     * @param type 新闻类型
+     * @param size 分页大小
+     * @return java.util.Map<java.lang.String , java.lang.Object>
+     */
+    @GetMapping("/api/headlines/{type}/{size}")
+    public Map<String, Object> getHeadlinesPageable(@PathVariable("type") String type, @PathVariable("size") Integer size);
+
+    /**
      * description: 返回新闻头条
      *
      * @param type 新闻类型

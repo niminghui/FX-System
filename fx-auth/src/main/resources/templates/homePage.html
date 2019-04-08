@@ -15,9 +15,21 @@
             margin-right: 3px;
         }
     </style>
-    <!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript">
+        function showFxRate() {
+            $('#fxRateDiv').css('display', 'inline');
+            $('#rmbRateDiv').css('display', 'none');
+            $('#fxRateBtn').addClass('active');
+            $('#rmbRateBtn').removeClass('active');
+        }
+
+        function showRmbRate() {
+            $('#fxRateDiv').css('display', 'none');
+            $('#rmbRateDiv').css('display', 'inline');
+            $('#fxRateBtn').removeClass('active');
+            $('#rmbRateBtn').addClass('active');
+        }
+    </script>
 </head>
 
 <body>
@@ -171,15 +183,23 @@
             <div class="card-header">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/}"><img class="iconImg" th:src="@{~/img/dollar.png}"/>外汇牌价</a>
+                        <button id="fxRateBtn" class="nav-link active" th:onclick="showFxRate()"><img class="iconImg"
+                                                                                                      th:src="@{~/img/dollar.png}"/>外汇牌价
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}"><img class="iconImg" th:src="@{~/img/transaction.png}"/>结售汇牌价</a>
+                        <button id="rmbRateBtn" class="nav-link" th:onclick="showRmbRate()"><img class="iconImg"
+                                                                                                 th:src="@{~/img/transaction.png}"/>结售汇牌价
+                        </button>
                     </li>
                 </ul>
             </div>
-            <div class="card-body">
-                <table class="table table-hover">
+            <div id="fxRateDiv" class="card-body">
+                <div th:if="${fxRate['code'] ne 200}" class="alert alert-danger" role="alert">
+                    <p>错误码：<span th:text="${fxRate.get('code')}"></span></p>
+                    <p>错误信息：<span th:text="${fxRate.get('message')}"></span></p>
+                </div>
+                <table class="table table-hover" th:if="${fxRate['code'] eq 200}">
                     <thead class="thead-default">
                     <tr>
                         <th>货币对</th>
@@ -193,43 +213,44 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                    </tr>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                    </tr>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
+                    <tr th:each="fxdata : ${fxRate.get('data')}">
+                        <td th:text="${fxdata.value.currencyPairsName}"></td>
+                        <td th:text="${fxdata.value.currencyPairsCode}"></td>
+                        <td th:text="${fxdata.value.buyPic}"></td>
+                        <td th:text="${fxdata.value.sellPic}"></td>
+                        <td th:text="${fxdata.value.openPri}"></td>
+                        <td th:text="${fxdata.value.highPic}"></td>
+                        <td th:text="${fxdata.value.lowPic}"></td>
+                        <td th:text="${fxdata.value.range}"></td>
                     </tr>
                     </tbody>
-                    <tfoot>
+                </table>
+            </div>
+
+            <div id="rmbRateDiv" class="card-body" style="display:none">
+                <div th:if="${rmbRate['code'] ne 200}" class="alert alert-danger" role="alert">
+                    <p>错误码：<span th:text="${rmbRate.get('code')}"></span></p>
+                    <p>错误信息：<span th:text="${rmbRate.get('message')}"></span></p>
+                </div>
+                <table class="table table-hover" th:if="${rmbRate['code'] eq 200}">
+                    <thead class="thead-default">
                     <tr>
-                        <td colspan="4"><a class="btn btn-secondary" th:href="@{/}" role="button">了解更多 &raquo;</a></td>
-                        <td colspan="4">注：外汇牌价更新时间为</td>
+                        <th>货币名称</th>
+                        <th>标准符号</th>
+                        <th>现汇买入价</th>
+                        <th>现汇卖出价</th>
+                        <th>银行折算价</th>
                     </tr>
-                    </tfoot>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rmbData : ${rmbRate.get('data')}">
+                        <td th:text="${rmbData.value.currencyName}"></td>
+                        <td th:text="${rmbData.value.currencyCode}"></td>
+                        <td th:text="${rmbData.value.fbuyPri}"></td>
+                        <td th:text="${rmbData.value.fsellPri}"></td>
+                        <td th:text="${rmbData.value.bankConversionPri}"></td>
+                    </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -248,67 +269,20 @@
             <div class="card-header">
                 <p class="card-title">国际新闻</p>
             </div>
-            <div class="card-body">
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://09imgmini.eastday.com/mobile/20190403/20190403143048_7c21c1c2b278c4d44bf95534e3d07e72_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403143048004.html"><span>[国际]</span>马耳他MFSA批准14个加密资产代理商
-                                并颁发金融牌照</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://07imgmini.eastday.com/mobile/20190403/20190403142731_5cfb1a8d2fd7372a0f1382fa5e7293f3_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403142731852.html"><span>[国际]</span>立陶宛将对华出口青贮饲料</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://01imgmini.eastday.com/mobile/20190403/20190403143020_aca623918d9cfe8b79abaf522cc41b32_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403143020002.html"><span>[国际]</span>美媒：特朗普上任800天
-                                已“失言”近万次</a>
-                        </div>
-                    </div>
-                </div>
+            <div th:if="${headlines.get('code') ne 200}" class="alert alert-danger" role="alert">
+                <p>错误码：<span th:text="${headlines.get('code')}"></span></p>
+                <p>错误信息：<span th:text="${headlines.get('message')}"></span></p>
             </div>
-
-            <div class="card-body">
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://09imgmini.eastday.com/mobile/20190403/20190403143048_7c21c1c2b278c4d44bf95534e3d07e72_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403143048004.html"><span>[国际]</span>马耳他MFSA批准14个加密资产代理商
-                                并颁发金融牌照</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://07imgmini.eastday.com/mobile/20190403/20190403142731_5cfb1a8d2fd7372a0f1382fa5e7293f3_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403142731852.html"><span>[国际]</span>立陶宛将对华出口青贮饲料</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3" style="display: table-cell;">
-                    <div class="card">
-                        <img src="http://01imgmini.eastday.com/mobile/20190403/20190403143020_aca623918d9cfe8b79abaf522cc41b32_1_mwpm_03200403.jpg"
-                             alt="Photo of sunset">
-                        <div class="card-body">
-                            <a href="http://mini.eastday.com/mobile/190403143020002.html"><span>[国际]</span>美媒：特朗普上任800天
-                                已“失言”近万次</a>
+            <div th:if="${headlines['code'] eq 200}">
+                <div class='card-body' th:each="list : ${headlines.get('data')}">
+                    <div class="col-3" th:each="news : ${list.value}" style="display: table-cell;">
+                        <div class="card">
+                            <img th:src="@{${news.imgURL}}" th:alt="${news.authorName}">
+                            <div class="card-body">
+                                <a th:href="@{${news.newsURL}}">
+                                    <span th:text="'['+${news.category}+']'+${news.title}"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
