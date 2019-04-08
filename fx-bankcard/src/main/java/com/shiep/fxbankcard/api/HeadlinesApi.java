@@ -77,6 +77,34 @@ public class HeadlinesApi {
     }
 
     /**
+     * description: 新闻头条
+     *
+     * @param type 请求的新闻类型
+     * @return java.util.Map<java.lang.String   ,   java.lang.Object>
+     */
+    public static Map<String, Object> getHeadlinesPageable(String type, Integer size) {
+        Map<String, String> querys = new HashMap<String, String>();
+        querys.put(QUERYS_HEADER, type);
+        try {
+            HttpResponse response = HttpUtils.doGet(HOST, PATH, METHOD, headers, querys);
+            Map<String, Object> result = new HashMap<String, Object>();
+            StatusCodeEnum statusCodeEnum = StatusCodeEnum.parse(response.getStatusLine().getStatusCode());
+            result.put("code", statusCodeEnum.getCode());
+            result.put("message", statusCodeEnum.getMessage());
+            System.out.println(result);
+            // 当查询成功时，添加数据到result中
+            if (statusCodeEnum.getCode().equals(StatusCodeEnum.SUCCESS.getCode())) {
+                result.put("data", getDatasPageable(EntityUtils.toString(response.getEntity()), size));
+                return result;
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * description: 得到数据
      *
      * @param str json字符串
@@ -87,8 +115,8 @@ public class HeadlinesApi {
         JSONObject alljsonObject = (JSONObject) JSON.parse(str);
         JSONObject jsonObject = (JSONObject) alljsonObject.get("result");
         JSONArray jsonArray = (JSONArray) jsonObject.get("data");
-        for (Object object : jsonArray){
-            JSONObject data = (JSONObject)object;
+        for (Object object : jsonArray) {
+            JSONObject data = (JSONObject) object;
             NewsModel newsModel = new NewsModel();
             newsModel.setUniqueKey((String) data.get("uniquekey"));
             newsModel.setTitle((String) data.get("title"));
@@ -100,5 +128,36 @@ public class HeadlinesApi {
             dataList.add(newsModel);
         }
         return dataList;
+    }
+
+    /**
+     * description: 得到带分页的数据集
+     *
+     * @param str  json字符串
+     * @param size 每页大小
+     * @return java.util.Map<java.lang.Integer       ,       java.util.List       <       com.shiep.fxbankcard.api.model.NewsModel>>
+     */
+    private static Map<Integer, List<NewsModel>> getDatasPageable(String str, Integer size) {
+        Map<Integer, List<NewsModel>> dataMap = new HashMap<>();
+        JSONObject alljsonObject = (JSONObject) JSON.parse(str);
+        JSONObject jsonObject = (JSONObject) alljsonObject.get("result");
+        JSONArray jsonArray = (JSONArray) jsonObject.get("data");
+        for (int i = 0, j = 0; i <= (jsonArray.size() / size) && j < jsonArray.size(); i++) {
+            List<NewsModel> dataList = new ArrayList<>(size);
+            for (int k = 0; k < size; k++) {
+                JSONObject data = (JSONObject) jsonArray.get(j++);
+                NewsModel newsModel = new NewsModel();
+                newsModel.setUniqueKey((String) data.get("uniquekey"));
+                newsModel.setTitle((String) data.get("title"));
+                newsModel.setReleaseTime((String) data.get("date"));
+                newsModel.setNewsURL((String) data.get("url"));
+                newsModel.setImgURL((String) data.get("thumbnail_pic_s"));
+                newsModel.setCategory((String) data.get("category"));
+                newsModel.setAuthorName((String) data.get("author_name"));
+                dataList.add(newsModel);
+            }
+            dataMap.put(i, dataList);
+        }
+        return dataMap;
     }
 }

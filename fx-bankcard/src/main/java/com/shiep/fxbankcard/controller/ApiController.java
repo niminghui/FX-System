@@ -28,6 +28,11 @@ public class ApiController {
         return FxRateApi.getFxRate();
     }
 
+    @GetMapping("/headlines/{type}/{size}")
+    public Map<String, Object> getHeadlinesPageable(@PathVariable("type") String type, @PathVariable("size") Integer size) {
+        return HeadlinesApi.getHeadlinesPageable(type, size);
+    }
+
     @GetMapping("/headlines/{type}")
     public Map<String, Object> getHeadlines(@PathVariable("type") String type) {
         return HeadlinesApi.getHeadlines(type);

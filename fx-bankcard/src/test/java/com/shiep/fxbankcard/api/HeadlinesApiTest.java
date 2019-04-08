@@ -17,4 +17,11 @@ public class HeadlinesApiTest {
         Assert.assertEquals(200, resultMap.get("code"));
         System.out.println(resultMap);
     }
+
+    @Test
+    public void getHeadlinesPageable() {
+        Map<String, Object> resultMap = HeadlinesApi.getHeadlinesPageable(HeadlinesApi.TYPE_INTERNATIONAL, 3);
+        Assert.assertEquals(200, resultMap.get("code"));
+        System.out.println(resultMap);
+    }
 }
