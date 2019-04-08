@@ -91,7 +91,6 @@ public class HeadlinesApi {
             StatusCodeEnum statusCodeEnum = StatusCodeEnum.parse(response.getStatusLine().getStatusCode());
             result.put("code", statusCodeEnum.getCode());
             result.put("message", statusCodeEnum.getMessage());
-            System.out.println(result);
             // 当查询成功时，添加数据到result中
             if (statusCodeEnum.getCode().equals(StatusCodeEnum.SUCCESS.getCode())) {
                 result.put("data", getDatasPageable(EntityUtils.toString(response.getEntity()), size));

@@ -31,7 +31,22 @@ public enum StatusCodeEnum {
     IP_REQUEST_EXCEEDS_LIMITT(10011, "当前IP请求超过限制"),
     REQUEST_EXCEEDS_LIMITT(10012, "请求超过次数限制"),
     INTERFACE_MAINTAIN(10020, "接口维护"),
-    INTERFACE_DISABLED(10021, "接口停用");
+    INTERFACE_DISABLED(10021, "接口停用"),
+
+    OLD_KEY_WRONG(101, "错误的请求KEY"),
+    OLD_KEY_NO_PERMISSION(102, "该KEY无请求权限"),
+    OLD_KEY_EXPIRED(103, "KEY过期"),
+    OLD_OPENID_WRONG(104, "错误的OPENID"),
+    OLD_AUTH_WRONG(105, "应用未审核"),
+    OLD_UNKNOWN_REQUEST_SOURCE(107, "未知的请求源"),
+    OLD_IP_BANNED(108, "被禁止的IP"),
+    OLD_KEY_BANNED(109, "被禁止的KEY"),
+    OLD_IP_REQUEST_EXCEEDS_LIMITT(111, "当前IP请求超过限制"),
+    OLD_REQUEST_EXCEEDS_LIMITT(112, "请求超过次数限制"),
+    OLD_INTERFACE_MAINTAIN(120, "接口维护"),
+    OLD_INTERFACE_DISABLED(121, "接口停用");
+
+
 
     private Integer code;
 
