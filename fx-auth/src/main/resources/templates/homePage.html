@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>home</title>
     <link rel="stylesheet" th:href="@{~/css/bootstrap-magic.css}"/>
+    <script type="text/javascript" th:src="@{~/js/jquery-3.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/jquery.cookie.js}"></script>
     <style>
         body {
             padding-top: 5rem;
@@ -33,6 +35,22 @@
 </head>
 
 <body>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            success: function (data, status, xhr) {
+                var token = xhr.getResponseHeader('token');
+                if (token != null) {
+                    $.cookie('token', token, {
+                        expires: 7,
+                        path: '/'
+                    });
+                    console.log($.cookie('token'));
+                }
+            }
+        });
+    });
+</script>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" th:href="@{/}"><img class="iconImg" th:src="@{~/img/bank-light.png}">FX-System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -47,7 +65,7 @@
                    aria-haspopup="true" aria-expanded="false">银行卡业务</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownBankCard">
                     <li>
-                        <a class="dropdown-item" th:href="@{/}">办理银行卡</a>
+                        <a class="dropdown-item" th:href="@{/home/cookie}">办理银行卡</a>
                     </li>
                     <li>
                         <a class="dropdown-item" th:href="@{/}">绑定银行卡</a>
@@ -303,9 +321,7 @@
         <span>&middot; Foreign exchange business management system</span>
     </p>
 </footer>
-<script type="text/javascript" th:src="@{~/js/jquery-3.2.1.slim.min.js}"></script>
 <script type="text/javascript" th:src="@{~/js/popper.min.js}"></script>
 <script type="text/javascript" th:src="@{~/js/bootstrap-4.0.0.min.js}"></script>
 </body>
-
 </html>
