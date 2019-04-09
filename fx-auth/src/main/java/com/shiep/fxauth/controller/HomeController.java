@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.util.Map;
 
 /**
@@ -34,25 +35,5 @@ public class HomeController {
         mv.addObject("headlines", apiService.getHeadlinesPageable("guoji", 3));
         mv.setViewName("homePage");
         return mv;
-    }
-
-    @GetMapping("/cookie")
-    @ResponseBody
-    public String checkCookie(HttpServletRequest request) {
-        Cookie cookie = CookieUtils.getCookie(request, "token");
-        System.out.println("cookieValue:" + cookie.getValue() + " " + cookie.getMaxAge());
-        return cookie.getValue();
-    }
-
-    //    @GetMapping("/test")
-//    @ResponseBody
-//    public String toTest(){
-//        return "redirect:/a/account/20150600";
-//    }
-//
-    @GetMapping("/api")
-    @ResponseBody
-    public Map<String, Object> getFxRate(){
-        return apiService.getHeadlinesPageable("guoji", 3);
     }
 }

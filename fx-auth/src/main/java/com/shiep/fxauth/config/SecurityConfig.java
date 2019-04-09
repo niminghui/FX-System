@@ -23,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 /**
  * @author: 倪明辉
  * @date: 2019/3/6 16:24
- * @description:
+ * @description: Spring Security 配置类
  */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
-    // 加密器
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -42,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * description: 加载userDetailsService，用于从account微服务中取用户信息
      *
-     * @param auth
+     * @param auth AuthenticationManagerBuilder
      * @return void
      */
     @Override
@@ -51,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * description: http细节
+     * description: 配置http细节
      *
-     * @param http
+     * @param http HttpSecurity
      * @return void
      */
     @Override

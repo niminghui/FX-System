@@ -2,6 +2,7 @@ package com.shiep.fxauth.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,11 +23,7 @@ public class CookieUtils {
      */
     public static Cookie getCookie(HttpServletRequest request, String cookieName) {
         Map<String, Cookie> cookieMap = readCookieToMap(request);
-        if (cookieMap.containsKey(cookieName)) {
-            return cookieMap.get(cookieName);
-        } else {
-            return null;
-        }
+        return cookieMap.containsKey(cookieName) ? cookieMap.get(cookieName) : null;
     }
 
     /**
@@ -44,7 +41,7 @@ public class CookieUtils {
         if (null == cookieValue) {
             cookieValue = "";
         }
-        Cookie cookie = new Cookie(cookieName, cookieValue);
+        Cookie cookie = new Cookie(cookieName, URLEncoder.encode(cookieValue));
         cookie.setPath("/");
         if (expirationTime != 0) {
             cookie.setMaxAge(expirationTime);

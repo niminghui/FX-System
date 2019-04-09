@@ -82,7 +82,6 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
-        // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象，这里是JwtAuthUser
         JwtAuthUser jwtUser = (JwtAuthUser) authResult.getPrincipal();
         logger.info(jwtUser.toString());
         boolean isRemember = rememberMe.get();

@@ -2,6 +2,7 @@ package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.common.HttpStatusEnum;
 import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.utils.CookieUtils;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -43,10 +45,9 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
      * @return void
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
-        String tokenHeader = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
         // 如果请求头中没有Authorization信息则直接放行了
         if (tokenHeader == null || !tokenHeader.startsWith(JwtTokenUtils.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
