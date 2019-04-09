@@ -35,22 +35,6 @@
 </head>
 
 <body>
-<script type="text/javascript">
-    $(function () {
-        $.ajax({
-            success: function (data, status, xhr) {
-                var token = xhr.getResponseHeader('token');
-                if (token != null) {
-                    $.cookie('token', token, {
-                        expires: 7,
-                        path: '/'
-                    });
-                    console.log($.cookie('token'));
-                }
-            }
-        });
-    });
-</script>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" th:href="@{/}"><img class="iconImg" th:src="@{~/img/bank-light.png}">FX-System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"

@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.Map;
  * @description: Basic认证过滤器
  */
 public class JwtPreAuthFilter extends BasicAuthenticationFilter {
-
+    private final static String[] IGNORED_URL = {"/login", "/register", "/css", "/js", "/img"};
     public JwtPreAuthFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -47,13 +48,21 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
+        //String tokenHeader = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
+        // 从cookie中取Token
         String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        // 如果请求头中没有Authorization信息则直接放行了
+        String uri = request.getRequestURI();
+        for (String str : IGNORED_URL) {
+            if (uri.startsWith(str)) {
+                chain.doFilter(request, response);
+                return;
+            }
+        }
         if (tokenHeader == null || !tokenHeader.startsWith(JwtTokenUtils.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
         }
-        // 如果请求头中有token，则进行解析，并且设置认证信息
+        // 对其他情况进行解析Token，并且设置认证信息
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = getAuthentication(tokenHeader);
         if (usernamePasswordAuthenticationToken == null){
             // 此时应该是用户Token过期，将跳转到登录界面

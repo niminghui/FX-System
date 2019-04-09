@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtLoginAuthFilter.class);
-    private static final String REDIS_TOKEN_KEY="token";
+    private static final String REDIS_TOKEN_KEY = "token";
 
     private AuthenticationManager authenticationManager;
 
@@ -41,7 +41,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     public JwtLoginAuthFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         // 设置该过滤器地址
-        super.setFilterProcessesUrl("/auth/login");
+        super.setFilterProcessesUrl("/login/auth");
     }
 
     /**
@@ -54,7 +54,6 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
-        //LoginVO loginVO = (LoginVO) request.getAttribute("loginUser");
         LoginVO loginVO = new LoginVO();
         loginVO.setAccountName(request.getParameter("name"));
         loginVO.setPassword(request.getParameter("password"));
@@ -94,9 +93,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
         logger.info("token:"+token);
         // 将Token存入Redis
         RedisUtils.hPut(REDIS_TOKEN_KEY,jwtUser.getUsername(),token);
-        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
-        request.getRequestDispatcher("/home").forward(request,response);
-        //response.sendRedirect("/home?token="+token);
+        response.sendRedirect("/login/success?token=" + JwtTokenUtils.TOKEN_PREFIX + token);
     }
 
     /**

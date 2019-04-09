@@ -98,7 +98,7 @@
             <div class="input">
                 <img th:src="@{~/img/login-yzm.png}" alt="验证码" class="loginImg" />
                 <input type="text" th:value="*{userCaptcha}" name="userCaptcha" id="userCaptcha" placeholder="请输入验证码" autocomplete="off">
-                <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/captcha}" onclick="changeCaptcha()" />
+                <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/login/captcha}" onclick="changeCaptcha()"/>
                 <div class="errorDiv" th:errors="${loginVO.userCaptcha}"></div>
             </div>
 
@@ -217,7 +217,7 @@
 </footer>
 <script>
     function changeCaptcha(){
-        document.getElementById("yzmImg").setAttribute('src','/captcha?'+Math.random());
+        document.getElementById("yzmImg").setAttribute('src', '/login/captcha?' + Math.random());
     }
     function changeValue(){
         var check = document.getElementById("rememberMe");

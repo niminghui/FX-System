@@ -33,7 +33,7 @@
 
         <label for="userCaptcha" class="sr-only">Captcha</label>
         <input type="text" name="userCaptcha" id="userCaptcha" class="form-control" placeholder="请输入验证码" required />
-        <img border=0 id="captchaImg" alt="点击重新加载" th:src="@{/captcha}" onclick="changeCaptcha()" />
+        <img border=0 id="captchaImg" alt="点击重新加载" th:src="@{/login/captcha}" onclick="changeCaptcha()"/>
         <div class="errorDiv" id="captchaError" th:if="${captchaError}!=null" th:text="${captchaError}"></div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
@@ -49,7 +49,7 @@
 <!-- /container -->
 <script type="text/javascript">
     function changeCaptcha(){
-        document.getElementById("captchaImg").setAttribute('src','/captcha?'+Math.random());
+        document.getElementById("captchaImg").setAttribute('src', '/login/captcha?' + Math.random());
     }
 
     function check() {
@@ -65,7 +65,7 @@
         var accountName = $('#accountName').val();
         $.ajax({
             type : 'get',
-            url : '/check/'+accountName,
+            url: '/register/check/' + accountName,
             contentType : 'application/json;charset=UTF-8',
             dataType : 'text',
             success : function(data,textStatus,jqXHR){

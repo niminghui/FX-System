@@ -23,22 +23,23 @@ import java.util.Random;
 /**
  * @author: 倪明辉
  * @date: 2019/3/21 14:01
- * @description: 登录控制器
+ * @description: 登录控制层
  */
 @Controller
+@RequestMapping("/login")
 public class LoginController {
     @SuppressWarnings("all")
     @Autowired
     private IAccountService accountService;
 
-    @GetMapping("/login")
+    @GetMapping
     public String toLoginPage(Model model){
         LoginVO loginVO=new LoginVO();
         model.addAttribute("loginVO",loginVO);
         return "loginPage";
     }
 
-    @PostMapping("/login/validate")
+    @PostMapping("/validate")
     public ModelAndView loginValidate(HttpServletRequest request, @Validated LoginVO loginUser,
                                  Errors errors, RedirectAttributes ra){
         ModelAndView mv=new ModelAndView();
@@ -56,36 +57,14 @@ public class LoginController {
         ra.addAttribute("name",loginUser.getAccountName());
         ra.addAttribute("password",loginUser.getPassword());
         ra.addAttribute("rememberMe",loginUser.getRememberMe());
-        mv.setViewName("redirect:/auth/login");
+        mv.setViewName("redirect:/login/auth");
         return mv;
     }
 
-    @RequestMapping("/register")
-    public String toRegisterPage(Model model){
-        RegisterVO registerVo = new RegisterVO();
-        model.addAttribute("registerVo",registerVo);
-        return "registerPage";
-    }
-
-    @PostMapping("/register/validate")
-    public ModelAndView registerValidate(HttpServletRequest request,RegisterVO registerVo){
-        System.out.println(registerVo);
-        ModelAndView mv = new ModelAndView();
-        String captcha = request.getSession().getAttribute("captcha").toString();
-        if (!captcha.equals(registerVo.getUserCaptcha()) || !registerVo.getPassword().equals(registerVo.getConfirmPassword())) {
-            mv.addObject("captchaError","验证码错误");
-            mv.setViewName("registerPage");
-            return mv;
-        }
-        accountService.createAccount(registerVo.getAccountName(),registerVo.getPassword());
-        mv.setViewName("redirect:/login");
-        return mv;
-    }
-
-    @GetMapping("/check/{accountName}")
-    @ResponseBody
-    public Boolean checkAccountNameExist(@PathVariable("accountName")String accountName){
-        return accountService.getAccountVo(accountName)!=null;
+    @GetMapping("/success")
+    public String toLoginSuccessPage(@RequestParam("token") String token, HttpServletResponse response) {
+        response.setHeader("token", token);
+        return "loginSuccessPage";
     }
 
     @GetMapping("/captcha")
