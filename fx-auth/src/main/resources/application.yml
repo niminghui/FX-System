@@ -10,3 +10,8 @@ spring:
     servlet:
       content-type: text/html
     cache: false
+  mail:
+    host: smtp.126.com
+    username: gent_ni@126.com
+    password: 126authcode
+    default-encoding: utf-8

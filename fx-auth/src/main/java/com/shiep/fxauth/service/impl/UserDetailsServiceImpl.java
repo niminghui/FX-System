@@ -1,4 +1,4 @@
-package com.shiep.fxauth.service;
+package com.shiep.fxauth.service.impl;
 
 import com.shiep.fxauth.endpoint.IAccountService;
 import com.shiep.fxauth.model.JwtAuthUser;
