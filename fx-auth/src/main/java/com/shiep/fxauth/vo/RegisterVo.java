@@ -1,4 +1,4 @@
-package com.shiep.fxauth.model;
+package com.shiep.fxauth.vo;
 
 import com.shiep.fxauth.annotation.Password;
 import lombok.Data;
@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  */
 @Component
 @Data
-public class RegisterVO {
+public class RegisterVo {
     @Size(min = 3, max = 25, message = "账户名长度介于3-25之间")
     private String accountName;
 

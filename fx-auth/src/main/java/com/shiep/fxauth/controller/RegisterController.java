@@ -1,7 +1,7 @@
 package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.endpoint.IAccountService;
-import com.shiep.fxauth.model.RegisterVO;
+import com.shiep.fxauth.vo.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +24,13 @@ public class RegisterController {
 
     @RequestMapping
     public String toRegisterPage(Model model) {
-        RegisterVO registerVo = new RegisterVO();
+        RegisterVo registerVo = new RegisterVo();
         model.addAttribute("registerVo", registerVo);
         return "registerPage";
     }
 
     @PostMapping("/validate")
-    public ModelAndView registerValidate(HttpServletRequest request, RegisterVO registerVo) {
+    public ModelAndView registerValidate(HttpServletRequest request, RegisterVo registerVo) {
         System.out.println(registerVo);
         ModelAndView mv = new ModelAndView();
         String captcha = request.getSession().getAttribute("captcha").toString();

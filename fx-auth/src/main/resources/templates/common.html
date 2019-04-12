@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonHeader(title)">
+    <meta charset="UTF-8">
+    <title th:title="${title}"></title>
+    <link rel="stylesheet" th:href="@{~/css/bootstrap-magic.css}"/>
+    <style>
+        body {
+            padding-top: 5rem;
+        }
+
+        .iconImg {
+            width: 30px;
+            margin-top: -5px;
+            margin-right: 3px;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{~/js/jquery-3.1.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/bootstrap-4.0.0.min.js}"></script>
+</head>
+<body>
+<nav th:fragment="commonNav" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" th:href="@{/}"><img class="iconImg" th:src="@{~/img/bank-light.png}">FX-System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="dropdownBankCard"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">银行卡业务</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownBankCard">
+                    <li>
+                        <a class="dropdown-item" th:href="@{/home/bankCard/create}">办理银行卡</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">绑定银行卡</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">我的银行卡</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="dropdownDeposit"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">存款业务</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownDeposit">
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">查询活期利率</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">存款记录查询</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="dropdownTransfer"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">转账业务</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownTransfer">
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">外汇转账</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">转账记录查询</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="dropdownExchange"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">外汇兑换业务</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownExchange">
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">外汇牌价</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">结售汇牌价</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">新闻头条</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">关于</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li>
+                        <h6 class="dropdown-header">Company Information</h6></li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">我们的故事</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">我们的团队</a>
+                    </li>
+                    <li>
+                        <h6 class="dropdown-header">Contact Us</h6></li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">联系电话</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/}">公司地址</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+</body>
+</html>

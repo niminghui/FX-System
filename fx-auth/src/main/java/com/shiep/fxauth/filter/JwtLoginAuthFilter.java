@@ -3,7 +3,7 @@ package com.shiep.fxauth.filter;
 import com.shiep.fxauth.common.HttpStatusEnum;
 import com.shiep.fxauth.common.ResultVO;
 import com.shiep.fxauth.model.JwtAuthUser;
-import com.shiep.fxauth.model.LoginVO;
+import com.shiep.fxauth.vo.LoginVo;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
-        LoginVO loginVO = new LoginVO();
+        LoginVo loginVO = new LoginVo();
         loginVO.setAccountName(request.getParameter("name"));
         loginVO.setPassword(request.getParameter("password"));
         loginVO.setRememberMe(Boolean.parseBoolean(request.getParameter("rememberMe")));

@@ -65,6 +65,6 @@ public interface IApiService {
      * @param idCardNum 身份证号码
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
-    @GetMapping("/verify/{idCardNum}")
+    @GetMapping("/api/verify/{idCardNum}")
     Map<String, Object> verify(@PathVariable("idCardNum") String idCardNum);
 }
