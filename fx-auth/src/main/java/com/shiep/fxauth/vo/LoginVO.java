@@ -1,4 +1,4 @@
-package com.shiep.fxauth.model;
+package com.shiep.fxauth.vo;
 
 
 import com.shiep.fxauth.annotation.Password;
@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
  */
 @Component
 @Data
-public class LoginVO {
+public class LoginVo {
     @NotNull(message = "验证码不能为空")
     @Pattern(regexp = "([0-9]{4})", message = "验证码只能由四位数字组成")
     private String userCaptcha;

@@ -1,12 +1,12 @@
 package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.endpoint.IAccountService;
-import com.shiep.fxauth.model.LoginVO;
-import com.shiep.fxauth.model.RegisterVO;
+import com.shiep.fxauth.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,17 +34,22 @@ public class LoginController {
 
     @GetMapping
     public String toLoginPage(Model model){
-        LoginVO loginVO=new LoginVO();
+        LoginVo loginVO = new LoginVo();
         model.addAttribute("loginVO",loginVO);
         return "loginPage";
     }
 
     @PostMapping("/validate")
-    public ModelAndView loginValidate(HttpServletRequest request, @Validated LoginVO loginUser,
-                                 Errors errors, RedirectAttributes ra){
+    public ModelAndView loginValidate(HttpServletRequest request, @Validated LoginVo loginUser,
+                                      Errors errors, RedirectAttributes ra){
         ModelAndView mv=new ModelAndView();
         // 如果Errors对象有Field错误的时候，重新跳回注册页面，否则正常提交
         if (errors.hasFieldErrors()){
+            mv.addObject("error", "true");
+            for (FieldError error : errors.getFieldErrors()) {
+                mv.addObject("err_" + error.getField(), error.getDefaultMessage());
+            }
+            mv.addObject("loginVO", loginUser);
             mv.setViewName("loginPage");
             return mv;
         }

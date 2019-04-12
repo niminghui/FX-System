@@ -84,27 +84,30 @@
             <input type="hidden" name="opt" value="login" />
             <div class="input">
                 <img th:src="@{~/img/login-id.png}" alt="用户账户" class="loginImg" />
-                <input type="text" th:value="*{accountName}" name="accountName" id="accountName" autocomplete="off" placeholder="请输入登录帐号" />
-                <div class="errorDiv" th:errors="${loginVO.accountName}"></div>
+                <input type="text" th:field="*{accountName}" name="accountName" id="accountName" autocomplete="off"
+                       placeholder="请输入登录帐号"/>
+                <div class="errorDiv" th:if="${error} eq 'true'" th:text="${err_accountName}"></div>
             </div>
 
 
             <div class="input">
                 <img th:src="@{~/img/login-pwd.png}" alt="用户密码" class="loginImg" />
-                <input type="password" th:value="*{password}" name="password" id="password" placeholder="请输入登录密码" />
-                <div class="errorDiv" th:errors="${loginVO.password}"></div>
+                <input type="password" th:field="*{password}" name="password" id="password" placeholder="请输入登录密码"/>
+                <div class="errorDiv" th:if="${error} eq 'true'" th:text="${err_password}"></div>
             </div>
 
             <div class="input">
                 <img th:src="@{~/img/login-yzm.png}" alt="验证码" class="loginImg" />
-                <input type="text" th:value="*{userCaptcha}" name="userCaptcha" id="userCaptcha" placeholder="请输入验证码" autocomplete="off">
+                <input type="text" th:field="*{userCaptcha}" name="userCaptcha" id="userCaptcha" placeholder="请输入验证码"
+                       autocomplete="off">
                 <img border=0 id="yzmImg" alt="点击重新加载" th:src="@{/login/captcha}" onclick="changeCaptcha()"/>
-                <div class="errorDiv" th:errors="${loginVO.userCaptcha}"></div>
+                <div class="errorDiv" th:if="${error} eq 'true'" th:text="${err_userCaptcha}"></div>
             </div>
 
             <div class="inlineDiv">
                 <div id="rememberMeDiv">
-                    <input type="checkbox" th:value="*{rememberMe}" class="e-selfecheckbox" name="rememberMe" id="rememberMe" onclick="changeValue()" />
+                    <input type="checkbox" th:field="*{rememberMe}" class="e-selfecheckbox" name="rememberMe"
+                           id="rememberMe" onclick="changeValue()"/>
                     <label class="selfecheckbox_label" for="rememberMe">
                         <span id="rememberMeFont">记住我</span>
                     </label>
