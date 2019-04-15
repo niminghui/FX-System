@@ -26,7 +26,7 @@ public class VerificationIDCardApi {
     private static Map<String, String> headers;
 
     static {
-        headers = new HashMap<String, String>();
+        headers = new HashMap<>();
         //格式：Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put(HEADER, APPCODE_HEADER + APPCODE);
     }
