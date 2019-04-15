@@ -63,7 +63,7 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
             return;
         }
         // 对其他情况进行解析Token，并且设置认证信息
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = getAuthentication(tokenHeader);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = getAuthentication(tokenHeader, request, response);
         if (usernamePasswordAuthenticationToken == null){
             // 此时应该是用户Token过期，将跳转到登录界面
             Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_OVERDUE,false);
@@ -81,9 +81,18 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
      * @param tokenHeader Token字符串
      * @return org.springframework.security.authentication.UsernamePasswordAuthenticationToken
      */
-    private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) {
+    private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader,
+                                                                  HttpServletRequest request,
+                                                                  HttpServletResponse response) throws IOException, ServletException {
         //解析Token时将“Bearer ”前缀去掉
         String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        // 如果Token过期
+        if (JwtTokenUtils.isExpiration(userToken)) {
+            Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_OVERDUE, false);
+            request.setAttribute("code", map.get("code"));
+            request.setAttribute("msg", map.get("messageCN"));
+            request.getRequestDispatcher("/error").forward(request, response);
+        }
         String username = JwtTokenUtils.getUsername(userToken);
         String token = RedisUtils.hGet("token",username).toString();
         // 如果用户传来的Token跟Redis中存储的Token匹配的话

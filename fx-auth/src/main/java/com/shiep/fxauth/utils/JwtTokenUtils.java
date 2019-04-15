@@ -1,8 +1,11 @@
 package com.shiep.fxauth.utils;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -14,32 +17,53 @@ import java.util.List;
  * @description: JWT Token 工具类
  */
 public class JwtTokenUtils {
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtils.class);
+
+    /**
+     * description: request header 请求头
+     */
     public static final String TOKEN_HEADER = "Authorization";
+
+    /**
+     * description: token 前缀
+     */
     public static final String TOKEN_PREFIX = "Bearer ";
 
-    //密钥，用于signature（签名）部分解密
+    /**
+     * description: 密钥，用于signature（签名）部分解密
+     */
     private static final String PRIMARY_KEY = "foreign exchange";
-    //签发者
+
+    /**
+     * description: 签发者
+     */
     private static final String ISS = "Gent.Ni";
-    // 添加角色的key
+
+    /**
+     * description: 添加角色的key
+     */
     private static final String ROLE_CLAIMS = "role";
 
-    // 过期时间是3600秒，既是1个小时
+    /**
+     * description: 过期时间是3600秒，既是1个小时(默认)
+     */
     private static final long EXPIRATION = 3600L;
 
-    // 选择了记住我之后的过期时间为7天
+    /**
+     * description: 选择了记住我之后的过期时间为7天
+     */
     private static final long EXPIRATION_REMEMBER = 604800L;
 
     /**
      * description: 创建Token
      *
-     * @param username
-     * @param isRememberMe
+     * @param username 用户名
+     * @param isRememberMe 是否记住我
      * @return java.lang.String
      */
     public static String createToken(String username, List<String> roles, boolean isRememberMe) {
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
-        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>(16);
         map.put(ROLE_CLAIMS, roles);
         return Jwts.builder()
                 //采用HS512算法对JWT进行的签名,PRIMARY_KEY是我们的密钥
@@ -57,14 +81,19 @@ public class JwtTokenUtils {
     /**
      * description: 从token中获取用户名
      *
-     * @param token
+     * @param token JWT token
      * @return java.lang.String
      */
     public static String getUsername(String token){
         return getTokenBody(token).getSubject();
     }
 
-    // 获取用户角色
+    /**
+     * description: 获取用户角色信息
+     *
+     * @param token JWT token
+     * @return java.util.List<java.lang.String>
+     */
     public static List<String> getUserRole(String token){
         return (List<String>) getTokenBody(token).get(ROLE_CLAIMS);
     }
@@ -72,17 +101,22 @@ public class JwtTokenUtils {
     /**
      * description: 判断Token是否过期
      *
-     * @param token
+     * @param token JWT token
      * @return boolean
      */
     public static boolean isExpiration(String token){
-        return getTokenBody(token).getExpiration().before(new Date());
+        try {
+            return getTokenBody(token).getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            logger.warn("[" + token + "]" + "is expired.");
+            return true;
+        }
     }
 
     /**
-     * description:　获取
+     * description:　获取Token body
      *
-     * @param token
+     * @param token JWT token
      * @return io.jsonwebtoken.Claims
      */
     private static Claims getTokenBody(String token){

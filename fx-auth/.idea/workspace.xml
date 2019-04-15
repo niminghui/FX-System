@@ -2,30 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="fx-auth: 完善Token认证流程">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/Gender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/GenderValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/UserInfoVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/active-card-gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/active-card-red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/bind-card-gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/bind-card-red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/idAuth-gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/idAuth-red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/next-step-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/previous-step-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/city-select.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/city.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/common.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/createBankcard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/BankCardIdGeneratorUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/UuidTools.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IBankCardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-account/src/main/java/com/shiep/fxaccount/service/impl/FxAccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-account/src/main/java/com/shiep/fxaccount/service/impl/FxAccountServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/RegisterVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/RegisterVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/homePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/homePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/api/VerificationIDCardApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/api/VerificationIDCardApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -43,7 +33,7 @@
     <session id="372973517">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="21" />
+          <entry key="project.closed" value="23" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.4" value="2" />
@@ -51,7 +41,7 @@
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.47" value="1" />
           <entry key="project.open.time.49" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.52" value="1" />
           <entry key="project.open.time.53" value="2" />
           <entry key="project.open.time.6" value="1" />
@@ -61,62 +51,62 @@
           <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.8" value="3" />
           <entry key="project.open.time.85" value="1" />
-          <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="23" />
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
           <entry key="css" value="14" />
-          <entry key="html" value="56" />
-          <entry key="java" value="223" />
+          <entry key="html" value="62" />
+          <entry key="java" value="247" />
           <entry key="jpg" value="1" />
           <entry key="js" value="15" />
           <entry key="png" value="1" />
-          <entry key="properties" value="8" />
-          <entry key="xml" value="10" />
-          <entry key="yml" value="9" />
+          <entry key="properties" value="9" />
+          <entry key="xml" value="11" />
+          <entry key="yml" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="CSS" value="14" />
-          <entry key="HTML" value="56" />
+          <entry key="HTML" value="62" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="223" />
+          <entry key="JAVA" value="247" />
           <entry key="JavaScript" value="15" />
-          <entry key="Properties" value="8" />
-          <entry key="XML" value="10" />
-          <entry key="YAML" value="9" />
+          <entry key="Properties" value="9" />
+          <entry key="XML" value="11" />
+          <entry key="YAML" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="101" />
-          <entry key="dummy" value="11" />
-          <entry key="html" value="4896" />
-          <entry key="java" value="10908" />
+          <entry key="dummy" value="19" />
+          <entry key="html" value="5013" />
+          <entry key="java" value="12226" />
           <entry key="js" value="170" />
-          <entry key="properties" value="51" />
-          <entry key="txt" value="283" />
+          <entry key="properties" value="104" />
+          <entry key="txt" value="317" />
           <entry key="xml" value="45" />
-          <entry key="yml" value="118" />
+          <entry key="yml" value="133" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="101" />
-          <entry key="HTML" value="4894" />
-          <entry key="JAVA" value="10908" />
+          <entry key="HTML" value="5011" />
+          <entry key="JAVA" value="12226" />
           <entry key="JavaScript" value="170" />
-          <entry key="PLAIN_TEXT" value="294" />
-          <entry key="Properties" value="51" />
+          <entry key="PLAIN_TEXT" value="336" />
+          <entry key="Properties" value="104" />
           <entry key="SQL" value="19" />
           <entry key="ThymeleafExpressions" value="2" />
           <entry key="XML" value="26" />
-          <entry key="YAML" value="118" />
+          <entry key="YAML" value="133" />
         </counts>
       </usages-collector>
     </session>
@@ -124,45 +114,97 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/UserInfoVo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="1207">
+              <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/createBankcard.html">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="37" column="99" selection-start-line="37" selection-start-column="99" selection-end-line="37" selection-end-column="99" />
+            <state relative-caret-position="302">
+              <caret line="98" column="9" lean-forward="true" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="9" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#3;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+            <state relative-caret-position="153">
+              <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="83" column="65" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1849#1850#0" expanded="true" />
+                <element signature="e#1904#1905#0" expanded="true" />
+                <element signature="e#1977#1978#0" expanded="true" />
+                <element signature="e#2051#2052#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="109" column="82" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1145#1146#0" expanded="true" />
+                <element signature="e#1168#1169#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-170">
+              <caret line="2" column="31" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/homePage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -172,11 +214,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="HTML File" />
         <option value="JUnit4 Test Class" />
         <option value="AnnotationType" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -199,6 +241,7 @@
       <find>th:value</find>
       <find>th:errors</find>
       <find>errorDiv</find>
+      <find>apiSer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -207,13 +250,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/ResultEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/ResultVO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/BaseErrorController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/JwtAuthUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/handler/FxAccessDeniedHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/handler/FxLogoutSuccessHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/handler/UnAuthorizedEntryPoint.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/login.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/register.html" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/enroll.css" />
@@ -222,7 +258,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/PasswordValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/LoginVO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/RegisterVO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/UserDetailsServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/HttpStatusEnum.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/register.css" />
@@ -237,27 +272,35 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginSuccessPage.html" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/EmailController.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/controller/EmailControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/AsyncConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/IMailService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/impl/MailServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/homePage.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/RegisterVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/UserInfoVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/Gender.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/GenderValidator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/city-select.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginPage.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/common.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/createBankcard.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/BankCardIdGeneratorUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-dev1.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IFxUserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxUser.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/UuidTools.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" />
       </list>
     </option>
   </component>
@@ -309,9 +352,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -520,6 +560,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -530,7 +573,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555062189162" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555313801438" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -546,8 +589,17 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\static\js" />
+      <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\templates" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.shiep.fxauth.config" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.shiep.fxauth.utils" />
+      <recent name="com.shiep.fxauth.model" />
+      <recent name="com.shiep.fxauth.vo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\static\js" />
@@ -555,14 +607,6 @@
       <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\static\css" />
       <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\templates" />
       <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.shiep.fxauth.model" />
-      <recent name="com.shiep.fxauth.vo" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\static\js" />
-      <recent name="C:\Users\dell\Documents\IDEA Programs\FXProjects\fx-auth\src\main\resources\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -577,13 +621,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.FxAuthApplication">
-    <configuration name="RedisConfigTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shiep.fxauth.config.RedisConfigTest" />
+  <component name="RunManager" selected="JUnit.MailServiceImplTest.sendThymeleafMail">
+    <configuration name="BankCardIdGeneratorUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.shiep.fxauth.utils.BankCardIdGeneratorUtils" />
       <module name="fx-auth" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shiep.fxauth.config.*" />
+          <option name="PATTERN" value="com.shiep.fxauth.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -664,19 +708,19 @@
     </configuration>
     <list>
       <item itemvalue="Spring Boot.FxAuthApplication" />
-      <item itemvalue="Application.RedisConfigTest" />
       <item itemvalue="JUnit.RedisConfigTest.testRedis" />
       <item itemvalue="JUnit.EmailControllerTest.sendEmail" />
       <item itemvalue="JUnit.MailServiceImplTest.sendTextMail" />
       <item itemvalue="JUnit.MailServiceImplTest.sendThymeleafMail" />
+      <item itemvalue="Application.BankCardIdGeneratorUtils" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.MailServiceImplTest.sendThymeleafMail" />
+        <item itemvalue="Application.BankCardIdGeneratorUtils" />
         <item itemvalue="JUnit.MailServiceImplTest.sendTextMail" />
         <item itemvalue="JUnit.EmailControllerTest.sendEmail" />
         <item itemvalue="JUnit.RedisConfigTest.testRedis" />
-        <item itemvalue="Application.RedisConfigTest" />
       </list>
     </recent_temporary>
   </component>
@@ -715,7 +759,9 @@
       <workItem from="1554884398199" duration="77000" />
       <workItem from="1554946400083" duration="11994000" />
       <workItem from="1554990827448" duration="77000" />
-      <workItem from="1555031623462" duration="25651000" />
+      <workItem from="1555031623462" duration="26405000" />
+      <workItem from="1555080893048" duration="1030000" />
+      <workItem from="1555290910949" duration="16863000" />
     </task>
     <task id="LOCAL-00001" summary="fx-auth:实现Token登录认证流程">
       <created>1553498069215</created>
@@ -822,22 +868,17 @@
       <option name="project" value="LOCAL" />
       <updated>1555057130603</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fx-auth: 新增办理银行卡模块的个人身份认证功能">
+      <created>1555062419336</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1555062419336</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RedisConfigTest_testRedis - 2019.03.26 at 09h 39m 35s.xml">
-      <configuration name="RedisConfigTest.testRedis" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RedisConfigTest_testRedis - 2019.03.26 at 15h 56m 06s.xml">
-      <configuration name="RedisConfigTest.testRedis" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EmailControllerTest_sendEmail - 2019.04.11 at 10h 07m 52s.xml">
-      <configuration name="EmailControllerTest.sendEmail" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MailServiceImplTest_sendTextMail - 2019.04.11 at 11h 41m 38s.xml">
-      <configuration name="MailServiceImplTest.sendTextMail" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="MailServiceImplTest_sendTextMail - 2019.04.11 at 11h 47m 35s.xml">
       <configuration name="MailServiceImplTest.sendTextMail" configurationId="JUnit" />
     </history-entry>
@@ -856,16 +897,27 @@
     <history-entry file="MailServiceImplTest_sendThymeleafMail - 2019.04.11 at 14h 13m 15s.xml">
       <configuration name="MailServiceImplTest.sendThymeleafMail" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MailServiceImplTest_sendThymeleafMail - 2019.04.12 at 17h 50m 42s.xml">
+      <configuration name="MailServiceImplTest.sendThymeleafMail" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MailServiceImplTest_sendTextMail - 2019.04.12 at 17h 54m 19s.xml">
+      <configuration name="MailServiceImplTest.sendTextMail" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MailServiceImplTest_sendTextMail - 2019.04.12 at 23h 09m 30s.xml">
+      <configuration name="MailServiceImplTest.sendTextMail" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MailServiceImplTest_sendThymeleafMail - 2019.04.15 at 15h 05m 04s.xml">
+      <configuration name="MailServiceImplTest.sendThymeleafMail" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198744000" />
+    <option name="totallyTimeSpent" value="217391000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2600536" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49800798" visible="true" weight="0.26675603" />
+      <window_info id="Structure" order="1" sideWeight="0.50199205" side_tool="true" weight="0.26675603" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -874,7 +926,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28895184" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28895184" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -921,70 +973,16 @@
     <MESSAGE value="fx-auth: 优化Token认证流程，采用cookie取Token" />
     <MESSAGE value="fx-auth: 新增异步发送邮件服务，并通过测试" />
     <MESSAGE value="fx-auth: 修正loginPage数据绑定及错误回传BUG" />
-    <option name="LAST_COMMIT_MESSAGE" value="fx-auth: 修正loginPage数据绑定及错误回传BUG" />
+    <MESSAGE value="fx-auth: 新增办理银行卡模块的个人身份认证功能" />
+    <MESSAGE value="fx-auth: 优化Token过期时流程" />
+    <option name="LAST_COMMIT_MESSAGE" value="fx-auth: 优化Token过期时流程" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/jquery-3.2.1.slim.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/popper.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.16/tomcat-embed-core-9.0.16-sources.jar!/org/apache/tomcat/util/threads/TaskThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.cookie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/RedisUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/HttpStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/test.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/RedisConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/WebConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="16" column="68" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
         </state>
       </provider>
     </entry>
@@ -993,9 +991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="64" column="28" lean-forward="true" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,20 +1012,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="31" column="34" lean-forward="true" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/shiep/fxauth/controller/EmailControllerTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/impl/MailServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="72" column="95" selection-start-line="72" selection-start-column="95" selection-end-line="72" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/IMailService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1038,45 +1023,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginSuccessPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="23" column="11" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1125,20 +1075,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="53" column="45" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/annotation/Gender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1146,9 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1199,27 +1136,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="43" column="25" lean-forward="true" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IApiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="54" column="9" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="54" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1233,57 +1153,198 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2091">
+          <caret line="123" column="21" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/createBankcard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/service/impl/MailServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="66" column="49" lean-forward="true" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/BankCardIdGeneratorUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/UserInfoVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev1.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="97" selection-start-line="2" selection-start-column="97" selection-end-line="2" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IFxUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/homePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/JwtAuthUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/HttpStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="87" column="22" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt/0.9.0/jjwt-0.9.0-sources.jar!/io/jsonwebtoken/Claims.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="922">
+          <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1849#1850#0" expanded="true" />
+            <element signature="e#1904#1905#0" expanded="true" />
+            <element signature="e#1977#1978#0" expanded="true" />
+            <element signature="e#2051#2052#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="109" column="82" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1145#1146#0" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="88" column="100" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="100" />
+        <state relative-caret-position="-3400">
+          <caret line="1" column="73" selection-start-line="1" selection-start-column="64" selection-end-line="1" selection-end-column="73" />
           <folding>
             <element signature="n#style#0;n#div#3;n#div#3;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/homePage.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/UuidTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="110" column="16" selection-start-line="110" selection-start-column="16" selection-end-line="113" selection-end-column="22" />
+        <state relative-caret-position="17">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/UserInfoVo.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="374">
+          <caret line="35" column="98" selection-start-line="35" selection-start-column="88" selection-end-line="35" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="83" column="65" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+        <state relative-caret-position="302">
+          <caret line="98" column="9" lean-forward="true" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/createBankcard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="37" column="99" selection-start-line="37" selection-start-column="99" selection-end-line="37" selection-end-column="99" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#2;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
