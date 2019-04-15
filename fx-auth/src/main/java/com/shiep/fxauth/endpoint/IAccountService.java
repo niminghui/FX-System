@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 /**
  * @author: 倪明辉
  * @date: 2019/3/21 13:57
- * @description: 指定服务ID（Service ID）,使用Feign调用服务
+ * @description: fx-account服务端点
  */
 @FeignClient("fx-account")
 public interface IAccountService {

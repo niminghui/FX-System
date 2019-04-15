@@ -2,9 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>激活银行卡</title>
 </head>
 <body>
-<span th:text="${message}"></span>
+<p>
+    <span th:text="${name}"></span>,您好，感谢您办理我行银行卡。
+    您的银行卡初始密码为：<span th:text="${password}"></span>,请尽快修改密码以进行激活。
+</p>
 </body>
 </html>

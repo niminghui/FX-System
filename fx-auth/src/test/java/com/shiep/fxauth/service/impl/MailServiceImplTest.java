@@ -25,13 +25,14 @@ public class MailServiceImplTest {
 
     @Test
     public void sendTextMail() {
-        mailService.sendTextMail("635681077@qq.com", "FX-System：测试发送邮件", "Hello world. Nice to see you.");
+        mailService.sendTextMail("894851406@qq.com", "FX-System：测试发送邮件", "Hello world. Nice to see you.");
     }
 
     @Test
     public void sendThymeleafMail() {
         Map<String, Object> value = new HashMap<>();
-        value.put("message", "thymeleaf");
+        value.put("name", "倪明辉");
+        value.put("password", "123");
         mailService.sendThymeleafMail("635681077@qq.com", "FX-System：测试发送Thymeleaf邮件", "mailActive", value);
     }
 }
