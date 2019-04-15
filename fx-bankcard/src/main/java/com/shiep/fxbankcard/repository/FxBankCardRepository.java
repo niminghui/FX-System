@@ -18,7 +18,7 @@ public interface FxBankCardRepository extends JpaRepository<FxBankCard, String> 
     /**
      * description: 通过用户ID查找该用户的银行卡
      *
-     * @param userID
+     * @param userID 用户ID
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
     FxBankCard findByUserID(String userID);
@@ -26,15 +26,15 @@ public interface FxBankCardRepository extends JpaRepository<FxBankCard, String> 
     /**
      * description: 通过银行卡状态查找银行卡
      *
-     * @param Status
+     * @param status 银行卡状态
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    List<FxBankCard> findByStatus(Integer Status);
+    List<FxBankCard> findByStatus(Integer status);
 
     /**
      * description: 查找银行卡创建时间在time之后的银行卡
      *
-     * @param time
+     * @param time 时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
     List<FxBankCard> findByCreatedTimeAfter(Timestamp time);
@@ -42,7 +42,7 @@ public interface FxBankCardRepository extends JpaRepository<FxBankCard, String> 
     /**
      * description: 查找银行卡创建时间在time之前的银行卡
      *
-     * @param time
+     * @param time 时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
     List<FxBankCard> findByCreatedTimeBefore(Timestamp time);
@@ -50,8 +50,8 @@ public interface FxBankCardRepository extends JpaRepository<FxBankCard, String> 
     /**
      * description: 查找银行卡创建时间在beginTime至endTime之间的银行卡
      *
-     * @param beginTime
-     * @param endTime
+     * @param beginTime 开始时间
+     * @param endTime 结束时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
     List<FxBankCard> findByCreatedTimeBetween(Timestamp beginTime, Timestamp endTime);

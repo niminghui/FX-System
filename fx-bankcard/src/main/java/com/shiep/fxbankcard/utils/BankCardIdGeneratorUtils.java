@@ -1,4 +1,4 @@
-package com.shiep.fxauth.utils;
+package com.shiep.fxbankcard.utils;
 
 import java.util.Random;
 

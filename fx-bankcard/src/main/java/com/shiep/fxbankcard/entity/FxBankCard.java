@@ -1,11 +1,9 @@
 package com.shiep.fxbankcard.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -38,4 +36,16 @@ public class FxBankCard implements Serializable {
 
     @Column(name = "USER_ID", nullable = false, unique = true)
     private String userID;
+
+    /**
+     * description: 银行卡状态
+     */
+    @Transient
+    public static final int INACTIVE = 0;
+    @Transient
+    public static final int ACTIVATED = 1;
+    @Transient
+    public static final int FREEZE = 2;
+    @Transient
+    public static final int CANCELLATION = 3;
 }
