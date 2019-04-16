@@ -1,11 +1,13 @@
 package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.endpoint.IBankCardService;
+import com.shiep.fxauth.model.FxBankCard;
 import com.shiep.fxauth.model.FxUser;
 import com.shiep.fxauth.service.IMailService;
-import com.shiep.fxauth.utils.BankCardIdGeneratorUtils;
-import com.shiep.fxauth.utils.UuidTools;
+import com.shiep.fxauth.utils.IpUtils;
 import com.shiep.fxauth.vo.UserInfoVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +32,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @SuppressWarnings("all")
     @Autowired
     private IBankCardService bankCardService;
@@ -55,7 +60,7 @@ public class HomeController {
     }
 
     @PostMapping("/userInfo/check")
-    public ModelAndView checkUserInfo(@Validated UserInfoVo userInfo, BindingResult errors) {
+    public ModelAndView checkUserInfo(@Validated UserInfoVo userInfo, BindingResult errors, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         // 校验失败返回错误信息
         if (errors.hasFieldErrors()) {
@@ -84,12 +89,14 @@ public class HomeController {
         if (userInfo.getGender().equals(data.get("sex")) && userInfo.getProvince().equals(data.get("prov"))
                 && userInfo.getCity().equals(data.get("city")) && userInfo.getCountry().equals(data.get("region"))) {
             // 个人信息认证成功后，将用户信息写入数据库
-            bankCardService.createFxUser(new FxUser(userInfo));
-            String bankCardId = BankCardIdGeneratorUtils.getBankCardID();
-            String password = UuidTools.getUUID();
-            Map<String, Object> value = new HashMap<>();
+            FxUser user = bankCardService.createFxUser(new FxUser(userInfo));
+            logger.info("create user info:" + user);
+            String ip = IpUtils.getIpAddress(request);
+            FxBankCard bankCard = bankCardService.createInitBankCard(ip, user.getId());
+            logger.info("create init bankcard:" + bankCard);
+            Map<String, Object> value = new HashMap<>(2);
             value.put("name", userInfo.getChineseName());
-            value.put("password", password);
+            value.put("password", bankCard.getPassword());
             // 发送初始密码到用户邮箱
             mailService.sendThymeleafMail(userInfo.getEmail(), "FX-System：激活银行卡", "mailActive", value);
             // 用户在界面输入初始密码，然后修改密码完成银行卡激活
