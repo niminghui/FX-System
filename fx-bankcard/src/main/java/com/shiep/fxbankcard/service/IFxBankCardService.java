@@ -63,12 +63,13 @@ public interface IFxBankCardService {
     FxBankCard findByBankCardId(String bankCardId);
 
     /**
-     * description: 创建银行卡（状态为未激活，User id 为空==》未绑定）
+     * description: 创建银行卡（状态为未激活）
      *
      * @param createdPlace 用户的IP地址
-     * @return com.shiep.fxbankcard.entity.FxBankCard
+     * @param userID 用户信息id
+     * @return com.shiep.fxauth.model.FxBankCard
      */
-    FxBankCard createInitBankCard(String createdPlace);
+    FxBankCard createInitBankCard(String createdPlace, String userID);
 
     /**
      * description: 激活银行卡
@@ -93,6 +94,16 @@ public interface IFxBankCardService {
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
     FxBankCard unFreezeBankCard(String bankCardId);
+
+    /**
+     * description: 更改银行卡密码
+     *
+     * @param bankCardId  银行卡号码
+     * @param oldPassword 原密码
+     * @param newPassword 新密码
+     * @return com.shiep.fxbankcard.entity.FxBankCard
+     */
+    FxBankCard updatePassword(String bankCardId, String oldPassword, String newPassword);
 
     /**
      * description: 注销银行卡(逻辑删除，设置银行卡状态为销户)

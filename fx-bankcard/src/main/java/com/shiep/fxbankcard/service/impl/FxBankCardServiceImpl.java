@@ -58,19 +58,26 @@ public class FxBankCardServiceImpl implements IFxBankCardService {
     }
 
     @Override
-    public FxBankCard createInitBankCard(String createdPlace) {
+    public FxBankCard createInitBankCard(String createdPlace, String userID) {
         FxBankCard bankCard = new FxBankCard();
         bankCard.setId(BankCardIdGeneratorUtils.getBankCardID());
         String password = UuidTools.get8BitUUID();
         bankCard.setPassword(passwordEncoder.encode(password));
+        bankCard.setUserID(userID);
         // 银行卡状态未激活
         bankCard.setStatus(FxBankCard.INACTIVE);
         bankCard.setCreatedTime(new Timestamp(System.currentTimeMillis()));
         bankCard.setCreatedPlace(createdPlace);
-        FxBankCard result = bankCardRepository.save(bankCard);
-        if (result != null) {
+        FxBankCard save = bankCardRepository.save(bankCard);
+        if (save != null) {
             // 将未加密的密码返回
+            FxBankCard result = new FxBankCard();
+            result.setId(save.getId());
             result.setPassword(password);
+            result.setStatus(save.getStatus());
+            result.setCreatedTime(save.getCreatedTime());
+            result.setCreatedPlace(save.getCreatedPlace());
+            result.setUserID(save.getUserID());
             return result;
         }
         return null;
@@ -104,6 +111,16 @@ public class FxBankCardServiceImpl implements IFxBankCardService {
         if (bankCard != null) {
             bankCard.setStatus(FxBankCard.ACTIVATED);
             return bankCardRepository.save(bankCard);
+        }
+        return null;
+    }
+
+    @Override
+    public FxBankCard updatePassword(String bankCardId, String oldPassword, String newPassword) {
+        FxBankCard bankCard = findByBankCardId(bankCardId);
+        if (bankCard != null && bankCard.getPassword().equals(passwordEncoder.encode(oldPassword))) {
+            bankCard.setPassword(passwordEncoder.encode(newPassword));
+            bankCardRepository.save(bankCard);
         }
         return null;
     }
