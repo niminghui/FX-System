@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="fx-auth: 完善Token认证流程">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/submit-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/activeBankcard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/bindBankcard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-account/src/main/java/com/shiep/fxaccount/service/impl/FxAccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-account/src/main/java/com/shiep/fxaccount/service/impl/FxAccountServiceImpl.java" afterDir="false" />
+    <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/FxAuthApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/FxAuthApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/IBankCardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/createBankcard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/createBankcard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/loginPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/loginPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxBankCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxBankCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/repository/FxUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/repository/FxUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxBankCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxBankCardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxBankCardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxBankCardServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -63,7 +47,7 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="css" value="14" />
-          <entry key="html" value="80" />
+          <entry key="html" value="82" />
           <entry key="java" value="274" />
           <entry key="jpg" value="1" />
           <entry key="js" value="15" />
@@ -77,7 +61,7 @@
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="CSS" value="14" />
-          <entry key="HTML" value="80" />
+          <entry key="HTML" value="82" />
           <entry key="Image" value="2" />
           <entry key="JAVA" value="274" />
           <entry key="JavaScript" value="15" />
@@ -90,11 +74,11 @@
         <counts>
           <entry key="css" value="101" />
           <entry key="dummy" value="20" />
-          <entry key="html" value="6215" />
+          <entry key="html" value="6298" />
           <entry key="java" value="14054" />
           <entry key="js" value="170" />
           <entry key="properties" value="104" />
-          <entry key="txt" value="358" />
+          <entry key="txt" value="373" />
           <entry key="xml" value="45" />
           <entry key="yml" value="133" />
         </counts>
@@ -102,10 +86,10 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="101" />
-          <entry key="HTML" value="6213" />
+          <entry key="HTML" value="6296" />
           <entry key="JAVA" value="14054" />
           <entry key="JavaScript" value="170" />
-          <entry key="PLAIN_TEXT" value="378" />
+          <entry key="PLAIN_TEXT" value="393" />
           <entry key="Properties" value="104" />
           <entry key="SQL" value="19" />
           <entry key="ThymeleafExpressions" value="2" />
@@ -121,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="279">
-              <caret line="208" column="30" selection-start-line="208" selection-start-column="30" selection-end-line="208" selection-end-column="30" />
+              <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -141,16 +125,44 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/bindBankcard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+            <state relative-caret-position="347">
+              <caret line="47" column="89" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#1345#1352#1" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="26" column="76" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#1;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -250,13 +262,11 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/UuidTools.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/BankCardIdGeneratorUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxBankCard.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/IPUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/IpUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/FxAuthApplication.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/common.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginPage.html" />
@@ -266,6 +276,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/activeBankcard.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/bindBankcard.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/mailActive.html" />
       </list>
     </option>
   </component>
@@ -508,7 +520,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555478025104" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555479803089" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -698,7 +710,7 @@
       <workItem from="1555080893048" duration="1030000" />
       <workItem from="1555290910949" duration="21365000" />
       <workItem from="1555377892338" duration="23046000" />
-      <workItem from="1555464171786" duration="9554000" />
+      <workItem from="1555464171786" duration="11362000" />
     </task>
     <task id="LOCAL-00001" summary="fx-auth:实现Token登录认证流程">
       <created>1553498069215</created>
@@ -833,7 +845,14 @@
       <option name="project" value="LOCAL" />
       <updated>1555386806238</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="实现激活和绑定银行卡功能">
+      <created>1555478215130</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1555478215130</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -869,13 +888,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="254493000" />
+    <option name="totallyTimeSpent" value="256301000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49800798" visible="true" weight="0.27010724" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49800798" visible="true" weight="0.27010724" />
       <window_info id="Structure" order="1" sideWeight="0.50199205" side_tool="true" weight="0.26675603" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -885,7 +903,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28895184" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28895184" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -936,7 +954,8 @@
     <MESSAGE value="fx-auth: 优化Token过期时流程" />
     <MESSAGE value="fx-auth: 完善办理银行卡模块校验身份功能" />
     <MESSAGE value="fx-auth: 引入Bankcard服务端点，新增IpUtils工具类" />
-    <option name="LAST_COMMIT_MESSAGE" value="fx-auth: 引入Bankcard服务端点，新增IpUtils工具类" />
+    <MESSAGE value="实现激活和绑定银行卡功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现激活和绑定银行卡功能" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
@@ -1164,20 +1183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="56" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/utils/JwtTokenUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-918">
@@ -1213,6 +1218,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-646">
           <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#div#3;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1292,19 +1300,43 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
-          <caret line="208" column="30" selection-start-line="208" selection-start-column="30" selection-end-line="208" selection-end-column="30" />
+          <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/bindBankcard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+        <state relative-caret-position="347">
+          <caret line="47" column="89" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#1345#1352#1" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailResetInitPwd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="26" column="76" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#1;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/mailActive.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

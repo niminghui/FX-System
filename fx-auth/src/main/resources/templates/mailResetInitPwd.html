@@ -6,8 +6,30 @@
 </head>
 <body>
 <p>
-    您好，由于您在激活密码时，输入了错误的初始密码，导致原初始密码作废。
-    现发放新的初始密码：<span th:text="${password}"></span>，请重新激活。
+    您好，
 </p>
+<table width="600" cellpadding="0" cellspacing="0" border="0">
+    <tbody>
+    <tr>
+        <td>
+            <div style="width:600px;text-align:left;">
+                您好:
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="width:600px;margin-left: 30px">
+                <p>
+                    由于您在激活密码时，输入了错误的初始密码，导致原初始密码作废。
+                </p>
+                <p>
+                    现发放新的初始密码：<span th:text="${password}" style="color: red;"></span>，请重新激活。
+                </p>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
