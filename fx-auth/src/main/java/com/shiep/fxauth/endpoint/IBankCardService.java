@@ -90,6 +90,15 @@ public interface IBankCardService {
     FxUser getByIdCardNum(@PathVariable("idNumber") String idNumber);
 
     /**
+     * description: 通过邮箱查找该用户
+     *
+     * @param email 邮箱
+     * @return com.shiep.fxbankcard.entity.FxUser
+     */
+    @GetMapping("/user/email/{email}")
+    FxUser getByEmail(@PathVariable("email") String email);
+
+    /**
      * description: 返回所有用户信息
      *
      * @param
@@ -169,7 +178,7 @@ public interface IBankCardService {
      * @param userID       用户信息id
      * @return com.shiep.fxauth.model.FxBankCard
      */
-    @PostMapping("/bankcard/{createdPlace}/{userID}")
+    @PostMapping("/bankcard/create/{createdPlace}/{userID}")
     FxBankCard createInitBankCard(@PathVariable("createdPlace") String createdPlace, @PathVariable("userID") String userID);
 
     /**
@@ -207,10 +216,18 @@ public interface IBankCardService {
      * @param newPassword 新密码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @PutMapping("/bankcard/{bankCardId}/{oldPassword}/{newPassword}")
-    FxBankCard updatePassword(@PathVariable("bankCardId") String bankCardId,
-                              @PathVariable("oldPassword") String oldPassword,
-                              @PathVariable("newPassword") String newPassword);
+    @PutMapping("/bankcard/password")
+    FxBankCard updatePassword(@RequestParam("bankCardId") String bankCardId, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword);
+
+
+    /**
+     * description: 重置初始密码
+     *
+     * @param bankCardId 银行卡号码
+     * @return java.lang.String
+     */
+    @PutMapping("/bankcard/reset/{bankCardId}")
+    String resetInitPassword(@PathVariable("bankCardId") String bankCardId);
 
     /**
      * description: 注销银行卡(逻辑删除，设置银行卡状态为销户)

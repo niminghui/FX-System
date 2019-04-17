@@ -118,9 +118,23 @@ public class FxBankCardServiceImpl implements IFxBankCardService {
     @Override
     public FxBankCard updatePassword(String bankCardId, String oldPassword, String newPassword) {
         FxBankCard bankCard = findByBankCardId(bankCardId);
-        if (bankCard != null && bankCard.getPassword().equals(passwordEncoder.encode(oldPassword))) {
+        if (bankCard != null && passwordEncoder.matches(oldPassword,bankCard.getPassword())) {
             bankCard.setPassword(passwordEncoder.encode(newPassword));
             bankCardRepository.save(bankCard);
+        }
+        return null;
+    }
+
+    @Override
+    public String resetInitPassword(String bankCardId) {
+        FxBankCard bankCard = findByBankCardId(bankCardId);
+        if (bankCard != null) {
+            String password = UuidTools.get8BitUUID();
+            bankCard.setPassword(passwordEncoder.encode(password));
+            FxBankCard save = bankCardRepository.save(bankCard);
+            if (save != null) {
+               return password;
+            }
         }
         return null;
     }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="common::commonHeader('主页')">
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<div class="col-4" style="margin: auto;">
+    <div class="card">
+        <div class="card-header" style="margin: auto;">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <p class="nav-link text-secondary">
+                        <img class="iconImg" th:src="@{~/img/idAuth-gray.png}"/>身份认证
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link text-secondary">
+                        <img class="iconImg" th:src="@{~/img/active-card-gray.png}"/>激活银行卡
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link active text-danger">
+                        <img class="iconImg" th:src="@{~/img/bind-card-red.png}"/>绑定银行卡
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body">
+            <div th:switch="${error}" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <p th:case="1">错误信息：您还未进行身份认证，请先进行身份认证办理银行卡后，再进行激活，谢谢。</p>
+                <p th:case="2">错误信息：您的银行卡还未进行激活，请先激活然后再绑定。</p>
+                <p th:case="3">错误信息：请检查信息是否正确！</p>
+                <p th:case="*">
+                    如果忘记银行卡号码，请到“我的银行卡”处进行查询。
+                </p>
+            </div>
+
+            <div th:if="(${error} ne 1) and (${error} ne 2)" class="mt-3 mb-5">
+                <div class="container" style="padding-left: 50px;">
+                    <form th:action="@{/home/bankcard/bind}" th:method="post">
+                        <div class="form-group row">
+                            <label for="bankcardID" class="col-xs-3 col-form-label mr-2">请输入银行卡号码</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" placeholder="请输入银行卡号码"
+                                       id="bankcardID" name="bankcardID" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="reservedMail" class="col-xs-3 col-form-label mr-2">请输入预留的邮箱</label>
+                            <div class="col-xs-9">
+                                <input type="email" class="form-control" placeholder="请输入预留的邮箱"
+                                       id="reservedMail" name="reservedMail" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row float-right">
+                            <div class="offset-xs-3 col-xs-9">
+                                <button type="submit" class="btn btn-danger">
+                                    完成<img th:src="@{~/img/submit-light.png}"
+                                           style="width: 25px; margin-top: -2px; margin-left: 5px;"/>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <h6 class="card-text text-danger">
+                请输入银行卡号码与预留的邮箱，完成银行卡绑定。注意：如果忘记银行卡号码，请到“我的银行卡”处进行查询。
+            </h6>
+        </div>
+    </div>
+</div>
+</body>
+</html>

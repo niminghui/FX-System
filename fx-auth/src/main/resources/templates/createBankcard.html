@@ -18,23 +18,24 @@
         <div class="card-header" style="margin: auto;">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <p id="idAuthItem" class="nav-link active text-danger">
+                    <p class="nav-link active text-danger">
                         <img class="iconImg" th:src="@{~/img/idAuth-red.png}"/>身份认证
                     </p>
                 </li>
                 <li class="nav-item">
-                    <p id="activeCardItem" class="nav-link text-secondary">
+                    <p class="nav-link text-secondary">
                         <img class="iconImg" th:src="@{~/img/active-card-gray.png}"/>激活银行卡
                     </p>
                 </li>
                 <li class="nav-item">
-                    <p id="bindCardItem" class="nav-link text-secondary">
+                    <p class="nav-link text-secondary">
                         <img class="iconImg" th:src="@{~/img/bind-card-gray.png}"/>绑定银行卡
                     </p>
                 </li>
             </ul>
         </div>
 
+        <!-- 用户身份信息校验 -->
         <div th:if="${code != null} and ${code} ne 200" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -42,7 +43,7 @@
             <p>错误码：<span th:text="${code}"></span></p>
             <p>错误信息：<span th:text="${message}"></span></p>
         </div>
-        <div th:if="${step} eq '1'" id="idAuthDiv" class="card-body">
+        <div class="card-body">
             <div class="mt-3 mb-5">
                 <div class="container" style="padding-left: 50px;">
                     <form th:object="${userInfo}" th:action="@{/home/userInfo/check}" th:method="post">
@@ -152,90 +153,15 @@
             </div>
         </div>
 
-        <div th:if="${step} eq '2'" id="activeCardDiv" class="card-body">
-            <form action="javascript:void(0);">
-                <p>您的银行卡号码为：</p>
-                <p>初始密码为：</p>
-                <p>您当前的银行卡状态为未激活，请查看邮件进行激活</p>
-                <div class="form-group row float-right">
-                    <div class="offset-xs-3 col-xs-9">
-                        <button type="button" class="btn btn-danger">
-                            下一步<img th:src="@{~/img/next-step-light.png}"
-                                    style="width: 25px; margin-top: -2px; margin-left: 5px;"/>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div th:if="${step} eq '3'" id="bindCardDiv" class="card-body">
-            <form action="javascript:void(0);">
-                <p>绑定银行卡</p>
-            </form>
-        </div>
-
         <div class="card-footer">
             <h6 class="card-text text-danger">
-                为提供更好的银行卡服务，请您在申请银行卡时，务必填写本人真实有效的个人信息。如果信息有误将会直接影响银行卡的办理。点击提交后，系统将会发送邮件到您的邮箱，请及时查看并激活银行卡。</h6>
+                为提供更好的银行卡服务，请您在申请银行卡时，务必填写本人真实有效的个人信息。如果信息有误将会直接影响银行卡的办理。点击提交后，系统将会发送邮件到您的邮箱，请及时查看并激活银行卡。
+            </h6>
         </div>
     </div>
-
 </div>
+
 <script th:src="@{~/js/city.js}"></script>
 <script th:src="@{~/js/city-select.js}"></script>
-<script th:inline="javascript">
-    var step = [[${step}]];
-    var idAuthItem = $('#idAuthItem');
-    var activeCardItem = $('#activeCardItem');
-    var bindCardItem = $('#bindCardItem');
-    if (step === '1') {
-        idAuthItem.addClass('active');
-        idAuthItem.addClass('text-danger');
-        idAuthItem.removeClass('text-secondary');
-        idAuthItem.children('img').attr('src', '/img/idAuth-red.png');
-
-        activeCardItem.removeClass('active');
-        activeCardItem.removeClass('text-danger');
-        activeCardItem.addClass('text-secondary');
-        activeCardItem.children('img').attr('src', '/img/active-card-gray.png');
-
-        bindCardItem.removeClass('active');
-        bindCardItem.removeClass('text-danger');
-        bindCardItem.addClass('text-secondary');
-        bindCardItem.children('img').attr('src', '/img/bind-card-gray.png');
-    } else if (step === '2') {
-        idAuthItem.removeClass('active');
-        idAuthItem.removeClass('text-danger');
-        idAuthItem.addClass('text-secondary');
-        idAuthItem.children('img').attr('src', '/img/idAuth-gray.png');
-
-        activeCardItem.addClass('active');
-        activeCardItem.addClass('text-danger');
-        activeCardItem.removeClass('text-secondary');
-        activeCardItem.children('img').attr('src', '/img/active-card-red.png');
-
-        bindCardItem.removeClass('active');
-        bindCardItem.removeClass('text-danger');
-        bindCardItem.addClass('text-secondary');
-        bindCardItem.children('img').attr('src', '/img/bind-card-gray.png');
-    } else if (step === '3') {
-        idAuthItem.removeClass('active');
-        idAuthItem.removeClass('text-danger');
-        idAuthItem.addClass('text-secondary');
-        idAuthItem.children('img').attr('src', '/img/idAuth-gray.png');
-
-        activeCardItem.removeClass('active');
-        activeCardItem.removeClass('text-danger');
-        activeCardItem.addClass('text-secondary');
-        activeCardItem.children('img').attr('src', '/img/active-card-gray.png');
-
-        bindCardItem.addClass('active');
-        bindCardItem.addClass('text-danger');
-        bindCardItem.removeClass('text-secondary');
-        bindCardItem.children('img').attr('src', '/img/bind-card-red.png');
-    }
-</script>
-
 </body>
-
 </html>

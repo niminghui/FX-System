@@ -49,7 +49,7 @@ public class FxBankCardController {
         return bankCardService.findByBankCardId(bankCardId);
     }
 
-    @PostMapping("/{createdPlace}/{userID}")
+    @PostMapping("/create/{createdPlace}/{userID}")
     public FxBankCard createInitBankCard(@PathVariable("createdPlace") String createdPlace, @PathVariable("userID") String userID) {
         return bankCardService.createInitBankCard(createdPlace, userID);
     }
@@ -69,11 +69,14 @@ public class FxBankCardController {
         return bankCardService.unFreezeBankCard(bankCardId);
     }
 
-    @PutMapping("/{bankCardId}/{oldPassword}/{newPassword}")
-    public FxBankCard updatePassword(@PathVariable("bankCardId") String bankCardId,
-                                     @PathVariable("oldPassword") String oldPassword,
-                                     @PathVariable("newPassword") String newPassword) {
+    @PutMapping("/password")
+    public FxBankCard updatePassword(@RequestParam("bankCardId") String bankCardId, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
         return bankCardService.updatePassword(bankCardId, oldPassword, newPassword);
+    }
+
+    @PutMapping("/reset/{bankCardId}")
+    public String resetInitPassword(@PathVariable("bankCardId") String bankCardId){
+        return bankCardService.resetInitPassword(bankCardId);
     }
 
     @DeleteMapping("/{bankCardId}")

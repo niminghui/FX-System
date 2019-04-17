@@ -16,7 +16,7 @@ public interface FxUserRepository extends JpaRepository<FxUser, String> {
     /**
      * description: 通过中文名查找用户
      *
-     * @param chinaName
+     * @param chinaName 中文名
      * @return com.shiep.fxbankcard.entity.FxUser
      */
     List<FxUser> findByChinaName(String chinaName);
@@ -24,8 +24,16 @@ public interface FxUserRepository extends JpaRepository<FxUser, String> {
     /**
      * description: 通过身份证号码查找该用户
      *
-     * @param idCardNum
+     * @param idCardNum 身份证号码
      * @return com.shiep.fxbankcard.entity.FxUser
      */
     FxUser findByIdCardNum(String idCardNum);
+
+    /**
+     * description:
+     *
+     * @param email 邮箱
+     * @return com.shiep.fxbankcard.entity.FxUser
+     */
+    FxUser findByEmail(String email);
 }

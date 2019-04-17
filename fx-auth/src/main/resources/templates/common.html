@@ -21,7 +21,7 @@
 </head>
 <body>
 <nav th:fragment="commonNav" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" th:href="@{/}"><img class="iconImg" th:src="@{~/img/bank-light.png}">FX-System</a>
+    <a class="navbar-brand" th:href="@{/home}"><img class="iconImg" th:src="@{~/img/bank-light.png}">FX-System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,10 @@
                         <a class="dropdown-item" th:href="@{/home/bankCard/create}">办理银行卡</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" th:href="@{/}">绑定银行卡</a>
+                        <a class="dropdown-item" th:href="@{/home/bankcard/active}">激活银行卡</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/home/bankcard/bind}">绑定银行卡</a>
                     </li>
                     <li>
                         <a class="dropdown-item" th:href="@{/}">我的银行卡</a>

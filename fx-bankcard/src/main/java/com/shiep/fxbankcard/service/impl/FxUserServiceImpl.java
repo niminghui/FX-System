@@ -30,6 +30,11 @@ public class FxUserServiceImpl implements IFxUserService {
     }
 
     @Override
+    public FxUser getByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public List<FxUser> getAll() {
         return userRepository.findAll();
     }

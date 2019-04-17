@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="common::commonHeader('主页')">
+<body>
+<style type="text/css">
+    .errorDiv {
+        color: red;
+        font-size: 12px;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+</style>
+<nav th:replace="common::commonNav"></nav>
+<div class="col-4" style="margin: auto;">
+    <div class="card">
+        <div class="card-header" style="margin: auto;">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <p class="nav-link text-secondary">
+                        <img class="iconImg" th:src="@{~/img/idAuth-gray.png}"/>身份认证
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link active text-danger">
+                        <img class="iconImg" th:src="@{~/img/active-card-red.png}"/>激活银行卡
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link text-secondary">
+                        <img class="iconImg" th:src="@{~/img/bind-card-gray.png}"/>绑定银行卡
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 激活银行卡 -->
+        <div class="card-body">
+            <div th:switch="${error}" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <p th:case="1">错误信息：初始密码错误！系统将重新发放初始密码到您的账户，请及时查收并进行激活。</p>
+                <p th:case="2">错误信息：您还未进行身份认证，请先进行身份认证办理银行卡后，再进行激活，谢谢。</p>
+                <p th:case="*">
+                <h6 class="card-title text-info">您的银行卡初始密码已经发送到<span th:text="${email}"></span>，请及时查收。</h6>
+                </p>
+            </div>
+            <div th:if="${error} ne 2" class="mt-3 mb-5">
+                <div class="container" style="padding-left: 50px;">
+                    <form th:action="@{/home/bankcard/active}" th:method="post" onsubmit="return check()">
+                        <input type="hidden" name="bankcardID" th:value="${bankcardID}">
+                        <input type="hidden" name="email" th:value="${email}">
+                        <p class="card-text">您的银行卡号码为：<span class="text-danger" th:text="${bankcardID}"></span></p>
+
+                        <div class="form-group row">
+                            <label for="initPassword" class="col-xs-3 col-form-label mr-2">请输入初始密码</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" placeholder="请输入初始密码"
+                                       id="initPassword" name="initPassword" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-xs-3 col-form-label mr-2">请输入新密码</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" placeholder="请输入新密码"
+                                       id="password" name="password" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="confirmPassword" class="col-xs-3 col-form-label mr-2">请确认密码</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" placeholder="请确认密码"
+                                       id="confirmPassword" name="confirmPassword" required/>
+                            </div>
+                            <div class="errorDiv" id="passwordError"></div>
+                        </div>
+
+                        <div class="form-group row float-right">
+                            <div class="offset-xs-3 col-xs-9">
+                                <button type="submit" class="btn btn-danger">
+                                    下一步<img th:src="@{~/img/next-step-light.png}"
+                                            style="width: 25px; margin-top: -2px; margin-left: 5px;"/>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <h6 class="card-text text-danger">
+                请及时查收邮件，然后在此界面填入初始密码完成认证，并输入新密码完成激活。注意：如果初始密码输入错误将作废，系统会重新发放初始密码到您的邮箱。
+            </h6>
+            <h6 class="card-text text-danger">
+                请记住您的银行卡号码，后续绑定需要您输入。
+            </h6>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check() {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        if (password === confirmPassword) {
+            return true;
+        }
+        document.getElementById("passwordError").innerText = '请确认两次密码是否输入正确';
+        return false;
+    }
+</script>
+</body>
+</html>

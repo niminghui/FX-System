@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>激活银行卡</title>
+</head>
+<body>
+<p>
+    您好，由于您在激活密码时，输入了错误的初始密码，导致原初始密码作废。
+    现发放新的初始密码：<span th:text="${password}"></span>，请重新激活。
+</p>
+</body>
+</html>

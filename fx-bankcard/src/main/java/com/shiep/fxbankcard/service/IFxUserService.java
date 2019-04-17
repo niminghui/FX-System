@@ -1,5 +1,6 @@
 package com.shiep.fxbankcard.service;
 
+import com.shiep.fxbankcard.entity.FxBankCard;
 import com.shiep.fxbankcard.entity.FxUser;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,14 @@ public interface IFxUserService {
      * @return com.shiep.fxbankcard.entity.FxUser
      */
     FxUser getByIdCardNum(String idCardNum);
+
+    /**
+     * description: 通过邮箱查找该用户
+     *
+     * @param email 邮箱
+     * @return com.shiep.fxbankcard.entity.FxUser
+     */
+    FxUser getByEmail(String email);
 
     /**
      * description: 返回所有用户信息

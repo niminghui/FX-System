@@ -106,6 +106,13 @@ public interface IFxBankCardService {
     FxBankCard updatePassword(String bankCardId, String oldPassword, String newPassword);
 
     /**
+     * description: 重置初始密码
+     *
+     * @param bankCardId 银行卡号码
+     * @return java.lang.String
+     */
+    String resetInitPassword(String bankCardId);
+    /**
      * description: 注销银行卡(逻辑删除，设置银行卡状态为销户)
      *
      * @param bankCardId 银行卡号码

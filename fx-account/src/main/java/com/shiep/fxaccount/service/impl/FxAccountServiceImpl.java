@@ -52,7 +52,11 @@ public class FxAccountServiceImpl implements IFxAccountService {
 
     @Override
     public FxAccountVo getAccountVo(String accountName) {
-        return new FxAccountVo(find(accountName),getRoles(accountName));
+        FxAccount account = find(accountName);
+        if (account == null){
+            return null;
+        }
+        return new FxAccountVo(account,getRoles(accountName));
     }
 
     @Override
@@ -98,7 +102,7 @@ public class FxAccountServiceImpl implements IFxAccountService {
     @Override
     public FxAccount bindBankCard(String accountName, String bankCard) {
         FxAccount account = accountRepository.findByName(accountName);
-        if(account==null)
+        if(account == null)
             return null;
         account.setBankCardId(bankCard);
         return accountRepository.save(account);

@@ -28,6 +28,11 @@ public class FxUserController {
         return userService.getByIdCardNum(idNumber);
     }
 
+    @GetMapping("/email/{email}")
+    public FxUser getByEmail(@PathVariable("email") String email){
+        return userService.getByEmail(email);
+    }
+
     @GetMapping
     public List<FxUser> getAll() {
         return userService.getAll();
