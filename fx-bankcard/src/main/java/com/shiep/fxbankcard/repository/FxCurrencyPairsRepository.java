@@ -15,8 +15,17 @@ public interface FxCurrencyPairsRepository extends JpaRepository<FxCurrencyPairs
     /**
      * description: 通过基础货币查找货币对
      *
-     * @param basicCurrency
+     * @param basicCurrency 基本货币
      * @return com.shiep.fxbankcard.entity.FxCurrencyPairs
      */
     FxCurrencyPairs findByBasicCurrency(String basicCurrency);
+
+    /**
+     * description: 通过基本货币和二级货币查找货币对
+     *
+     * @param basicCurrency     基本货币
+     * @param secondaryCurrency 二级货币
+     * @return com.shiep.fxbankcard.entity.FxCurrencyPairs
+     */
+    FxCurrencyPairs findByBasicCurrencyAndSecondaryCurrency(String basicCurrency, String secondaryCurrency);
 }
