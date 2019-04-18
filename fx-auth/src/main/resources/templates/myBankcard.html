@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('我的银行卡')">
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<div class="container-fluid example-container" data-category="modals">
+    <div class="col-4" style="margin: auto;">
+        <div th:if="${status} eq 1" class="card">
+            <div class="card-header">
+                <p class="card-title text-lg-center text-success">我的银行卡</p>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>错误信息：<span>您还未办理银行卡，请先办理银行卡。</span></p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group row">
+                    <div class="offset-xs-3 col-xs-9">
+                        <button type="submit" class="btn btn-danger">
+                            前往办理<img th:src="@{~/img/next-step-light.png}"
+                                     style="width: 25px; margin-top: -2px; margin-left: 5px;"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${status} ne 1" class="card">
+            <div class="card-header">
+                <p class="card-title text-lg-center text-success">我的银行卡</p>
+            </div>
+            <div class="card-body" style="padding-left: 50px;">
+                <div class="mt-3 mb-5">
+                    <div class="container">
+                        <div class="card-group row">
+                            <label for="bankcardID" class="col-xs-3 col-form-label mr-2">银行卡号码：</label>
+                            <div class="col-xs-9">
+                                <p class="form-control card-text" id="bankcardID" th:text="${bankcard.id}"></p>
+                            </div>
+                        </div>
+                        <div class="card-group row" style="margin-top: 10px;">
+                            <label class="col-xs-3 col-form-label mr-2">银行卡状态：</label>
+                            <div th:switch="${bankcard.status}" class="col-xs-9">
+                                <p th:case="0" class="form-control card-text">未激活</p>
+                                <p th:case="1" class="form-control card-text">已激活</p>
+                                <p th:case="2" class="form-control card-text">已冻结</p>
+                                <p th:case="3" class="form-control card-text">已注销</p>
+                                <p th:case="*" class="form-control card-text">其他</p>
+                            </div>
+                        </div>
+                        <div class="card-group row" style="margin-top: 10px;">
+                            <label for="createdTime" class="col-xs-3 col-form-label mr-2">银行卡创建时间：</label>
+                            <div class="col-xs-9">
+                                <p class="form-control card-text" id="createdTime"
+                                   th:text="${bankcard.createdTime}"></p>
+                            </div>
+                        </div>
+                        <div class="card-group row" style="margin-top: 10px;">
+                            <label for="createdPlace" class="col-xs-3 col-form-label mr-2">银行卡创建地点：</label>
+                            <div class="col-xs-9">
+                                <p class="form-control card-text" id="createdPlace"
+                                   th:text="${bankcard.createdPlace}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="mt-3 mb-5 row">
+                    <button onclick="checkBankcardStatus()" id="updatePwdBtn" type="button"
+                            class="btn btn-danger btn-sm col-3 mr-3 ml-3" data-toggle="modal" data-target="#updatePwd">
+                        修改密码
+                    </button>
+
+                    <button onclick="getUserInfo()" type="button" class="btn btn-info btn-sm col-3 mr-3 ml-3"
+                            data-toggle="modal" data-target="#showUserInfo">
+                        查看个人信息
+                    </button>
+
+                    <a class="btn btn-success btn-sm col-3 mr-3 ml-3" th:href="@{/home}">
+                        返回主页
+                    </a>
+
+                    <!-- 修改密码弹出框 -->
+                    <div class="modal fade" id="updatePwd" tabindex="-1" role="dialog" aria-labelledby="updatePwdLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="updatePwdLabel">修改银行卡密码</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body" style="margin: auto;">
+                                    <div class="form-group row">
+                                        <label for="password" class="col-xs-3 col-form-label mr-2">请输入初始密码：</label>
+                                        <div class="col-xs-9">
+                                            <input type="password" class="form-control" placeholder="请输入初始密码"
+                                                   id="password" name="password" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="newPassword" class="col-xs-3 col-form-label mr-2">请输入新密码：</label>
+                                        <div class="col-xs-9">
+                                            <input type="password" class="form-control" placeholder="请输入新密码"
+                                                   id="newPassword" name="newPassword" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="confirmPassword"
+                                               class="col-xs-3 col-form-label mr-2">请再次输入密码：</label>
+                                        <div class="col-xs-9">
+                                            <input type="password" class="form-control" placeholder="请再次输入密码"
+                                                   id="confirmPassword" name="confirmPassword" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" onclick="updateBankcardPwd()">完成
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 显示用户信息弹出框 -->
+                    <div class="modal fade" id="showUserInfo" tabindex="-1" role="dialog"
+                         aria-labelledby="showUserInfoLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="showUserInfoLabel">显示个人信息</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="margin: auto;">
+                                    <div class="mt-3 mb-5">
+                                        <div class="container">
+                                            <div class="card-group row">
+                                                <label for="name" class="col-xs-3 col-form-label mr-2">姓名：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="name">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-group row" style="margin-top: 10px;">
+                                                <label for="gender" class="col-xs-3 col-form-label mr-2">性别：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="gender">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-group row" style="margin-top: 10px;">
+                                                <label for="idNumber" class="col-xs-3 col-form-label mr-2">身份证号：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="idNumber">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-group row" style="margin-top: 10px;">
+                                                <label for="place" class="col-xs-3 col-form-label mr-2">出生地：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="place">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-group row" style="margin-top: 10px;">
+                                                <label for="email" class="col-xs-3 col-form-label mr-2">邮箱：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="email">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-group row" style="margin-top: 10px;">
+                                                <label for="phone" class="col-xs-3 col-form-label mr-2">手机：</label>
+                                                <div class="col-xs-9">
+                                                    <p class="form-control card-text" id="phone">--</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    function getUserInfo() {
+        $.ajax({
+            type: 'get',
+            url: '/home/showUserInfo',
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            success: function (data) {
+                $('#name').text(data.chinaName);
+                $('#gender').text(data.gender);
+                $('#idNumber').text(data.idCardNum);
+                $('#place').text(data.province + ' ' + data.city + ' ' + data.region);
+                $('#email').text(data.email);
+                $('#phone').text(data.phone);
+            },
+            error: function (err) {
+                console.log('ajax错误码:' + err.status);
+            }
+        });
+    }
+
+    function checkBankcardStatus() {
+        var status = [[${bankcard.status}]];
+        console.log(status);
+        // 当银行卡状态是冻结或注销时
+        if ((status === 2) || (status === 3)) {
+            $('#updatePwdBtn').attr('data-target', '');
+            alert('您的银行卡已冻结或注销，无法销户');
+        }
+    }
+
+    // 如果银行卡状态是未激活时修改密码同时激活，已激活就修改
+    function updateBankcardPwd() {
+        var status = [[${bankcard.status}]];
+        var password = document.getElementById('password').value;
+        var newPassword = document.getElementById('newPassword').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        if (newPassword !== confirmPassword) {
+            alert('请确认两次密码是否输入正确');
+        }
+        var bankcardID = [[${bankcard.id}]];
+        $.ajax({
+            type: 'post',
+            url: '/home/bankcard/updatePwd/' + bankcardID,
+            data: {
+                oldPassword: password,
+                newPassword: newPassword,
+                status: status
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            success: function (data) {
+                if (data === true) {
+                    $('#updatePwd').modal('hide');
+                    alert('更改成功！');
+                } else {
+                    alert('请检查初始密码是否正确');
+                }
+            },
+            error: function (err) {
+                console.log('ajax错误码:' + err.status);
+            }
+        });
+    }
+</script>
+</body>
+</html>

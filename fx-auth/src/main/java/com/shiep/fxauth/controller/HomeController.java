@@ -20,10 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,6 +104,62 @@ public class HomeController {
         }
         mv.setViewName("bindBankcard");
         return mv;
+    }
+
+    @GetMapping("/myBankCard")
+    public ModelAndView toMyBankCardPage(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String accountName = JwtTokenUtils.getUsername(userToken);
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", accountName);
+        // 如果银行卡号码为空，表示还未办理银行卡
+        if (StringUtils.isEmpty(bankcardID)) {
+            mv.addObject("status", 1);
+            mv.setViewName("myBankcard");
+            return mv;
+        }
+        FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
+        // 如果银行卡未激活
+        if (bankCard.getStatus().equals(FxBankCard.INACTIVE)) {
+            mv.addObject("status", 2);
+            mv.setViewName("myBankcard");
+            return mv;
+        }
+        // 如果银行卡未绑定到账户
+        if (StringUtils.isEmpty(accountService.getAccountVo(accountName).getBankcardId())) {
+            mv.addObject("status", 3);
+            mv.setViewName("myBankcard");
+            return mv;
+        }
+        mv.addObject("status", 4);
+        mv.addObject("bankcard", bankCard);
+        mv.setViewName("myBankcard");
+        return mv;
+    }
+
+    @GetMapping("/showUserInfo")
+    @ResponseBody
+    public FxUser getUserInfo(HttpServletRequest request) {
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String accountName = JwtTokenUtils.getUsername(userToken);
+        String email = (String) RedisUtils.get(accountName);
+        return bankCardService.getByEmail(email);
+    }
+
+    @PostMapping("/bankcard/updatePwd/{bankcardID}")
+    @ResponseBody
+    public Boolean updateBankCardPassword(@PathVariable("bankcardID") String bankcardID, @RequestParam String oldPassword,
+                                          @RequestParam String newPassword, @RequestParam String status) {
+        if (bankCardService.updatePassword(bankcardID, oldPassword, newPassword) != null) {
+            // 如果银行卡未激活，修改密码后将激活
+            if ("0".equals(status)) {
+                bankCardService.activeBankCard(bankcardID);
+            }
+            return true;
+        }
+        return false;
     }
 
     @PostMapping("/userInfo/check")

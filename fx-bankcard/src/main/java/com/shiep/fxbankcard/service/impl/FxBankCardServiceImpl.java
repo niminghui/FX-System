@@ -120,7 +120,7 @@ public class FxBankCardServiceImpl implements IFxBankCardService {
         FxBankCard bankCard = findByBankCardId(bankCardId);
         if (bankCard != null && passwordEncoder.matches(oldPassword,bankCard.getPassword())) {
             bankCard.setPassword(passwordEncoder.encode(newPassword));
-            bankCardRepository.save(bankCard);
+            return bankCardRepository.save(bankCard);
         }
         return null;
     }
