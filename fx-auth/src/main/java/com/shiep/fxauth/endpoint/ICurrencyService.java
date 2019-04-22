@@ -23,6 +23,15 @@ public interface ICurrencyService {
     List<FxCurrency> getAll();
 
     /**
+     * description: 货币初始化
+     *
+     * @param
+     * @return java.util.List<com.shiep.fxauth.model.FxCurrency>
+     */
+    @GetMapping("/currency/init")
+    List<FxCurrency> initCurrency();
+
+    /**
      * description: 通过货币名查找货币
      *
      * @param currencyName 货币名

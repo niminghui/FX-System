@@ -23,12 +23,21 @@ public interface ICurrencyPairsService {
     List<FxCurrencyPairs> getAll();
 
     /**
+     * description: 货币对初始化
+     *
+     * @param
+     * @return java.util.List<com.shiep.fxauth.model.FxCurrencyPairs>
+     */
+    @GetMapping("/currencyPairs/init")
+    List<FxCurrencyPairs> initCurrencyPairs();
+
+    /**
      * description: 创建货币对
      *
      * @param currencyPairs 货币对
      * @return com.shiep.fxauth.model.FxCurrencyPairs
      */
-    @PostMapping
+    @PostMapping("/currencyPairs")
     FxCurrencyPairs create(FxCurrencyPairs currencyPairs);
 
     /**
@@ -37,6 +46,6 @@ public interface ICurrencyPairsService {
      * @param currencyPairs 货币对
      * @return com.shiep.fxauth.model.FxCurrencyPairs
      */
-    @DeleteMapping
+    @DeleteMapping("/currencyPairs")
     FxCurrencyPairs delete(FxCurrencyPairs currencyPairs);
 }
