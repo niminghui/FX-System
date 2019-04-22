@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('主页')">
+</head>
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<div class="col-10 m-1 m-auto mb-2">
+    <div class="card">
+        <div class="card-header">
+            <p class="text-lg-center text-info">存款利率一览</p>
+        </div>
+        <div id="fxRateDiv" class="card-body">
+            <div th:if="${rate == null}" class="alert alert-danger" role="alert">
+                <p>存款利率为空</p>
+            </div>
+            <table class="table table-hover" th:if="${rate != null}">
+                <thead class="thead-default">
+                <tr>
+                    <th>货币名</th>
+                    <th>货币符号</th>
+                    <th>活期利率</th>
+                    <th>定期一个月</th>
+                    <th>定期三个月</th>
+                    <th>定期半年</th>
+                    <th>定期一年</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${rate}">
+                    <td th:text="${data.chinaName}"></td>
+                    <td th:text="${data.englishName}"></td>
+                    <td th:text="${data.depositInterestRate}"></td>
+                    <td th:text="${data.termDepositRateOfOneMonth}"></td>
+                    <td th:text="${data.termDepositRateOfThreeMonth}"></td>
+                    <td th:text="${data.termDepositRateOfSixMonth}"></td>
+                    <td th:text="${data.termDepositRateOfOneYear}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-success btn-sm col-2" style="margin-left: 450px;" th:href="@{/home}">
+            返回主页
+        </a>
+    </div>
+</div>
+</body>
+</html>

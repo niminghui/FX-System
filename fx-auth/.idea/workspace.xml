@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/depositRate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shiep/fxauth/service/impl/MailServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxCurrencyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxCurrencyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxCurrencyPairsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/controller/FxCurrencyPairsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/entity/FxCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/entity/FxCurrency.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxCurrencyPairsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxCurrencyPairsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxCurrencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/IFxCurrencyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxCurrencyPairsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fx-bankcard/src/main/java/com/shiep/fxbankcard/service/impl/FxCurrencyPairsServiceImpl.java" afterDir="false" />
@@ -56,8 +54,8 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="css" value="14" />
-          <entry key="html" value="99" />
-          <entry key="java" value="302" />
+          <entry key="html" value="104" />
+          <entry key="java" value="306" />
           <entry key="jpg" value="1" />
           <entry key="js" value="15" />
           <entry key="png" value="1" />
@@ -70,9 +68,9 @@
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="CSS" value="14" />
-          <entry key="HTML" value="99" />
+          <entry key="HTML" value="104" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="302" />
+          <entry key="JAVA" value="306" />
           <entry key="JavaScript" value="15" />
           <entry key="Properties" value="9" />
           <entry key="XML" value="11" />
@@ -83,11 +81,11 @@
         <counts>
           <entry key="css" value="101" />
           <entry key="dummy" value="20" />
-          <entry key="html" value="7136" />
-          <entry key="java" value="15601" />
+          <entry key="html" value="7362" />
+          <entry key="java" value="15748" />
           <entry key="js" value="170" />
           <entry key="properties" value="104" />
-          <entry key="txt" value="453" />
+          <entry key="txt" value="466" />
           <entry key="xml" value="45" />
           <entry key="yml" value="133" />
         </counts>
@@ -95,10 +93,10 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="101" />
-          <entry key="HTML" value="7134" />
-          <entry key="JAVA" value="15601" />
+          <entry key="HTML" value="7360" />
+          <entry key="JAVA" value="15748" />
           <entry key="JavaScript" value="170" />
-          <entry key="PLAIN_TEXT" value="473" />
+          <entry key="PLAIN_TEXT" value="486" />
           <entry key="Properties" value="104" />
           <entry key="SQL" value="19" />
           <entry key="ThymeleafExpressions" value="2" />
@@ -111,37 +109,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-603">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#743#744#0" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#946#947#0" expanded="true" />
-                <element signature="e#983#984#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="218">
+              <caret line="56" column="73" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -149,8 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/FeignClientConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+            <state relative-caret-position="303">
+              <caret line="52" column="33" lean-forward="true" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1880#1881#0" expanded="true" />
@@ -167,12 +138,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/depositRate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+            <state relative-caret-position="246">
+              <caret line="43" column="70" selection-start-line="43" selection-start-column="70" selection-end-line="43" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="101">
+              <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#868#869#0" expanded="true" />
+                <element signature="e#921#922#0" expanded="true" />
+                <element signature="e#1016#1017#0" expanded="true" />
+                <element signature="e#1079#1080#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,9 +181,9 @@
       <list>
         <option value="JUnit4 Test Class" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="HTML File" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -230,8 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/RegisterController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/registerPage.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtLoginAuthFilter.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginSuccessPage.html" />
@@ -267,7 +261,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/createBankcard.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/activeBankcard.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/bindBankcard.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/common.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/myBankcard.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxCurrencyPairs.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxCurrency.java" />
@@ -281,6 +274,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/common.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/depositRate.html" />
       </list>
     </option>
   </component>
@@ -562,7 +558,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555920933448" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555926068044" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -756,7 +752,7 @@
       <workItem from="1555489370549" duration="5299000" />
       <workItem from="1555550139832" duration="16708000" />
       <workItem from="1555646587494" duration="161000" />
-      <workItem from="1555904412541" duration="5712000" />
+      <workItem from="1555904412541" duration="10880000" />
     </task>
     <task id="LOCAL-00001" summary="fx-auth:实现Token登录认证流程">
       <created>1553498069215</created>
@@ -919,7 +915,14 @@
       <option name="project" value="LOCAL" />
       <updated>1555912706701</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="FX-Auth：完成初始化货币及货币对工作">
+      <created>1555921064077</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1555921064077</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -955,10 +958,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285461000" />
+    <option name="totallyTimeSpent" value="290629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49800798" visible="true" weight="0.28150135" />
       <window_info id="Structure" order="1" sideWeight="0.50199205" side_tool="true" weight="0.26675603" />
@@ -970,7 +974,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28611898" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2875354" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1025,20 +1029,11 @@
     <MESSAGE value="FX-Auth：优化邮件模板界面" />
     <MESSAGE value="实现“我的银行卡”功能模块" />
     <MESSAGE value="FX-Auth：新增货币及货币对服务端点，并拆分IBankCardService服务端点" />
-    <option name="LAST_COMMIT_MESSAGE" value="FX-Auth：新增货币及货币对服务端点，并拆分IBankCardService服务端点" />
+    <MESSAGE value="FX-Auth：完成初始化货币及货币对工作" />
+    <option name="LAST_COMMIT_MESSAGE" value="FX-Auth：完成初始化货币及货币对工作" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="129" selection-start-line="129" selection-end-line="134" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2091">
@@ -1184,13 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3032">
@@ -1233,38 +1221,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/myBankcard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="259" column="24" lean-forward="true" selection-start-line="259" selection-start-column="24" selection-end-line="259" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/error.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/activeBankcard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="84" column="41" lean-forward="true" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/homePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="81" column="82" lean-forward="true" selection-start-line="81" selection-start-column="82" selection-end-line="81" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxCurrency.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -1326,24 +1286,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/FeignClientConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1943#1944#0" expanded="true" />
-            <element signature="e#2132#2133#0" expanded="true" />
-            <element signature="e#2200#2201#0" expanded="true" />
-            <element signature="e#2389#2390#0" expanded="true" />
-            <element signature="e#2457#2458#0" expanded="true" />
-            <element signature="e#2660#2661#0" expanded="true" />
-            <element signature="e#2733#2734#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1372,15 +1314,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="298">
+          <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
           <folding>
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#946#947#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1395,13 +1334,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ICurrencyPairsService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/activeBankcard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+        <state relative-caret-position="417">
+          <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="56" column="73" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/homePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="121" column="38" lean-forward="true" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/myBankcard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="86" column="24" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="86" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxCurrency.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="32" column="47" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/FeignClientConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="52" column="33" lean-forward="true" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1880#1881#0" expanded="true" />
+            <element signature="e#1943#1944#0" expanded="true" />
+            <element signature="e#2132#2133#0" expanded="true" />
+            <element signature="e#2200#2201#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#2457#2458#0" expanded="true" />
+            <element signature="e#2660#2661#0" expanded="true" />
+            <element signature="e#2733#2734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/depositRate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="43" column="70" selection-start-line="43" selection-start-column="70" selection-end-line="43" selection-end-column="70" />
         </state>
       </provider>
     </entry>
