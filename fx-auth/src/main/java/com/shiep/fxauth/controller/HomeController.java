@@ -1,7 +1,9 @@
 package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.endpoint.IAccountService;
+import com.shiep.fxauth.endpoint.IApiService;
 import com.shiep.fxauth.endpoint.IBankCardService;
+import com.shiep.fxauth.endpoint.IUserInfoService;
 import com.shiep.fxauth.model.FxBankCard;
 import com.shiep.fxauth.model.FxUser;
 import com.shiep.fxauth.service.IMailService;
@@ -41,23 +43,24 @@ public class HomeController {
     @SuppressWarnings("all")
     @Autowired
     private IBankCardService bankCardService;
-
     @SuppressWarnings("all")
     @Autowired
     private IAccountService accountService;
-
+    @Autowired
+    private IApiService apiService;
+    @Autowired
+    private IUserInfoService userInfoService;
     @Autowired
     private IMailService mailService;
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping
     public ModelAndView toHomePage() {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("fxRate", bankCardService.getFxRate());
-        mv.addObject("rmbRate", bankCardService.getRmbRate());
-        mv.addObject("headlines", bankCardService.getHeadlinesPageable("guoji", 3));
+        mv.addObject("fxRate", apiService.getFxRate());
+        mv.addObject("rmbRate", apiService.getRmbRate());
+        mv.addObject("headlines", apiService.getHeadlinesPageable("guoji", 3));
         mv.setViewName("homePage");
         return mv;
     }
@@ -145,7 +148,7 @@ public class HomeController {
         String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         String accountName = JwtTokenUtils.getUsername(userToken);
         String email = (String) RedisUtils.get(accountName);
-        return bankCardService.getByEmail(email);
+        return userInfoService.getByEmail(email);
     }
 
     @PostMapping("/bankcard/updatePwd/{bankcardID}")
@@ -175,7 +178,7 @@ public class HomeController {
             mv.setViewName("createBankcard");
             return mv;
         }
-        Map<String, Object> result = bankCardService.verify(userInfo.getIdNumber());
+        Map<String, Object> result = apiService.verify(userInfo.getIdNumber());
         // 请求身份证号码认证识别时，返回失败信息
         if (!result.get("code").equals(200)) {
             mv.addObject("userInfo", userInfo);
@@ -190,7 +193,7 @@ public class HomeController {
         if (userInfo.getGender().equals(data.get("sex")) && userInfo.getProvince().equals(data.get("prov"))
                 && userInfo.getCity().equals(data.get("city")) && userInfo.getCountry().equals(data.get("region"))) {
             // 个人信息认证成功后，将用户信息写入数据库
-            FxUser user = bankCardService.createFxUser(new FxUser(userInfo));
+            FxUser user = userInfoService.createFxUser(new FxUser(userInfo));
             logger.info("create user info:" + user);
             String ip = IpUtils.getIpAddress(request);
             FxBankCard bankCard = bankCardService.createInitBankCard(ip, user.getId());
@@ -248,7 +251,7 @@ public class HomeController {
     @PostMapping("/bankcard/bind")
     public ModelAndView bindBankCard(String bankcardID, String reservedMail, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        FxUser user = bankCardService.getByEmail(reservedMail);
+        FxUser user = userInfoService.getByEmail(reservedMail);
         if (user != null) {
             String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
             String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
