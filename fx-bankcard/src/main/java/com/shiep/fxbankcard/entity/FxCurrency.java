@@ -26,7 +26,6 @@ public class FxCurrency implements Serializable {
 
     @Column(name = "CURRENCY_CN_NAME", nullable = false, unique = true)
     private String chinaName;
-    ;
 
     @Column(name = "CURRENCY_EN_NAME", nullable = false, unique = true)
     private String englishName;
