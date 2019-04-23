@@ -23,6 +23,11 @@ public class FxCurrencyPairsController {
         return currencyPairsService.getAll();
     }
 
+    @GetMapping("/init")
+    public List<FxCurrencyPairs> initCurrencyPairs() {
+        return currencyPairsService.init();
+    }
+
     @PostMapping
     public FxCurrencyPairs create(@RequestBody FxCurrencyPairs currencyPairs) {
         return currencyPairsService.create(currencyPairs);

@@ -13,6 +13,15 @@ import java.util.List;
  */
 @Transactional(rollbackFor = Exception.class)
 public interface IFxCurrencyService {
+
+    /**
+     * description: 初始化货币种类
+     *
+     * @param
+     * @return java.util.List<com.shiep.fxbankcard.entity.FxCurrency>
+     */
+    List<FxCurrency> init();
+
     /**
      * description: 创建货币
      *

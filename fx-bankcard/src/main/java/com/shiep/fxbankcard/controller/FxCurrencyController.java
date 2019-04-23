@@ -24,6 +24,11 @@ public class FxCurrencyController {
         return currencyService.getAll();
     }
 
+    @GetMapping("/init")
+    public List<FxCurrency> initCurrency() {
+        return currencyService.init();
+    }
+
     @GetMapping("/name/{currencyName}")
     public FxCurrency getFxCurrencyByName(@PathVariable("currencyName") String currencyName) {
         return currencyService.findByCurrencyName(currencyName);
