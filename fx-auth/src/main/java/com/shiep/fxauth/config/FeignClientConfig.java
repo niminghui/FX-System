@@ -2,10 +2,7 @@ package com.shiep.fxauth.config;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import com.shiep.fxauth.endpoint.IApiService;
-import com.shiep.fxauth.endpoint.ICurrencyPairsService;
-import com.shiep.fxauth.endpoint.ICurrencyService;
-import com.shiep.fxauth.endpoint.IUserInfoService;
+import com.shiep.fxauth.endpoint.*;
 import feign.Contract;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +88,27 @@ public class FeignClientConfig {
     @Bean
     public ICurrencyPairsService currencyPairsService() {
         return create(ICurrencyPairsService.class, "fx-bankcard");
+    }
+
+    /**
+     * description: 配置资产服务端点bean
+     *
+     * @param
+     * @return com.shiep.fxauth.endpoint.IAssetService
+     */
+    @Bean
+    public IAssetService assetService() {
+        return create(IAssetService.class, "fx-bankcard");
+    }
+
+    /**
+     * description: 配置交易记录服务端点bean
+     *
+     * @param
+     * @return com.shiep.fxauth.endpoint.ITransactionRecordService
+     */
+    @Bean
+    public ITransactionRecordService transactionRecordService() {
+        return create(ITransactionRecordService.class, "fx-bankcard");
     }
 }
