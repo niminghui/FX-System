@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @date: 2019/3/21 13:57
  * @description: fx-account服务端点
  */
-@FeignClient("fx-account")
+@FeignClient(name = "fx-account", path = "/account")
 public interface IAccountService {
     /**
      * description: 通过账户名得到账户视图
@@ -20,7 +20,7 @@ public interface IAccountService {
      * @param accountName 账户名
      * @return com.shiep.fxauth.vo.FxAccountVo
      */
-    @GetMapping("/account/{accountName}")
+    @GetMapping("/{accountName}")
     FxAccountVo getAccountVo(@PathVariable("accountName") String accountName);
 
     /**
@@ -30,7 +30,7 @@ public interface IAccountService {
      * @param password    密码
      * @return com.shiep.fxaccount.entity.FxAccount
      */
-    @PostMapping("/account/{accountName}/{password}")
+    @PostMapping("/{accountName}/{password}")
     FxAccountVo createAccount(@PathVariable("accountName") String accountName, @PathVariable("password") String password);
 
     /**
@@ -39,7 +39,7 @@ public interface IAccountService {
      * @param accountVo 账户视图对象
      * @return com.shiep.fxauth.vo.FxAccountVo
      */
-    @PostMapping("/account")
+    @PostMapping
     FxAccountVo createAccountAndAuth(FxAccountVo accountVo);
 
     /**
@@ -49,7 +49,7 @@ public interface IAccountService {
      * @param roleName    角色名
      * @return java.lang.Boolean
      */
-    @PostMapping("/account/authorization/{accountName}/{roleName}")
+    @PostMapping("/authorization/{accountName}/{roleName}")
     Boolean authorization(@PathVariable("accountName")String accountName, @PathVariable("roleName")String roleName);
 
     /**
@@ -59,7 +59,7 @@ public interface IAccountService {
      * @param newPassword 新密码
      * @return com.shiep.fxaccount.vo.FxAccountVo 账户视图对象
      */
-    @PutMapping("/account/{accountName}/{newPassword}")
+    @PutMapping("/{accountName}/{newPassword}")
     Boolean updatePassword(@PathVariable("accountName")String accountName, @PathVariable("newPassword")String newPassword);
 
     /**
@@ -69,6 +69,6 @@ public interface IAccountService {
      * @param bankCard 银行卡号
      * @return com.shiep.fxaccount.entity.FxAccount
      */
-    @PutMapping("/account/bindBankCard/{accountName}/{bankCard}")
+    @PutMapping("/bindBankCard/{accountName}/{bankCard}")
     Boolean bindBankCard(@PathVariable("accountName")String accountName, @PathVariable("bankCard")String bankCard);
 }

@@ -11,6 +11,7 @@ import java.util.List;
  * @date: 2019/4/18 16:41
  * @description: 货币服务端点
  */
+@RequestMapping("/currency")
 public interface ICurrencyService {
 
     /**
@@ -19,7 +20,7 @@ public interface ICurrencyService {
      * @param
      * @return java.util.List<com.shiep.fxbankcard.entity.FxCurrency>
      */
-    @GetMapping("/currency")
+    @GetMapping
     List<FxCurrency> getAll();
 
     /**
@@ -28,7 +29,7 @@ public interface ICurrencyService {
      * @param
      * @return java.util.List<com.shiep.fxauth.model.FxCurrency>
      */
-    @GetMapping("/currency/init")
+    @GetMapping("/init")
     List<FxCurrency> initCurrency();
 
     /**
@@ -37,7 +38,7 @@ public interface ICurrencyService {
      * @param currencyName 货币名
      * @return com.shiep.fxbankcard.entity.FxCurrency
      */
-    @GetMapping("/currency/name/{currencyName}")
+    @GetMapping("/name/{currencyName}")
     FxCurrency getFxCurrencyByName(@PathVariable("currencyName") String currencyName);
 
     /**
@@ -46,7 +47,7 @@ public interface ICurrencyService {
      * @param currencyCode 货币的标准符号
      * @return com.shiep.fxbankcard.entity.FxCurrency
      */
-    @GetMapping("/currency/code/{currencyCode}")
+    @GetMapping("/code/{currencyCode}")
     FxCurrency getFxCurrencyByCode(@PathVariable("currencyCode") String currencyCode);
 
     /**
@@ -55,7 +56,7 @@ public interface ICurrencyService {
      * @param currency 货币对象
      * @return com.shiep.fxbankcard.entity.FxCurrency
      */
-    @PostMapping("/currency")
+    @PostMapping
     FxCurrency create(FxCurrency currency);
 
     /**
@@ -66,7 +67,7 @@ public interface ICurrencyService {
      * @param value        新的货币汇率
      * @return java.lang.Boolean
      */
-    @PutMapping("/currency/{currencyCode}/{type}/{value}")
+    @PutMapping("/{currencyCode}/{type}/{value}")
     Boolean updateRate(@PathVariable("currencyCode") String currencyCode, @PathVariable("type") Integer type,
                        @PathVariable("value") BigDecimal value);
 
@@ -76,6 +77,6 @@ public interface ICurrencyService {
      * @param currencyCode 货币的标准符号
      * @return com.shiep.fxbankcard.entity.FxCurrency
      */
-    @DeleteMapping("/currency/{currencyCode}")
+    @DeleteMapping("/{currencyCode}")
     FxCurrency delete(@PathVariable("currencyCode") String currencyCode);
 }

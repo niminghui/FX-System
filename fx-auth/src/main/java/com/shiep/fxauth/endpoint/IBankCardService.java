@@ -14,7 +14,7 @@ import java.util.Map;
  * @date: 2019/4/3 16:52
  * @description: fx-bankcard服务端点
  */
-@FeignClient("fx-bankcard")
+@FeignClient(name = "fx-bankcard", path = "/bankcard")
 public interface IBankCardService {
 
     /**
@@ -23,7 +23,7 @@ public interface IBankCardService {
      * @param userID 用户ID
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @GetMapping("/bankcard/userID/{userID}")
+    @GetMapping("/userID/{userID}")
     FxBankCard findByUserID(@PathVariable("userID") String userID);
 
     /**
@@ -32,7 +32,7 @@ public interface IBankCardService {
      * @param status 银行卡状态
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    @GetMapping("/bankcard/status/{status}")
+    @GetMapping("/status/{status}")
     List<FxBankCard> findByStatus(@PathVariable("status") Integer status);
 
     /**
@@ -41,7 +41,7 @@ public interface IBankCardService {
      * @param time 时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    @GetMapping("/bankcard/after/{time}")
+    @GetMapping("/after/{time}")
     List<FxBankCard> findByCreatedTimeAfter(@PathVariable("time") Timestamp time);
 
     /**
@@ -50,7 +50,7 @@ public interface IBankCardService {
      * @param time 时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    @GetMapping("/bankcard/before/{time}")
+    @GetMapping("/before/{time}")
     List<FxBankCard> findByCreatedTimeBefore(@PathVariable("time") Timestamp time);
 
     /**
@@ -60,7 +60,7 @@ public interface IBankCardService {
      * @param endTime   结束时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
      */
-    @GetMapping("/bankcard/between/{beginTime}/{endTime}")
+    @GetMapping("/between/{beginTime}/{endTime}")
     List<FxBankCard> findByCreatedTimeBetween(@PathVariable("beginTime") Timestamp beginTime, @PathVariable("endTime") Timestamp endTime);
 
     /**
@@ -69,7 +69,7 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @GetMapping("/bankcard/id/{id}")
+    @GetMapping("/id/{id}")
     FxBankCard findByBankCardId(@PathVariable("id") String bankCardId);
 
     /**
@@ -79,7 +79,7 @@ public interface IBankCardService {
      * @param userID       用户信息id
      * @return com.shiep.fxauth.model.FxBankCard
      */
-    @PostMapping("/bankcard/create/{createdPlace}/{userID}")
+    @PostMapping("/create/{createdPlace}/{userID}")
     FxBankCard createInitBankCard(@PathVariable("createdPlace") String createdPlace, @PathVariable("userID") String userID);
 
     /**
@@ -88,7 +88,7 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return java.lang.Boolean
      */
-    @PutMapping("/bankcard/active/{bankCardId}")
+    @PutMapping("/active/{bankCardId}")
     Boolean activeBankCard(@PathVariable("bankCardId") String bankCardId);
 
     /**
@@ -97,7 +97,7 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @PutMapping("/bankcard/freeze/{bankCardId}")
+    @PutMapping("/freeze/{bankCardId}")
     FxBankCard freezeBankCard(@PathVariable("bankCardId") String bankCardId);
 
     /**
@@ -106,7 +106,7 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @PutMapping("/bankcard/unfreeze/{bankCardId}")
+    @PutMapping("/unfreeze/{bankCardId}")
     FxBankCard unFreezeBankCard(@PathVariable("bankCardId") String bankCardId);
 
     /**
@@ -117,7 +117,7 @@ public interface IBankCardService {
      * @param newPassword 新密码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @PutMapping("/bankcard/password")
+    @PutMapping("/password")
     FxBankCard updatePassword(@RequestParam("bankCardId") String bankCardId, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword);
 
 
@@ -127,7 +127,7 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return java.lang.String
      */
-    @PutMapping("/bankcard/reset/{bankCardId}")
+    @PutMapping("/reset/{bankCardId}")
     String resetInitPassword(@PathVariable("bankCardId") String bankCardId);
 
     /**
@@ -136,6 +136,6 @@ public interface IBankCardService {
      * @param bankCardId 银行卡号码
      * @return com.shiep.fxbankcard.entity.FxBankCard
      */
-    @DeleteMapping("/bankcard/{bankCardId}")
+    @DeleteMapping("/{bankCardId}")
     FxBankCard deleteBankCard(@PathVariable("bankCardId") String bankCardId);
 }

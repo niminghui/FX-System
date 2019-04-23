@@ -4,6 +4,7 @@ import com.shiep.fxauth.model.FxCurrencyPairs;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @date: 2019/4/22 13:45
  * @description: 货币对服务端点
  */
+@RequestMapping("/currencyPairs")
 public interface ICurrencyPairsService {
     /**
      * description: 得到所有货币对
@@ -19,7 +21,7 @@ public interface ICurrencyPairsService {
      * @param
      * @return java.util.List<com.shiep.fxauth.model.FxCurrencyPairs>
      */
-    @GetMapping("/currencyPairs")
+    @GetMapping
     List<FxCurrencyPairs> getAll();
 
     /**
@@ -28,7 +30,7 @@ public interface ICurrencyPairsService {
      * @param
      * @return java.util.List<com.shiep.fxauth.model.FxCurrencyPairs>
      */
-    @GetMapping("/currencyPairs/init")
+    @GetMapping("/init")
     List<FxCurrencyPairs> initCurrencyPairs();
 
     /**
@@ -37,7 +39,7 @@ public interface ICurrencyPairsService {
      * @param currencyPairs 货币对
      * @return com.shiep.fxauth.model.FxCurrencyPairs
      */
-    @PostMapping("/currencyPairs")
+    @PostMapping
     FxCurrencyPairs create(FxCurrencyPairs currencyPairs);
 
     /**
@@ -46,6 +48,6 @@ public interface ICurrencyPairsService {
      * @param currencyPairs 货币对
      * @return com.shiep.fxauth.model.FxCurrencyPairs
      */
-    @DeleteMapping("/currencyPairs")
+    @DeleteMapping
     FxCurrencyPairs delete(FxCurrencyPairs currencyPairs);
 }

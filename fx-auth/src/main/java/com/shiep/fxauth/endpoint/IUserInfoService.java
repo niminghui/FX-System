@@ -4,6 +4,7 @@ import com.shiep.fxauth.model.FxUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @date: 2019/4/22 13:36
  * @description: 用户信息服务端点
  */
+@RequestMapping("/user")
 public interface IUserInfoService {
 
     /**
@@ -20,7 +22,7 @@ public interface IUserInfoService {
      * @param chineseName 中文名
      * @return com.shiep.fxbankcard.entity.FxUser
      */
-    @GetMapping("/user/chineseName/{chineseName}")
+    @GetMapping("/chineseName/{chineseName}")
     List<FxUser> getByChineseName(@PathVariable("chineseName") String chineseName);
 
     /**
@@ -29,7 +31,7 @@ public interface IUserInfoService {
      * @param idNumber 银行卡号码
      * @return com.shiep.fxbankcard.entity.FxUser
      */
-    @GetMapping("/user/idNumber/{idNumber}")
+    @GetMapping("/idNumber/{idNumber}")
     FxUser getByIdCardNum(@PathVariable("idNumber") String idNumber);
 
     /**
@@ -38,7 +40,7 @@ public interface IUserInfoService {
      * @param email 邮箱
      * @return com.shiep.fxbankcard.entity.FxUser
      */
-    @GetMapping("/user/email/{email}")
+    @GetMapping("/email/{email}")
     FxUser getByEmail(@PathVariable("email") String email);
 
     /**
@@ -47,7 +49,7 @@ public interface IUserInfoService {
      * @param
      * @return java.util.List<com.shiep.fxbankcard.entity.FxUser>
      */
-    @GetMapping("/user")
+    @GetMapping
     List<FxUser> getAll();
 
     /**
@@ -56,6 +58,6 @@ public interface IUserInfoService {
      * @param user FxUser
      * @return com.shiep.fxbankcard.entity.FxUser
      */
-    @PostMapping("/user")
+    @PostMapping
     FxUser createFxUser(FxUser user);
 }

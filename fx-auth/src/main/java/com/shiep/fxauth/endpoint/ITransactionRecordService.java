@@ -3,6 +3,7 @@ package com.shiep.fxauth.endpoint;
 import com.shiep.fxauth.model.FxTransactionRecord;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
@@ -13,6 +14,7 @@ import java.util.List;
  * @date: 2019/4/23 16:01
  * @description: 交易记录服务端点
  */
+@RequestMapping("/record")
 public interface ITransactionRecordService {
 
     /**
@@ -21,7 +23,7 @@ public interface ITransactionRecordService {
      * @param type 交易类型
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    @GetMapping("/record/type")
+    @GetMapping("/type")
     List<FxTransactionRecord> findByType(@RequestParam("type") Integer type);
 
     /**
@@ -30,7 +32,7 @@ public interface ITransactionRecordService {
      * @param currencyCode 货币码
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    @GetMapping("/record/currency")
+    @GetMapping("/currency")
     List<FxTransactionRecord> findByCurrency(@RequestParam("currencyCode") String currencyCode);
 
     /**
@@ -41,7 +43,7 @@ public interface ITransactionRecordService {
      * @param endTime   结束时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    @GetMapping("/record/time")
+    @GetMapping("/time")
     List<FxTransactionRecord> findByTransactionTime(@RequestParam(value = "beginTime", required = false) Timestamp beginTime,
                                                     @RequestParam(value = "endTime", required = false) Timestamp endTime);
 
@@ -55,7 +57,7 @@ public interface ITransactionRecordService {
      * @param endTime      结束时间
      * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    @GetMapping("/record/bankcard")
+    @GetMapping("/bankcard")
     List<FxTransactionRecord> query(@RequestParam("bankcardID") String bankcardID,
                                     @RequestParam(value = "currencyCode", required = false) String currencyCode,
                                     @RequestParam(value = "type", required = false) Integer type,
@@ -68,6 +70,6 @@ public interface ITransactionRecordService {
      * @param transactionRecord 交易记录
      * @return com.shiep.fxbankcard.entity.FxTransactionRecord
      */
-    @PostMapping("/record")
+    @PostMapping
     FxTransactionRecord create(FxTransactionRecord transactionRecord);
 }

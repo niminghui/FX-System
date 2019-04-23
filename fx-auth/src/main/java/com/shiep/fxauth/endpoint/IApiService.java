@@ -2,6 +2,7 @@ package com.shiep.fxauth.endpoint;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import java.util.Map;
  * @date: 2019/4/22 13:30
  * @description: Api服务端点
  */
+@RequestMapping("/api")
 public interface IApiService {
 
     /**
@@ -18,7 +20,7 @@ public interface IApiService {
      * @param
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
-    @GetMapping("/api/rmbRate")
+    @GetMapping("/rmbRate")
     Map<String, Object> getRmbRate();
 
     /**
@@ -27,7 +29,7 @@ public interface IApiService {
      * @param
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
-    @GetMapping("/api/fxRate")
+    @GetMapping("/fxRate")
     Map<String, Object> getFxRate();
 
     /**
@@ -37,7 +39,7 @@ public interface IApiService {
      * @param size 分页大小
      * @return java.util.Map<java.lang.String   ,   java.lang.Object>
      */
-    @GetMapping("/api/headlines/{type}/{size}")
+    @GetMapping("/headlines/{type}/{size}")
     public Map<String, Object> getHeadlinesPageable(@PathVariable("type") String type, @PathVariable("size") Integer size);
 
     /**
@@ -46,7 +48,7 @@ public interface IApiService {
      * @param type 新闻类型
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
-    @GetMapping("/api/headlines/{type}")
+    @GetMapping("/headlines/{type}")
     Map<String, Object> getHeadlines(@PathVariable("type") String type);
 
     /**
@@ -55,7 +57,7 @@ public interface IApiService {
      * @param
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
-    @GetMapping("/api/headlines")
+    @GetMapping("/headlines")
     Map<String, Object> getHeadlines();
 
     /**
@@ -64,6 +66,6 @@ public interface IApiService {
      * @param idCardNum 身份证号码
      * @return java.util.Map<java.lang.String , java.lang.Object>
      */
-    @GetMapping("/api/verify/{idCardNum}")
+    @GetMapping("/verify/{idCardNum}")
     Map<String, Object> verify(@PathVariable("idCardNum") String idCardNum);
 }

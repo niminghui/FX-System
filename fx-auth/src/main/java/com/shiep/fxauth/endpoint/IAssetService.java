@@ -11,6 +11,7 @@ import java.util.List;
  * @date: 2019/4/23 11:37
  * @description: 资产服务端点
  */
+@RequestMapping("/asset")
 public interface IAssetService {
 
     /**
@@ -19,7 +20,7 @@ public interface IAssetService {
      * @param bankcardID 银行卡号码
      * @return java.util.List<com.shiep.fxbankcard.entity.FxAsset>
      */
-    @GetMapping("/asset/{bankcardID}")
+    @GetMapping("/{bankcardID}")
     List<FxAsset> getAll(@PathVariable("bankcardID") String bankcardID);
 
     /**
@@ -29,7 +30,7 @@ public interface IAssetService {
      * @param currencyCode 货币码
      * @return com.shiep.fxbankcard.entity.FxAsset
      */
-    @GetMapping("/asset/{bankcardID}/{currencyCode}")
+    @GetMapping("/{bankcardID}/{currencyCode}")
     FxAsset get(@PathVariable("bankcardID") String bankcardID, @PathVariable("currencyCode") String currencyCode);
 
     /**
@@ -38,7 +39,7 @@ public interface IAssetService {
      * @param asset 资产
      * @return com.shiep.fxbankcard.entity.FxAsset
      */
-    @PostMapping("/asset")
+    @PostMapping
     FxAsset create(FxAsset asset);
 
     /**
@@ -49,7 +50,7 @@ public interface IAssetService {
      * @param newBalance   新余额
      * @return com.shiep.fxbankcard.entity.FxAsset
      */
-    @PutMapping("/asset/{bankcardID}/{currencyCode}/{newBalance}")
+    @PutMapping("/{bankcardID}/{currencyCode}/{newBalance}")
     FxAsset updateBalance(@PathVariable("bankcardID") String bankcardID, @PathVariable("currencyCode") String currencyCode,
                           @PathVariable("newBalance") BigDecimal newBalance);
 }
