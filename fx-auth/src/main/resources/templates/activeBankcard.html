@@ -41,8 +41,8 @@
                 </button>
                 <p th:case="1">错误信息：初始密码错误！系统将重新发放初始密码到您的账户，请及时查收并进行激活。</p>
                 <p th:case="2">错误信息：您还未进行身份认证，请先进行身份认证办理银行卡后，再进行激活，谢谢。</p>
-                <p th:case="*">
-                <h6 class="card-title text-info">您的银行卡初始密码已经发送到<span th:text="${email}"></span>，请及时查收。</h6>
+                <p th:case="*" class="card-title text-info">
+                    您的银行卡初始密码已经发送到<span th:text="${email}"></span>，请及时查收。
                 </p>
             </div>
             <div th:if="${error} ne 2" class="mt-3 mb-5">

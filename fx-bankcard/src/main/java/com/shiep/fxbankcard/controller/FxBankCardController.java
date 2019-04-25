@@ -1,11 +1,20 @@
 package com.shiep.fxbankcard.controller;
 
+import com.shiep.fxbankcard.entity.FxAsset;
 import com.shiep.fxbankcard.entity.FxBankCard;
+import com.shiep.fxbankcard.entity.FxCurrency;
+import com.shiep.fxbankcard.entity.FxTransactionRecord;
+import com.shiep.fxbankcard.model.TransactionTypeEnum;
+import com.shiep.fxbankcard.service.IFxAssetService;
 import com.shiep.fxbankcard.service.IFxBankCardService;
+import com.shiep.fxbankcard.service.IFxCurrencyService;
+import com.shiep.fxbankcard.service.IFxTransactionRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +25,18 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/bankcard", produces = "application/json;charset=utf-8")
 public class FxBankCardController {
+
     @Autowired
     private IFxBankCardService bankCardService;
+
+    @Autowired
+    private IFxAssetService assetService;
+
+    @Autowired
+    private IFxCurrencyService currencyService;
+
+    @Autowired
+    private IFxTransactionRecordService transactionRecordService;
 
     @GetMapping("/userID/{userID}")
     public FxBankCard findByUserID(@PathVariable("userID") String userID) {
@@ -52,6 +71,32 @@ public class FxBankCardController {
     @PostMapping("/create/{createdPlace}/{userID}")
     public FxBankCard createInitBankCard(@PathVariable("createdPlace") String createdPlace, @PathVariable("userID") String userID) {
         return bankCardService.createInitBankCard(createdPlace, userID);
+    }
+
+    @PostMapping("/initAsset")
+    public List<FxAsset> initAsset(@RequestParam("bankcardID") String bankcardID, @RequestParam("money") BigDecimal money){
+        if (bankCardService.findByBankCardId(bankcardID) == null){
+            return null;
+        }
+        List<FxCurrency> currencyList = currencyService.getAll();
+        List<FxAsset> result = new ArrayList<>();
+        for (FxCurrency currency : currencyList){
+            FxAsset asset = new FxAsset();
+            asset.setBankcardId(bankcardID);
+            asset.setCurrencyCode(currency.getEnglishName());
+            asset.setBalance(money);
+            result.add(assetService.create(asset));
+            FxTransactionRecord transactionRecord = new FxTransactionRecord();
+            transactionRecord.setBankcardId(asset.getBankcardId());
+            transactionRecord.setCurrencyCode(asset.getCurrencyCode());
+            transactionRecord.setMoney(asset.getBalance());
+            transactionRecord.setType(TransactionTypeEnum.TRANSFER_INTO.getCode());
+            transactionRecord.setTransactionPeople("FX-System");
+            transactionRecord.setTransactionPlace("localhost");
+            transactionRecord.setTransactionTime(new Timestamp(System.currentTimeMillis()));
+            transactionRecordService.create(transactionRecord);
+        }
+        return result;
     }
 
     @PutMapping("/active/{bankCardId}")

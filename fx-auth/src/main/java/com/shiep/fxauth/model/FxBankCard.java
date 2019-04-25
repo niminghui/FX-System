@@ -2,7 +2,6 @@ package com.shiep.fxauth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

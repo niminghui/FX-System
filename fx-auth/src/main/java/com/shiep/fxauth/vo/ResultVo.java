@@ -1,4 +1,6 @@
-package com.shiep.fxauth.common;
+package com.shiep.fxauth.vo;
+
+import com.shiep.fxauth.common.HttpStatusEnum;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -9,7 +11,7 @@ import java.util.Map;
  * @date: 2019/3/7 17:23
  * @description: response返回结果集
  */
-public class ResultVO implements Serializable {
+public class ResultVo implements Serializable {
     private static final long serialVersionUID = -5359028332240046810L;
 
     /**

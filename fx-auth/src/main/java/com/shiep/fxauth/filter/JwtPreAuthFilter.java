@@ -1,12 +1,10 @@
 package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.common.HttpStatusEnum;
-import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.vo.ResultVo;
 import com.shiep.fxauth.utils.CookieUtils;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +14,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -66,7 +63,7 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = getAuthentication(tokenHeader, request, response);
         if (usernamePasswordAuthenticationToken == null){
             // 此时应该是用户Token过期，将跳转到登录界面
-            Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_OVERDUE,false);
+            Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_LOGIN_OVERDUE, false);
             request.setAttribute("code",map.get("code"));
             request.setAttribute("msg",map.get("messageCN"));
             request.getRequestDispatcher("/error").forward(request,response);
@@ -88,7 +85,7 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
         String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         // 如果Token过期
         if (JwtTokenUtils.isExpiration(userToken)) {
-            Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_OVERDUE, false);
+            Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_LOGIN_OVERDUE, false);
             request.setAttribute("code", map.get("code"));
             request.setAttribute("msg", map.get("messageCN"));
             request.getRequestDispatcher("/error").forward(request, response);

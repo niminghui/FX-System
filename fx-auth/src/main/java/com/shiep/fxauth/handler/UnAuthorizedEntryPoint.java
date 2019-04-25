@@ -1,8 +1,7 @@
 package com.shiep.fxauth.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.shiep.fxauth.common.HttpStatusEnum;
-import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.vo.ResultVo;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -22,7 +21,7 @@ public class UnAuthorizedEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_NEED_AUTHORITIES,false);
+        Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_NEED_AUTHORITIES, false);
         request.setAttribute("code",map.get("code"));
         request.setAttribute("msg",map.get("messageCN"));
         request.getRequestDispatcher("/error").forward(request,response);

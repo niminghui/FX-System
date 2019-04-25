@@ -99,11 +99,15 @@ public class HomeController {
         // 如果bankcardID和email为空，表示当前用户还未进行身份认证
         if (StringUtils.isEmpty(bankcardID) || StringUtils.isEmpty(email)) {
             mv.addObject("error", 1);
+            mv.setViewName("bindBankcard");
+            return mv;
         }
         FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
         // 如果银行卡状态为未激活
         if (bankCard.getStatus().equals(FxBankCard.INACTIVE)) {
             mv.addObject("error", 2);
+            mv.setViewName("bindBankcard");
+            return mv;
         }
         mv.setViewName("bindBankcard");
         return mv;
@@ -188,6 +192,7 @@ public class HomeController {
             return mv;
         }
         Map<String, String> data = (Map<String, String>) result.get("data");
+        logger.info(data.toString());
         // 通过比较出生地和性别判断身份证号码是否是本人
         // 实际上应该通过实名认证（比较姓名和身份证号码），但是这个api收费太高了……所以采用这种方式模拟(┬＿┬)
         if (userInfo.getGender().equals(data.get("sex")) && userInfo.getProvince().equals(data.get("prov"))
@@ -223,8 +228,11 @@ public class HomeController {
     }
 
     @PostMapping("/bankcard/active")
-    public ModelAndView activeBankCard(@RequestParam("email") String email, @RequestParam("bankcardID") String bankcardID,
-                                       @RequestParam("initPassword") String initPassword, @RequestParam("password") String newPassword) {
+    public ModelAndView activeBankCard(@RequestParam("email") String email,
+                                       @RequestParam("bankcardID") String bankcardID,
+                                       @RequestParam("initPassword") String initPassword,
+                                       @RequestParam("password") String newPassword,
+                                       HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
         // 如果用户初始密码匹配
@@ -233,6 +241,11 @@ public class HomeController {
             bankCardService.activeBankCard(bankcardID);
             // 修改密码
             bankCardService.updatePassword(bankcardID, initPassword, newPassword);
+            // 当激活银行卡后，为用户授予“USER”角色==》可进行银行卡业务操作
+            String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+            String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+            String accountName = JwtTokenUtils.getUsername(userToken);
+            accountService.authorization(accountName, "ROLE_USER");
             mv.setViewName("bindBankcard");
             return mv;
         }

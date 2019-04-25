@@ -1,10 +1,12 @@
 package com.shiep.fxauth.endpoint;
 
+import com.shiep.fxauth.model.FxAsset;
 import com.shiep.fxauth.model.FxBankCard;
 import com.shiep.fxauth.model.FxUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +84,15 @@ public interface IBankCardService {
     @PostMapping("/create/{createdPlace}/{userID}")
     FxBankCard createInitBankCard(@PathVariable("createdPlace") String createdPlace, @PathVariable("userID") String userID);
 
+    /**
+     * description: 为银行卡创建初始资金
+     *
+     * @param bankcardID 银行卡号码
+     * @param money      金额
+     * @return java.util.List<com.shiep.fxauth.model.FxAsset>
+     */
+    @PostMapping("/initAsset")
+    List<FxAsset> initAsset(@RequestParam("bankcardID") String bankcardID, @RequestParam("money") BigDecimal money);
     /**
      * description: 激活银行卡
      *

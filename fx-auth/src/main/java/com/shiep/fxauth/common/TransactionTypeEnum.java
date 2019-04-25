@@ -1,4 +1,4 @@
-package com.shiep.fxauth.model;
+package com.shiep.fxauth.common;
 
 import lombok.Getter;
 

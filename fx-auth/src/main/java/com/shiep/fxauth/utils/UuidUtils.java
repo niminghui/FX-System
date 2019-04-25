@@ -7,7 +7,7 @@ import java.util.UUID;
  * @date: 2019/3/14 9:38
  * @description: UUID工具类
  */
-public class UuidTools {
+public class UuidUtils {
     /**
      * description: 得到32位连续无'-'的UUID字符串
      *

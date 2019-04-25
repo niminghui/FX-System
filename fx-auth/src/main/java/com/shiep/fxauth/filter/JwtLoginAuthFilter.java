@@ -1,7 +1,7 @@
 package com.shiep.fxauth.filter;
 
 import com.shiep.fxauth.common.HttpStatusEnum;
-import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.vo.ResultVo;
 import com.shiep.fxauth.model.JwtAuthUser;
 import com.shiep.fxauth.vo.LoginVo;
 import com.shiep.fxauth.utils.JwtTokenUtils;
@@ -107,7 +107,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGIN_FAILED,false);
+        Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_LOGIN_FAILED, false);
         request.setAttribute("code",map.get("code"));
         request.setAttribute("msg",map.get("messageCN"));
         request.getRequestDispatcher("/error").forward(request,response);

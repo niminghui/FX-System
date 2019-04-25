@@ -2,6 +2,7 @@ package com.shiep.fxauth.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,8 @@ import java.util.List;
  * @description: 账户视图类
  */
 @Data
-public class FxAccountVo {
+public class FxAccountVo implements Serializable {
+    private static final long serialVersionUID = 2279537260989547220L;
     private String accountId;
     private String accountName;
     private String accountPwd;

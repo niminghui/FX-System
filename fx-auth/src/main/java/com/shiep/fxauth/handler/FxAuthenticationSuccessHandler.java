@@ -21,6 +21,6 @@ public class FxAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
         //String jwtToken = JwtTokenUtils.createToken(userDetails.getUsername(),userDetails.getAuthorities(),1);
 
-        //httpServletResponse.getWriter().write(JSON.toJSONString(ResultVO.result(ResultEnum.USER_LOGIN_SUCCESS,jwtToken,true)));
+        //httpServletResponse.getWriter().write(JSON.toJSONString(ResultVo.result(ResultEnum.USER_LOGIN_SUCCESS,jwtToken,true)));
     }
 }

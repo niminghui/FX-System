@@ -1,8 +1,7 @@
 package com.shiep.fxauth.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.shiep.fxauth.common.HttpStatusEnum;
-import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.vo.ResultVo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -20,7 +19,7 @@ import java.util.Map;
 public class FxLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_LOGOUT_SUCCESS,false);
+        Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_LOGOUT_SUCCESS, false);
         request.setAttribute("code",map.get("code"));
         request.setAttribute("msg",map.get("messageCN"));
         request.getRequestDispatcher("/error").forward(request,response);

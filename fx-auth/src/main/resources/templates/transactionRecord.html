@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('交易记录查询')">
+</head>
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<main role="main" class="container">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <p class="m-auto text-center text-light font-weight-bold">查询交易记录</p>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/deposit/transaction/record/query}" th:method="get" class="form-inline">
+                    <fieldset class="form-group">
+                        <label class="mr-sm-4 mb-0" for="beginTime">开始时间</label>
+                        <input type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0" id="beginTime"
+                               name="beginTime"/>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label class="mr-sm-4 mb-0" for="endTime">结束时间</label>
+                        <input type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0" id="endTime"
+                               name="endTime"/>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label class="mr-sm-4 mb-0" for="currency">币种</label>
+                        <select class="form-control mr-sm-4 mb-2 mb-sm-0" id="currency" name="currency">
+                            <option class="active" value="">
+                                <span>全部</span>
+                            </option>
+                            <option th:each="currency : ${currencyList}" th:value="${currency.code}">
+                                <span th:text="${currency.name}"></span>
+                            </option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label class="mr-sm-4 mb-0" for="type">交易类型</label>
+                        <select class="form-control mr-sm-4 mb-2 mb-sm-0" id="type" name="type">
+                            <option class="active" value="">
+                                <span>全部</span>
+                            </option>
+                            <option th:each="type : ${typeList}" th:value="${type.code}">
+                                <span th:text="${type.name}"></span>
+                            </option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group ml-5 mt-4">
+                        <button type="submit" class="btn btn-info">点击查询</button>
+                    </fieldset>
+                </form>
+
+                <hr class="featurette-divider bg-info">
+
+                <div class="table-responsive">
+                    <table th:if="${show} eq true" class="table table-hover">
+                        <thead class="thead-default">
+                        <tr>
+                            <th>银行卡号码</th>
+                            <th>币种</th>
+                            <th>交易金额</th>
+                            <th>交易时间</th>
+                            <th>交易类型</th>
+                            <th>交易方</th>
+                            <th>交易地点</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="record : ${recordList}">
+                            <td th:text="${record.bankcardId}"></td>
+                            <td th:text="${record.currencyCode}"></td>
+                            <td th:text="${record.money}"></td>
+                            <td th:text="${record.transactionTime}"></td>
+                            <th:block th:switch="${record.type}">
+                                <td th:case="0" th:text="转账支出"></td>
+                                <td th:case="1" th:text="外汇兑换支出"></td>
+                                <td th:case="2" th:text="转账存入"></td>
+                                <td th:case="3" th:text="外汇兑换存入"></td>
+                                <td th:case="4" th:text="存款利息存入"></td>
+                            </th:block>
+                            <td th:text="${record.transactionPeople}"></td>
+                            <td th:text="${record.transactionPlace}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="m-auto">
+                        <tr>
+                            <td colspan="7">
+                                <div class="mt-3" style="margin-left: 35%;">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a href="javascript:void(0);" class="page-link">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">2</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">3</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">4</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">5</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">6</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link">7</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="javascript:void(0);" class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,8 +1,7 @@
 package com.shiep.fxauth.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.shiep.fxauth.common.HttpStatusEnum;
-import com.shiep.fxauth.common.ResultVO;
+import com.shiep.fxauth.vo.ResultVo;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -20,7 +19,7 @@ import java.util.Map;
 public class FxAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-        Map<String, Object> map = ResultVO.result(HttpStatusEnum.USER_NO_ACCESS,false);
+        Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_NO_ACCESS, false);
         request.setAttribute("code",map.get("code"));
         request.setAttribute("msg",map.get("messageCN"));
         request.getRequestDispatcher("/error").forward(request,response);

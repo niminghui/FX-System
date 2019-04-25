@@ -14,30 +14,32 @@
             <div th:if="${rate == null}" class="alert alert-danger" role="alert">
                 <p>存款利率为空</p>
             </div>
-            <table class="table table-hover" th:if="${rate != null}">
-                <thead class="thead-default">
-                <tr>
-                    <th>货币名</th>
-                    <th>货币符号</th>
-                    <th>活期利率</th>
-                    <th>定期一个月</th>
-                    <th>定期三个月</th>
-                    <th>定期半年</th>
-                    <th>定期一年</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="data : ${rate}">
-                    <td th:text="${data.chinaName}"></td>
-                    <td th:text="${data.englishName}"></td>
-                    <td th:text="${data.depositInterestRate}"></td>
-                    <td th:text="${data.termDepositRateOfOneMonth}"></td>
-                    <td th:text="${data.termDepositRateOfThreeMonth}"></td>
-                    <td th:text="${data.termDepositRateOfSixMonth}"></td>
-                    <td th:text="${data.termDepositRateOfOneYear}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover" th:if="${rate != null}">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>货币名</th>
+                        <th>货币符号</th>
+                        <th>活期利率</th>
+                        <th>定期一个月</th>
+                        <th>定期三个月</th>
+                        <th>定期半年</th>
+                        <th>定期一年</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="data : ${rate}">
+                        <td th:text="${data.chinaName}"></td>
+                        <td th:text="${data.englishName}"></td>
+                        <td th:text="${data.depositInterestRate}"></td>
+                        <td th:text="${data.termDepositRateOfOneMonth}"></td>
+                        <td th:text="${data.termDepositRateOfThreeMonth}"></td>
+                        <td th:text="${data.termDepositRateOfSixMonth}"></td>
+                        <td th:text="${data.termDepositRateOfOneYear}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="card-footer">
