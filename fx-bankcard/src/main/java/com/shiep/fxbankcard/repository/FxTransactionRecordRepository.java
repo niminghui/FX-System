@@ -1,11 +1,13 @@
 package com.shiep.fxbankcard.repository;
 
 import com.shiep.fxbankcard.entity.FxTransactionRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @author: 倪明辉
@@ -16,30 +18,33 @@ import java.util.List;
 public interface FxTransactionRecordRepository extends JpaRepository<FxTransactionRecord, String> {
 
     /**
-     * description: 通过银行卡号查询该银行卡所有的交易记录
+     * description: 通过银行卡号查询该银行卡所有的交易记录(带分页)
      *
      * @param bankcardID 银行卡号
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardId(String bankcardID);
+    Page<FxTransactionRecord> findByBankcardId(String bankcardID, Pageable pageable);
 
     /**
      * description: 通过银行卡号和货币码查找该银行卡有关该货币的所有交易记录
      *
      * @param bankcardID 银行卡号
      * @param currencyCode 货币码
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode);
+    Page<FxTransactionRecord> findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode, Pageable pageable);
 
     /**
      * description: 通过银行卡号和交易类型查找该银行卡有关该交易类型的所有交易记录
      *
      * @param bankcardID 银行卡号
      * @param type 交易类型
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndType(String bankcardID, Integer type);
+    Page<FxTransactionRecord> findByBankcardIdAndType(String bankcardID, Integer type, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、货币码、交易类型查找交易记录
@@ -47,68 +52,76 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID   银行卡号码
      * @param currencyCode 货币码
      * @param type         交易类型
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndType(String bankcardID, String currencyCode, Integer type);
+    Page<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndType(String bankcardID, String currencyCode, Integer type, Pageable pageable);
 
     /**
      * description: 通过交易类型查找所有的交易记录
      *
      * @param type 交易类型
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByType(Integer type);
+    Page<FxTransactionRecord> findByType(Integer type, Pageable pageable);
 
     /**
      * description: 通过货币码查找交易记录
      *
      * @param currencyCode 货币码
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByCurrencyCode(String currencyCode);
+    Page<FxTransactionRecord> findByCurrencyCode(String currencyCode, Pageable pageable);
 
     /**
      * description: 查询交易时间在time之后的交易记录
      *
      * @param time 交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByTransactionTimeAfter(Timestamp time);
+    Page<FxTransactionRecord> findByTransactionTimeAfter(Timestamp time, Pageable pageable);
 
     /**
      * description: 查询交易时间在time之前的交易记录
      *
      * @param time 交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByTransactionTimeBefore(Timestamp time);
+    Page<FxTransactionRecord> findByTransactionTimeBefore(Timestamp time, Pageable pageable);
 
     /**
      * description: 查询交易时间在beginTime至endTime之间的记录
      *
      * @param beginTime 开始时间
      * @param endTime 结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByTransactionTimeBetween(Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByTransactionTimeBetween(Timestamp beginTime, Timestamp endTime, Pageable pageable);
 
     /**
      * description: 查询该银行卡交易时间在time之前的交易记录
      *
      * @param bankcardID 银行卡号
      * @param time 交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBefore(String bankcardID, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTransactionTimeBefore(String bankcardID, Timestamp time, Pageable pageable);
 
     /**
      * description: 查询该银行卡交易时间在time之后的交易记录
      *
      * @param bankcardID 银行卡号
      * @param time 交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeAfter(String bankcardID, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTransactionTimeAfter(String bankcardID, Timestamp time, Pageable pageable);
 
     /**
      * description: 查询该银行卡交易时间在beginTime至endTime之间的记录
@@ -116,9 +129,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID 银行卡号
      * @param beginTime 开始时间
      * @param endTime 结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTransactionTimeBetween(String bankcardID, Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByBankcardIdAndTransactionTimeBetween(String bankcardID, Timestamp beginTime, Timestamp endTime, Pageable pageable);
 
     /**
      * description: 根据银行卡号码、货币码，查询交易时间在time之前的交易记录
@@ -126,9 +140,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID   银行卡号码
      * @param currencyCode 货币码
      * @param time         交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeBefore(String bankcardID, String currencyCode, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeBefore(String bankcardID, String currencyCode, Timestamp time, Pageable pageable);
 
     /**
      * description: 根据银行卡号码、货币码，查询交易时间在time之后的交易记录
@@ -136,9 +151,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID   银行卡号码
      * @param currencyCode 货币码
      * @param time         交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeAfter(String bankcardID, String currencyCode, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeAfter(String bankcardID, String currencyCode, Timestamp time, Pageable pageable);
 
     /**
      * description: 根据银行卡号码、货币码，查询交易时间在beginTime和endTime之间的交易记录
@@ -147,9 +163,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param currencyCode 货币码
      * @param beginTime    开始时间
      * @param endTime      结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeBetween(String bankcardID, String currencyCode, Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeBetween(String bankcardID, String currencyCode, Timestamp beginTime, Timestamp endTime, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易类型查询交易时间在time之前的交易记录
@@ -157,9 +174,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID 银行卡号码
      * @param type       交易类型
      * @param time       交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeBefore(String bankcardID, Integer type, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeBefore(String bankcardID, Integer type, Timestamp time, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易类型查询交易时间在time之后的交易记录
@@ -167,9 +185,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param bankcardID 银行卡号码
      * @param type       交易类型
      * @param time       交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeAfter(String bankcardID, Integer type, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeAfter(String bankcardID, Integer type, Timestamp time, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易类型查询交易时间在beginTime和endTime之间的交易记录
@@ -178,9 +197,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param type       交易类型
      * @param beginTime  开始时间
      * @param endTime    结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeBetween(String bankcardID, Integer type, Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndTransactionTimeBetween(String bankcardID, Integer type, Timestamp beginTime, Timestamp endTime, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易货币、交易类型，查询交易时间在time之前的交易记录
@@ -189,9 +209,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param type         交易类型
      * @param currencyCode 交易货币
      * @param time         交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeBefore(String bankcardID, Integer type, String currencyCode, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeBefore(String bankcardID, Integer type, String currencyCode, Timestamp time, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易货币、交易类型，查询交易时间在time之后的交易记录
@@ -200,9 +221,10 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param type         交易类型
      * @param currencyCode 交易货币
      * @param time         交易时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeAfter(String bankcardID, Integer type, String currencyCode, Timestamp time);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeAfter(String bankcardID, Integer type, String currencyCode, Timestamp time, Pageable pageable);
 
     /**
      * description: 通过银行卡号码、交易货币、交易类型，查询交易时间在beginTime和endTime之间的交易记录
@@ -212,7 +234,8 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @param currencyCode 交易货币
      * @param beginTime    开始时间
      * @param endTime      结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeBetween(String bankcardID, Integer type, String currencyCode, Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeBetween(String bankcardID, Integer type, String currencyCode, Timestamp beginTime, Timestamp endTime, Pageable pageable);
 }

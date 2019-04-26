@@ -1,12 +1,15 @@
 package com.shiep.fxbankcard.controller;
 
 import com.shiep.fxbankcard.entity.FxTransactionRecord;
+import com.shiep.fxbankcard.model.TransactionRecordPage;
 import com.shiep.fxbankcard.service.IFxTransactionRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @author: 倪明辉
@@ -21,28 +24,68 @@ public class FxTransactionRecordController {
     private IFxTransactionRecordService transactionRecordService;
 
     @GetMapping("/type")
-    public List<FxTransactionRecord> findByType(@RequestParam("type") Integer type) {
-        return transactionRecordService.findByType(type);
+    public TransactionRecordPage findByType(@RequestParam("type") Integer type,
+                                            @RequestParam("page") Integer page,
+                                            @RequestParam("size") Integer size) {
+        Pageable pageable = new PageRequest(page - 1, size);
+        Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByType(type, pageable);
+        TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
+        transactionRecordPage.setSize(transactionRecords.getTotalElements());
+        transactionRecordPage.setPageIndex(transactionRecords.getNumber() + 1);
+        transactionRecordPage.setPageSize(transactionRecords.getTotalPages());
+        transactionRecordPage.setPageContent(transactionRecords.getContent());
+        transactionRecordPage.setCurrencyPageSize(transactionRecords.getNumberOfElements());
+        return transactionRecordPage;
     }
 
     @GetMapping("/currency")
-    public List<FxTransactionRecord> findByCurrency(@RequestParam("currencyCode") String currencyCode) {
-        return transactionRecordService.findByCurrency(currencyCode);
+    public TransactionRecordPage findByCurrency(@RequestParam("currencyCode") String currencyCode,
+                                                @RequestParam("page") Integer page,
+                                                @RequestParam("size") Integer size) {
+        Pageable pageable = new PageRequest(page - 1, size);
+        Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByCurrency(currencyCode, pageable);
+        TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
+        transactionRecordPage.setSize(transactionRecords.getTotalElements());
+        transactionRecordPage.setPageIndex(transactionRecords.getNumber() + 1);
+        transactionRecordPage.setPageSize(transactionRecords.getTotalPages());
+        transactionRecordPage.setPageContent(transactionRecords.getContent());
+        transactionRecordPage.setCurrencyPageSize(transactionRecords.getNumberOfElements());
+        return transactionRecordPage;
     }
 
     @GetMapping("/time")
-    public List<FxTransactionRecord> findByTransactionTime(@RequestParam(value = "beginTime", required = false) Timestamp beginTime,
-                                                           @RequestParam(value = "endTime", required = false) Timestamp endTime) {
-        return transactionRecordService.findByTransactionTime(beginTime, endTime);
+    public TransactionRecordPage findByTransactionTime(@RequestParam(value = "beginTime", required = false) Timestamp beginTime,
+                                                       @RequestParam(value = "endTime", required = false) Timestamp endTime,
+                                                       @RequestParam("page") Integer page,
+                                                       @RequestParam("size") Integer size) {
+        Pageable pageable = new PageRequest(page - 1, size);
+        Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByTransactionTime(beginTime, endTime, pageable);
+        TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
+        transactionRecordPage.setSize(transactionRecords.getTotalElements());
+        transactionRecordPage.setPageIndex(transactionRecords.getNumber() + 1);
+        transactionRecordPage.setPageSize(transactionRecords.getTotalPages());
+        transactionRecordPage.setPageContent(transactionRecords.getContent());
+        transactionRecordPage.setCurrencyPageSize(transactionRecords.getNumberOfElements());
+        return transactionRecordPage;
     }
 
     @GetMapping("/bankcard")
-    public List<FxTransactionRecord> query(@RequestParam("bankcardID") String bankcardID,
-                                           @RequestParam(value = "currencyCode", required = false) String currencyCode,
-                                           @RequestParam(value = "type", required = false) Integer type,
-                                           @RequestParam(value = "beginTime", required = false) Timestamp beginTime,
-                                           @RequestParam(value = "endTime", required = false) Timestamp endTime) {
-        return transactionRecordService.query(bankcardID, currencyCode, type, beginTime, endTime);
+    public TransactionRecordPage query(@RequestParam("bankcardID") String bankcardID,
+                                       @RequestParam(value = "currencyCode", required = false) String currencyCode,
+                                       @RequestParam(value = "type", required = false) Integer type,
+                                       @RequestParam(value = "beginTime", required = false) Timestamp beginTime,
+                                       @RequestParam(value = "endTime", required = false) Timestamp endTime,
+                                       @RequestParam("page") Integer page,
+                                       @RequestParam("size") Integer size) {
+        Pageable pageable = new PageRequest(page - 1, size);
+        Page<FxTransactionRecord> transactionRecords = transactionRecordService.query(bankcardID, currencyCode, type, beginTime, endTime, pageable);
+        TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
+        transactionRecordPage.setSize(transactionRecords.getTotalElements());
+        transactionRecordPage.setPageIndex(transactionRecords.getNumber() + 1);
+        transactionRecordPage.setPageSize(transactionRecords.getTotalPages());
+        transactionRecordPage.setPageContent(transactionRecords.getContent());
+        transactionRecordPage.setCurrencyPageSize(transactionRecords.getNumberOfElements());
+        return transactionRecordPage;
     }
 
     @PostMapping

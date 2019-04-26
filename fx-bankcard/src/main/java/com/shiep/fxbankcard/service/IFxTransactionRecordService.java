@@ -1,10 +1,11 @@
 package com.shiep.fxbankcard.service;
 
 import com.shiep.fxbankcard.entity.FxTransactionRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @author: 倪明辉
@@ -24,18 +25,20 @@ public interface IFxTransactionRecordService {
     /**
      * description: 通过交易类型查找所有的交易记录
      *
-     * @param type 交易类型
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param type     交易类型
+     * @param pageable 分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByType(Integer type);
+    Page<FxTransactionRecord> findByType(Integer type, Pageable pageable);
 
     /**
      * description: 通过货币码查找交易记录
      *
      * @param currencyCode 货币码
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable     分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByCurrency(String currencyCode);
+    Page<FxTransactionRecord> findByCurrency(String currencyCode, Pageable pageable);
 
     /**
      * description: 以0，1表示time是否有值。00返回null；10查询交易时间在beginTime之前的交易记录；
@@ -43,9 +46,10 @@ public interface IFxTransactionRecordService {
      *
      * @param beginTime 开始时间
      * @param endTime   结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable  分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> findByTransactionTime(Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> findByTransactionTime(Timestamp beginTime, Timestamp endTime, Pageable pageable);
 
     /**
      * description: 银行卡号码不能为空，其他四个参数可为为空。多功能查询该银行卡的交易记录。
@@ -55,7 +59,8 @@ public interface IFxTransactionRecordService {
      * @param type         交易类型
      * @param beginTime    开始时间
      * @param endTime      结束时间
-     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     * @param pageable     分页
+     * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
-    List<FxTransactionRecord> query(String bankcardID, String currencyCode, Integer type, Timestamp beginTime, Timestamp endTime);
+    Page<FxTransactionRecord> query(String bankcardID, String currencyCode, Integer type, Timestamp beginTime, Timestamp endTime, Pageable pageable);
 }
