@@ -12,21 +12,26 @@
                 <p class="m-auto text-center text-light font-weight-bold">查询交易记录</p>
             </div>
             <div class="card-body">
-                <form th:action="@{/deposit/transaction/record/query}" th:method="get" class="form-inline">
+                <form th:action="@{/deposit/transaction/record/query}" th:object="${queryVo}" th:method="get" id="form"
+                      class="form-inline">
+                    <input type="hidden" id="page" name="page" th:field="*{page}" value="1">
                     <fieldset class="form-group">
                         <label class="mr-sm-4 mb-0" for="beginTime">开始时间</label>
-                        <input type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0" id="beginTime"
+                        <input th:field="*{beginTime}" type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0"
+                               id="beginTime"
                                name="beginTime"/>
                     </fieldset>
                     <fieldset class="form-group">
                         <label class="mr-sm-4 mb-0" for="endTime">结束时间</label>
-                        <input type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0" id="endTime"
+                        <input th:field="*{endTime}" type="datetime-local" class="form-control mr-sm-4 mb-2 mb-sm-0"
+                               id="endTime"
                                name="endTime"/>
                     </fieldset>
                     <fieldset class="form-group">
                         <label class="mr-sm-4 mb-0" for="currency">币种</label>
-                        <select class="form-control mr-sm-4 mb-2 mb-sm-0" id="currency" name="currency">
-                            <option class="active" value="">
+                        <select th:field="*{currency}" class="form-control mr-sm-4 mb-2 mb-sm-0" id="currency"
+                                name="currency">
+                            <option value="">
                                 <span>全部</span>
                             </option>
                             <option th:each="currency : ${currencyList}" th:value="${currency.code}">
@@ -36,8 +41,8 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label class="mr-sm-4 mb-0" for="type">交易类型</label>
-                        <select class="form-control mr-sm-4 mb-2 mb-sm-0" id="type" name="type">
-                            <option class="active" value="">
+                        <select th:field="*{type}" class="form-control mr-sm-4 mb-2 mb-sm-0" id="type" name="type">
+                            <option value="">
                                 <span>全部</span>
                             </option>
                             <option th:each="type : ${typeList}" th:value="${type.code}">
@@ -52,8 +57,14 @@
 
                 <hr class="featurette-divider bg-info">
 
-                <div class="table-responsive">
-                    <table th:if="${show} eq true" class="table table-hover">
+                <div th:if="${show} eq false" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>暂无符合条件的交易记录。</p>
+                </div>
+                <div th:if="${show} eq true" class="table-responsive">
+                    <table class="table table-hover">
                         <thead class="thead-default">
                         <tr>
                             <th>银行卡号码</th>
@@ -66,7 +77,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="record : ${recordList}">
+                        <tr th:each="record : ${recordPage.pageContent}">
                             <td th:text="${record.bankcardId}"></td>
                             <td th:text="${record.currencyCode}"></td>
                             <td th:text="${record.money}"></td>
@@ -82,56 +93,66 @@
                             <td th:text="${record.transactionPlace}"></td>
                         </tr>
                         </tbody>
-                        <tfoot class="m-auto">
-                        <tr>
-                            <td colspan="7">
-                                <div class="mt-3" style="margin-left: 35%;">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a href="javascript:void(0);" class="page-link">1</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">4</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">5</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">6</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link">7</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="javascript:void(0);" class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </td>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
-
             </div>
-
+            <div th:if="${show} eq true" class="card-footer m-auto">
+                <div class="mt-3">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a th:onclick="previous()" class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li th:id="'li_'+${i}" class="page-item"
+                                th:each="i : ${#numbers.sequence(1,recordPage.pageSize)}">
+                                <a th:id="${i}" onclick="turnTo(this)" class="page-link">
+                                    <span th:text="${i}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a onclick="next()" class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
     </div>
 </main>
+<script th:if="${recordPage} ne null" th:inline="javascript">
+    var pageIndex = [[${recordPage.pageIndex}]];
+    var pageSize = [[${recordPage.pageSize}]];
+    $('#li_' + pageIndex).addClass('active');
+
+    function previous() {
+        var page = pageIndex - 1;
+        if (page === 0) {
+            alert('当前已经是第一页了。')
+        } else {
+            $('#page').val('' + page);
+            $('#form').submit();
+        }
+    }
+
+    function next() {
+        var page = pageIndex + 1;
+        if (page > pageSize) {
+            alert('当前已经是最后一页了。')
+        } else {
+            $('#page').val('' + page);
+            $('#form').submit();
+        }
+    }
+
+    function turnTo(obj) {
+        var page = obj.id;
+        $('#page').val('' + page);
+        $('#form').submit();
+    }
+</script>
 </body>
 </html>

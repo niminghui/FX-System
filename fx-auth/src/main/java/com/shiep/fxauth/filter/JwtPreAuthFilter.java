@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,7 +48,12 @@ public class JwtPreAuthFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         //String tokenHeader = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
         // 从cookie中取Token
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        Cookie cookie = CookieUtils.getCookie(request, "token");
+        if (cookie == null) {
+            chain.doFilter(request, response);
+            return;
+        }
+        String tokenHeader = URLDecoder.decode(cookie.getValue());
         String uri = request.getRequestURI();
         for (String str : IGNORED_URL) {
             if (uri.startsWith(str)) {
