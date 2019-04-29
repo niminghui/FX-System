@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author: 倪明辉
@@ -35,6 +37,25 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
     Page<FxTransactionRecord> findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode, Pageable pageable);
+
+    /**
+     * description: 通过银行卡号和货币码查找该银行卡有关该货币的所有交易记录
+     *
+     * @param bankcardID 银行卡号
+     * @param currencyCode 货币码
+     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     */
+    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeOrderByTransactionTimeDesc(String bankcardID, String currencyCode);
+
+    /**
+     * description: 通过银行卡号和货币码查找该银行卡在time之后的所有交易记录
+     *
+     * @param bankcardID   银行卡号码
+     * @param currencyCode 货币码
+     * @param time         时间
+     * @return java.util.List<com.shiep.fxbankcard.entity.FxTransactionRecord>
+     */
+    List<FxTransactionRecord> findByBankcardIdAndCurrencyCodeAndTransactionTimeAfterOrderByTransactionTimeDesc(String bankcardID, String currencyCode, Timestamp time);
 
     /**
      * description: 通过银行卡号和交易类型查找该银行卡有关该交易类型的所有交易记录
@@ -238,4 +259,14 @@ public interface FxTransactionRecordRepository extends JpaRepository<FxTransacti
      * @return org.springframework.data.domain.Page<com.shiep.fxbankcard.entity.FxTransactionRecord>
      */
     Page<FxTransactionRecord> findByBankcardIdAndTypeAndCurrencyCodeAndTransactionTimeBetween(String bankcardID, Integer type, String currencyCode, Timestamp beginTime, Timestamp endTime, Pageable pageable);
+
+    /**
+     * description: 得到最近一次的利息存入时间
+     *
+     * @param bankcardID   银行卡号码
+     * @param currencyCode 币种
+     * @return java.sql.Timestamp
+     */
+    @Query(value = "select TRANSACTION_TIME from fx_transaction_record where BANKCARD_ID = ?1 and CURRENCY_EN_NAME = ?2 and TRANSACTION_TYPE = 4 order by abs(now() - TRANSACTION_TIME) asc limit 0,1", nativeQuery = true)
+    Timestamp getTheMostRecentDepositTime(String bankcardID, String currencyCode);
 }

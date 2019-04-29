@@ -2,8 +2,12 @@ package com.shiep.fxbankcard.repository;
 
 import com.shiep.fxbankcard.entity.FxAsset;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -30,4 +34,18 @@ public interface FxAssetRepository extends JpaRepository<FxAsset, String> {
      * @return com.shiep.fxbankcard.entity.FxAsset
      */
     FxAsset findByBankcardIdAndCurrencyCode(String bankcardID, String currencyCode);
+
+    /**
+     * description: 修改余额
+     *
+     * @param balance      余额
+     * @param version      版本号
+     * @param currencyCode 币种
+     * @param bankcardId   银行卡号码
+     * @return int
+     */
+    @Modifying
+    @Transactional(rollbackFor = Exception.class)
+    @Query(value = "update FX_ASSET set ASSET_BALANCE = ?1 , VERSION = (?2 + 1) where CURRENCY_EN_NAME = ?3 and BANKCARD_ID = ?4", nativeQuery = true)
+    int updateBalance(BigDecimal balance, Integer version, String currencyCode, String bankcardId);
 }

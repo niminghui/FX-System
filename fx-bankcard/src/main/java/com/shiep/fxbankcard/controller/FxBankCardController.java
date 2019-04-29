@@ -85,6 +85,7 @@ public class FxBankCardController {
             asset.setBankcardId(bankcardID);
             asset.setCurrencyCode(currency.getEnglishName());
             asset.setBalance(money);
+            asset.setVersion(0);
             result.add(assetService.create(asset));
             FxTransactionRecord transactionRecord = new FxTransactionRecord();
             transactionRecord.setBankcardId(asset.getBankcardId());

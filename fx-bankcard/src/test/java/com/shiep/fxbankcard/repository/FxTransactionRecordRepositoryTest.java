@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Timestamp;
+
 import static org.junit.Assert.*;
 
 /**
@@ -37,5 +39,20 @@ public class FxTransactionRecordRepositoryTest {
             System.out.println(user.getCurrencyCode());
         }
 
+    }
+
+    @Test
+    public void getTheMostRecentDepositTime() {
+        System.out.println(transactionRecordRepository.getTheMostRecentDepositTime("6216602900057522721", "CNY"));
+    }
+
+    @Test
+    public void findByBankcardIdAndCurrencyCodeOrderByTransactionTime() {
+        System.out.println(transactionRecordRepository.findByBankcardIdAndCurrencyCodeOrderByTransactionTimeDesc("6216602900057522721", "CNY"));
+    }
+
+    @Test
+    public void findByBankcardIdAndCurrencyCodeAndTransactionTimeAfterOrderByTransactionTimeDesc() {
+        System.out.println(transactionRecordRepository.findByBankcardIdAndCurrencyCodeAndTransactionTimeAfterOrderByTransactionTimeDesc("6216602900057522721", "CNY", new Timestamp(System.currentTimeMillis())));
     }
 }

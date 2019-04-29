@@ -32,4 +32,7 @@ public class FxAsset implements Serializable {
 
     @Column(name = "BANKCARD_ID", nullable = false)
     private String bankcardId;
+
+    @Column(name = "VERSION", nullable = false)
+    private Integer version;
 }
