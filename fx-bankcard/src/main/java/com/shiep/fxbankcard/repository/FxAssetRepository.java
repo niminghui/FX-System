@@ -46,6 +46,6 @@ public interface FxAssetRepository extends JpaRepository<FxAsset, String> {
      */
     @Modifying
     @Transactional(rollbackFor = Exception.class)
-    @Query(value = "update FX_ASSET set ASSET_BALANCE = ?1 , VERSION = (?2 + 1) where CURRENCY_EN_NAME = ?3 and BANKCARD_ID = ?4", nativeQuery = true)
+    @Query(value = "update FX_ASSET set ASSET_BALANCE = ?1 , VERSION = (?2 + 1) where VERSION = ?2 and CURRENCY_EN_NAME = ?3 and BANKCARD_ID = ?4", nativeQuery = true)
     int updateBalance(BigDecimal balance, Integer version, String currencyCode, String bankcardId);
 }

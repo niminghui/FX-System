@@ -28,17 +28,17 @@ public enum CurrencyPairsEnum {
     USD_SGD("USDSGD", "美元新加坡元"),
     USD_TWD("USDTWD", "美元台币"),
 
-    CNY_USD("CNYUSD", "人民币美元"),
-    CNY_EUR("CNYEUR", "人民币欧元"),
-    CNY_HKD("CNYHKD", "人民币港币"),
-    CNY_JPY("CNYJPY", "人民币日元"),
-    CNY_GBP("CNYGBP", "人民币英镑"),
-    CNY_AUD("CNYAUD", "人民币澳大利亚元"),
-    CNY_CAD("CNYCAD", "人民币加拿大元"),
-    CNY_SGD("CNYSGD", "人民币新加坡元"),
-    CNY_NZD("CNYNZD", "人民币新西兰元"),
-    CNY_SEK("CNYSEK", "人民币瑞典克朗"),
-    CNY_MYR("CNYMYR", "人民币林吉特");
+    CNY_USD("USDCNY", "美元人民币"),
+    CNY_EUR("EURCNY", "欧元人民币"),
+    CNY_HKD("HKDCNY", "港币人民币"),
+    CNY_JPY("JPYCNY", "日元人民币"),
+    CNY_GBP("GBPCNY", "英镑人民币"),
+    CNY_AUD("AUDCNY", "澳大利亚元人民币"),
+    CNY_CAD("CADCNY", "加拿大元人民币"),
+    CNY_SGD("SGDCNY", "新加坡元人民币"),
+    CNY_NZD("NZDCNY", "新西兰元人民币"),
+    CNY_SEK("SEKCNY", "瑞典克朗人民币"),
+    CNY_MYR("MYRCNY", "林吉特人民币");
 
     /**
      * description: 标准货币对符号

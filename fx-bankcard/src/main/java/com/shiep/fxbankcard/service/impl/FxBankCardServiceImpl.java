@@ -27,6 +27,11 @@ public class FxBankCardServiceImpl implements IFxBankCardService {
     BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    public List<FxBankCard> findAll() {
+        return bankCardRepository.findAll();
+    }
+
+    @Override
     public FxBankCard findByUserID(String userID) {
         return bankCardRepository.findByUserID(userID);
     }

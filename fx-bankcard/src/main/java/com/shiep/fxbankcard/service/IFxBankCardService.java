@@ -14,6 +14,14 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public interface IFxBankCardService {
     /**
+     * description: 得到所有银行卡列表
+     *
+     * @param
+     * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
+     */
+    List<FxBankCard> findAll();
+
+    /**
      * description: 通过用户ID查找该用户的银行卡
      *
      * @param userID 用户ID

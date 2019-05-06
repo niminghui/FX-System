@@ -50,11 +50,11 @@ public interface ITransactionService {
      * @param basicCurrency     基本货币
      * @param secondaryCurrency 二级货币
      * @param money             买卖金额
-     * @param rate              汇率
+     * @param rate              汇率(交易单位：1)
      * @param buy               true为买入，false为卖出
-     * @return com.shiep.fxbankcard.entity.FxTransactionRecord
+     * @return java.lang.Boolean
      */
-    FxTransactionRecord foreignExchangeTrading(String bankcardID, String basicCurrency, String secondaryCurrency, BigDecimal money, BigDecimal rate, Boolean buy);
+    Boolean foreignExchangeTrading(String bankcardID, String basicCurrency, String secondaryCurrency, BigDecimal money, BigDecimal rate, Boolean buy);
 
     /**
      * description: 人民币结汇（外汇换人民币）
@@ -62,10 +62,10 @@ public interface ITransactionService {
      * @param bankcardID   银行卡号码
      * @param currencyCode 外汇币种
      * @param money        金额
-     * @param rate         汇率
-     * @return com.shiep.fxbankcard.entity.FxTransactionRecord
+     * @param rate         汇率（交易单位：100）
+     * @return java.lang.Boolean
      */
-    FxTransactionRecord foreignExchangeSettlement(String bankcardID, String currencyCode, BigDecimal money, BigDecimal rate);
+    Boolean foreignExchangeSettlement(String bankcardID, String currencyCode, BigDecimal money, BigDecimal rate);
 
     /**
      * description: 人民币购汇（人民币购买外汇）
@@ -73,8 +73,8 @@ public interface ITransactionService {
      * @param bankcardID   银行卡号码
      * @param currencyCode 外汇币种
      * @param money        金额
-     * @param rate         汇率
-     * @return com.shiep.fxbankcard.entity.FxTransactionRecord
+     * @param rate         汇率（交易单位：100）
+     * @return java.lang.Boolean
      */
-    FxTransactionRecord foreignExchangePurchase(String bankcardID, String currencyCode, BigDecimal money, BigDecimal rate);
+    Boolean foreignExchangePurchase(String bankcardID, String currencyCode, BigDecimal money, BigDecimal rate);
 }

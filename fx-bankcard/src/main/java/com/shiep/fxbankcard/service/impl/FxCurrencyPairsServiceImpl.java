@@ -128,72 +128,67 @@ public class FxCurrencyPairsServiceImpl implements IFxCurrencyPairsService {
         usd_twd.setBasicCurrency("USD");
         usd_twd.setSecondaryCurrency("TWD");
         data.add(usd_twd);
-        // 人民币美元
-        FxCurrencyPairs cny_usd = new FxCurrencyPairs();
-        cny_usd.setId(UuidTools.getUUID());
-        cny_usd.setBasicCurrency("CNY");
-        cny_usd.setSecondaryCurrency("USD");
-        data.add(cny_usd);
-        // 人民币欧元
-        FxCurrencyPairs cny_eur = new FxCurrencyPairs();
-        cny_eur.setId(UuidTools.getUUID());
-        cny_eur.setBasicCurrency("CNY");
-        cny_eur.setSecondaryCurrency("EUR");
-        data.add(cny_eur);
-        // 人民币港币
-        FxCurrencyPairs cny_hkd = new FxCurrencyPairs();
-        cny_hkd.setId(UuidTools.getUUID());
-        cny_hkd.setBasicCurrency("CNY");
-        cny_hkd.setSecondaryCurrency("HKD");
-        data.add(cny_hkd);
-        // 人民币日元
-        FxCurrencyPairs cny_jpy = new FxCurrencyPairs();
-        cny_jpy.setId(UuidTools.getUUID());
-        cny_jpy.setBasicCurrency("CNY");
-        cny_jpy.setSecondaryCurrency("JPY");
-        data.add(cny_jpy);
-        // 人民币英镑
-        FxCurrencyPairs cny_gbp = new FxCurrencyPairs();
-        cny_gbp.setId(UuidTools.getUUID());
-        cny_gbp.setBasicCurrency("CNY");
-        cny_gbp.setSecondaryCurrency("GBP");
-        data.add(cny_gbp);
-        // 人民币澳大利亚元
-        FxCurrencyPairs cny_aud = new FxCurrencyPairs();
-        cny_aud.setId(UuidTools.getUUID());
-        cny_aud.setBasicCurrency("CNY");
-        cny_aud.setSecondaryCurrency("AUD");
-        data.add(cny_aud);
-        // 人民币加拿大元
-        FxCurrencyPairs cny_cad = new FxCurrencyPairs();
-        cny_cad.setId(UuidTools.getUUID());
-        cny_cad.setBasicCurrency("CNY");
-        cny_cad.setSecondaryCurrency("CAD");
-        data.add(cny_cad);
-        // 人民币新加坡元
-        FxCurrencyPairs cny_sgd = new FxCurrencyPairs();
-        cny_sgd.setId(UuidTools.getUUID());
-        cny_sgd.setBasicCurrency("CNY");
-        cny_sgd.setSecondaryCurrency("SGD");
-        data.add(cny_sgd);
-        // 人民币新西兰元
-        FxCurrencyPairs cny_nzd = new FxCurrencyPairs();
-        cny_nzd.setId(UuidTools.getUUID());
-        cny_nzd.setBasicCurrency("CNY");
-        cny_nzd.setSecondaryCurrency("NZD");
-        data.add(cny_nzd);
-        // 人民币瑞典克朗
-        FxCurrencyPairs cny_sek = new FxCurrencyPairs();
-        cny_sek.setId(UuidTools.getUUID());
-        cny_sek.setBasicCurrency("CNY");
-        cny_sek.setSecondaryCurrency("SEK");
-        data.add(cny_sek);
-        // 人民币林吉特
-        FxCurrencyPairs cny_myr = new FxCurrencyPairs();
-        cny_myr.setId(UuidTools.getUUID());
-        cny_myr.setBasicCurrency("CNY");
-        cny_myr.setSecondaryCurrency("MYR");
-        data.add(cny_myr);
+
+        // 欧元人民币
+        FxCurrencyPairs eur_cny = new FxCurrencyPairs();
+        eur_cny.setId(UuidTools.getUUID());
+        eur_cny.setBasicCurrency("EUR");
+        eur_cny.setSecondaryCurrency("CNY");
+        data.add(eur_cny);
+        // 港币人民币
+        FxCurrencyPairs hkd_cny = new FxCurrencyPairs();
+        hkd_cny.setId(UuidTools.getUUID());
+        hkd_cny.setBasicCurrency("HKD");
+        hkd_cny.setSecondaryCurrency("CNY");
+        data.add(hkd_cny);
+        // 日元人民币
+        FxCurrencyPairs jpy_cny = new FxCurrencyPairs();
+        jpy_cny.setId(UuidTools.getUUID());
+        jpy_cny.setBasicCurrency("JPY");
+        jpy_cny.setSecondaryCurrency("CNY");
+        data.add(jpy_cny);
+        // 英镑人民币
+        FxCurrencyPairs gbp_cny = new FxCurrencyPairs();
+        gbp_cny.setId(UuidTools.getUUID());
+        gbp_cny.setBasicCurrency("GBP");
+        gbp_cny.setSecondaryCurrency("CNY");
+        data.add(gbp_cny);
+        // 澳大利亚元人民币
+        FxCurrencyPairs aud_cny = new FxCurrencyPairs();
+        aud_cny.setId(UuidTools.getUUID());
+        aud_cny.setBasicCurrency("AUD");
+        aud_cny.setSecondaryCurrency("CNY");
+        data.add(aud_cny);
+        // 加拿大元人民币
+        FxCurrencyPairs cad_cny = new FxCurrencyPairs();
+        cad_cny.setId(UuidTools.getUUID());
+        cad_cny.setBasicCurrency("CAD");
+        cad_cny.setSecondaryCurrency("CNY");
+        data.add(cad_cny);
+        // 新加坡元人民币
+        FxCurrencyPairs sgd_cny = new FxCurrencyPairs();
+        sgd_cny.setId(UuidTools.getUUID());
+        sgd_cny.setBasicCurrency("SGD");
+        sgd_cny.setSecondaryCurrency("CNY");
+        data.add(sgd_cny);
+        // 新西兰元人民币
+        FxCurrencyPairs nzd_cny = new FxCurrencyPairs();
+        nzd_cny.setId(UuidTools.getUUID());
+        nzd_cny.setBasicCurrency("NZD");
+        nzd_cny.setSecondaryCurrency("CNY");
+        data.add(nzd_cny);
+        // 瑞典克朗人民币
+        FxCurrencyPairs sek_cny = new FxCurrencyPairs();
+        sek_cny.setId(UuidTools.getUUID());
+        sek_cny.setBasicCurrency("SEK");
+        sek_cny.setSecondaryCurrency("CNY");
+        data.add(sek_cny);
+        // 林吉特人民币
+        FxCurrencyPairs myr_cny = new FxCurrencyPairs();
+        myr_cny.setId(UuidTools.getUUID());
+        myr_cny.setBasicCurrency("MYR");
+        myr_cny.setSecondaryCurrency("CNY");
+        data.add(myr_cny);
         return data;
     }
 }

@@ -38,6 +38,11 @@ public class FxBankCardController {
     @Autowired
     private IFxTransactionRecordService transactionRecordService;
 
+    @GetMapping
+    public List<FxBankCard> findAll() {
+        return bankCardService.findAll();
+    }
+
     @GetMapping("/userID/{userID}")
     public FxBankCard findByUserID(@PathVariable("userID") String userID) {
         return bankCardService.findByUserID(userID);
