@@ -111,4 +111,15 @@ public class FeignClientConfig {
     public ITransactionRecordService transactionRecordService() {
         return create(ITransactionRecordService.class, "fx-bankcard");
     }
+
+    /**
+     * description: 配置交易服务端点bean
+     *
+     * @param
+     * @return com.shiep.fxauth.endpoint.ITransactionService
+     */
+    @Bean
+    public ITransactionService transactionService() {
+        return create(ITransactionService.class, "fx-bankcard");
+    }
 }

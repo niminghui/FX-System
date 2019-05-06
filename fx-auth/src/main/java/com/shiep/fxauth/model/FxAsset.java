@@ -21,4 +21,6 @@ public class FxAsset implements Serializable {
     private BigDecimal balance;
 
     private String bankcardId;
+
+    private Integer version;
 }

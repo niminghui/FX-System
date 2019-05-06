@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('外汇存款')">
+</head>
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<main role="main" class="container">
+    <div class="col-6 m-auto">
+        <div class="card">
+            <div class="card-header bg-info">
+                <p class="m-auto text-center text-light font-weight-bold">外汇存款</p>
+            </div>
+            <div class="card-body m-auto">
+                <form th:action="@{/deposit/record}" th:method="post" onsubmit="return check()">
+                    <div class="form-group">
+                        <label class="mr-sm-4 mb-0" for="bankcardID">请输入您的银行卡号码</label>
+                        <input type="text" class="form-control" id="bankcardID" name="bankcardID" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="mr-sm-4 mb-0" for="currency">请选择操作币种</label>
+                        <select class="form-control" id="currency" name="currency">
+                            <option th:each="currency : ${currencyList}" th:value="${currency.code}">
+                                <span th:text="${currency.name}"></span>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="mr-sm-4 mb-0" for="money">请输入存款金额</label>
+                        <input type="number" class="form-control mr-sm-4 mb-2 mb-sm-0" id="money" name="money"
+                               required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="mr-sm-4 mb-0" for="password">请输入银行卡支付密码</label>
+                        <input type="password" class="form-control" id="password" name="password" required/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript">
+    function check() {
+        var result = true;
+        var bankcardID = $('#bankcardID').val();
+        var password = $('#password').val();
+        $.ajax({
+            type: 'post',
+            url: '/deposit/check/' + bankcardID + '/' + password,
+            async: false,
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'text',
+            success: function (data) {
+                if (data !== 'true') {
+                    result = false;
+                    alert(data);
+                }
+            },
+            error: function (err) {
+                console.log('ajax错误码:' + err.status);
+            }
+        });
+        return result;
+    }
+</script>
+</body>
+</html>

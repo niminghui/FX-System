@@ -18,6 +18,14 @@ import java.util.Map;
  */
 @FeignClient(name = "fx-bankcard", path = "/bankcard")
 public interface IBankCardService {
+    /**
+     * description: 得到所有银行卡列表
+     *
+     * @param
+     * @return java.util.List<com.shiep.fxbankcard.entity.FxBankCard>
+     */
+    @GetMapping
+    List<FxBankCard> findAll();
 
     /**
      * description: 通过用户ID查找该用户的银行卡

@@ -10,13 +10,14 @@ import lombok.Getter;
 @Getter
 public enum TransactionTypeEnum {
     /**
-     * description: 5种交易类型
+     * description: 6种交易类型
      */
     TRANSFER_EXPENDITURE(0, "转账支出"),
     EXCHANGE_EXPENDITURE(1, "外汇兑换支出"),
     TRANSFER_INTO(2, "转账存入"),
     EXCHANGE_INTO(3, "外汇兑换存入"),
-    DEPOSIT_INTO(4, "存款利息存入");
+    DEPOSIT_INTEREST_INTO(4, "存款利息存入"),
+    DEPOSIT_INFO(5, "存款存入");
 
     /**
      * description: 交易类型码
