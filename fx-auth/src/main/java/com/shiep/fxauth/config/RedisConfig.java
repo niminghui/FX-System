@@ -47,7 +47,6 @@ public class RedisConfig {
         RedisStandaloneConfiguration standaloneConfiguration=connectionFactory.getStandaloneConfiguration();
         connectionFactory.setHostName("127.0.0.1");
         connectionFactory.setPort(6379);
-        //connectionFactory.setPassword("");
         return connectionFactory;
     }
 
@@ -68,7 +67,6 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(stringRedisSerializer);
         //设置redisTemplate的连接工厂
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        System.out.println(redisTemplate);
         return redisTemplate;
     }
 }

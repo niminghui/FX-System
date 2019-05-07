@@ -2,13 +2,21 @@ package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.common.HeadlinesTypeEnum;
 import com.shiep.fxauth.endpoint.IApiService;
+import com.shiep.fxauth.endpoint.IBankCardService;
+import com.shiep.fxauth.endpoint.ITransactionService;
+import com.shiep.fxauth.model.FxBankCard;
+import com.shiep.fxauth.utils.CookieUtils;
+import com.shiep.fxauth.utils.JwtTokenUtils;
+import com.shiep.fxauth.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.net.URLDecoder;
 
 /**
  * @author: 倪明辉
@@ -20,6 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class ForeignExchangeController {
     @Autowired
     private IApiService apiService;
+    @SuppressWarnings("all")
+    @Autowired
+    private IBankCardService bankCardService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private ITransactionService transactionService;
 
     @GetMapping("/headlines")
     public ModelAndView showHeadlines() {
@@ -39,5 +54,77 @@ public class ForeignExchangeController {
         mv.addObject("headlines", apiService.getHeadlinesPageable(type, 3));
         mv.setViewName("headlines");
         return mv;
+    }
+
+    @GetMapping("/transaction")
+    public ModelAndView toFxTransactionPage(HttpServletRequest request) {
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("foreignExchange");
+        mv.addObject("fxRate", apiService.getFxRate());
+        mv.addObject("bankcardID", bankcardID);
+        return mv;
+    }
+
+    @PostMapping("/transaction/{bankcardID}/{currencyPairs}/{money}/{type}/{password}/{rate}")
+    @ResponseBody
+    public String fxTransactionSettlement(@PathVariable String bankcardID,
+                                          @PathVariable String currencyPairs,
+                                          @PathVariable String money,
+                                          @PathVariable String type,
+                                          @PathVariable String password,
+                                          @PathVariable String rate) {
+        FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
+        if (!passwordEncoder.matches(password, bankCard.getPassword())) {
+            return "密码错误";
+        }
+        String basicCurrency = currencyPairs.substring(0, 3);
+        String secondaryCurrency = currencyPairs.substring(3);
+        Boolean result = transactionService.foreignExchangeTrading(bankcardID, basicCurrency, secondaryCurrency,
+                new BigDecimal(money), new BigDecimal(rate), Boolean.parseBoolean(type));
+        if (result) {
+            return "交易成功";
+        }
+        return "交易失败";
+    }
+
+    @GetMapping("/cny")
+    public ModelAndView toCNYPage(HttpServletRequest request) {
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("rmbRate", apiService.getRmbRate());
+        mv.addObject("bankcardID", bankcardID);
+        mv.setViewName("cnyTransaction");
+        return mv;
+    }
+
+    @PostMapping("/cny/transaction/{bankcardID}/{currency}/{money}/{type}/{password}/{rate}")
+    @ResponseBody
+    public String cnyTransactionSettlement(@PathVariable String bankcardID,
+                                           @PathVariable String currency,
+                                           @PathVariable String money,
+                                           @PathVariable String type,
+                                           @PathVariable String password,
+                                           @PathVariable String rate) {
+        FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
+        if (!passwordEncoder.matches(password, bankCard.getPassword())) {
+            return "密码错误";
+        }
+        Boolean buy = Boolean.parseBoolean(type);
+        Boolean result;
+        // 结汇（外汇转换成本币，人民币）
+        if (buy) {
+            result = transactionService.foreignExchangeSettlement(bankcardID, currency, new BigDecimal(money), new BigDecimal(rate));
+        } else {
+            result = transactionService.foreignExchangePurchase(bankcardID, currency, new BigDecimal(money), new BigDecimal(rate));
+        }
+        if (result) {
+            return "交易成功";
+        }
+        return "交易失败";
     }
 }

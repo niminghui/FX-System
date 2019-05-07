@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('外汇兑换')">
+</head>
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<div class="m-auto">
+    <div class="card">
+        <div class="card-header bg-info">
+            <p class="m-auto text-center text-light font-weight-bold">外汇兑换</p>
+        </div>
+        <div class="card-body m-auto">
+            <div th:if="${fxRate['code'] ne 200}" class="alert alert-danger" role="alert">
+                <p>错误码：<span th:text="${fxRate.get('code')}"></span></p>
+                <p>错误信息：<span th:text="${fxRate.get('message')}"></span></p>
+            </div>
+            <div class="table-responsive" th:if="${fxRate['code'] eq 200}">
+                <table class="table table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>货币对</th>
+                        <th>标准符号</th>
+                        <th>发布日期</th>
+                        <th>发布时间</th>
+                        <th>最新价格</th>
+                        <th>涨跌百分比</th>
+                        <th>涨跌金额</th>
+                        <th>开盘价</th>
+                        <th>最高价</th>
+                        <th>最低价</th>
+                        <th>震幅百分比</th>
+                        <th>买入价</th>
+                        <th>卖出价</th>
+                        <th>昨收价</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="fxdata : ${fxRate.get('data')}">
+                        <td th:text="${fxdata.value.currencyPairsName}"></td>
+                        <td th:text="${fxdata.value.currencyPairsCode}"></td>
+                        <td th:text="${fxdata.value.date}"></td>
+                        <td th:text="${fxdata.value.time}"></td>
+                        <td th:text="${fxdata.value.closePri}"></td>
+                        <td th:text="${fxdata.value.diffPer}"></td>
+                        <td th:text="${fxdata.value.diffAmo}"></td>
+                        <td th:text="${fxdata.value.openPri}"></td>
+                        <td th:text="${fxdata.value.highPic}"></td>
+                        <td th:text="${fxdata.value.lowPic}"></td>
+                        <td th:text="${fxdata.value.range}"></td>
+                        <td th:text="${fxdata.value.buyPic}"></td>
+                        <td th:text="${fxdata.value.sellPic}"></td>
+                        <td th:text="${fxdata.value.yesPic}"></td>
+                        <td>
+                            <button onclick="show(this)" th:id="${fxdata.value.currencyPairsCode}" type="button"
+                                    class="btn btn-success btn-sm" data-toggle="modal" data-target="#transaction">
+                                兑换
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 外汇兑换弹出框 -->
+<div class="modal fade" id="transaction" tabindex="-1" role="dialog" aria-labelledby="transactionLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="transactionLabel">外汇兑换</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body m-auto">
+                <div class="form-group row">
+                    <label for="bankcardID" class="col-xs-3 col-form-label mr-2">支付卡号：</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" th:value="${bankcardID}" id="bankcardID"
+                               name="bankcardID" readonly/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="currencyPairs" class="col-xs-3 col-form-label mr-2">货币对：</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="currencyPairs" name="currencyPairs" readonly/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="money" class="col-xs-3 col-form-label mr-2">兑换金额：</label>
+                    <div class="col-xs-9">
+                        <input type="number" class="form-control" id="money" name="money" required/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="type"
+                           class="col-xs-3 col-form-label mr-2">操作类型：</label>
+                    <div class="col-xs-9">
+                        <select onchange="showRate()" class="form-control" id="type" name="type">
+                            <option value="true">买入</option>
+                            <option value="false">卖出</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="rate" class="col-xs-3 col-form-label mr-2">当前价格：</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="rate" name="rate" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-xs-3 col-form-label mr-2">支付密码：</label>
+                    <div class="col-xs-9">
+                        <input type="password" class="form-control" id="password" name="password" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="settlement()">提交
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    var fxdata = [[${fxRate.get('data')}]];
+    var currencyPairs;
+    var buyPic;
+    var sellPic;
+
+    function show(obj) {
+        currencyPairs = $(obj).attr('id');
+        buyPic = fxdata[currencyPairs].buyPic;
+        sellPic = fxdata[currencyPairs].sellPic;
+        $('#currencyPairs').val(currencyPairs);
+        $('#rate').val(buyPic);
+    }
+
+    function showRate() {
+        //获取被选中的option标签
+        var type = $('select option:selected').val();
+        if (type === 'true') {
+            $('#rate').val(buyPic);
+        } else {
+            $('#rate').val(sellPic);
+        }
+    }
+
+    function settlement() {
+        var bankcardID = $('#bankcardID').val();
+        var currencyPairs = $('#currencyPairs').val();
+        var money = $('#money').val();
+        var type = $('#type').val();
+        var password = $('#password').val();
+        var rate = $('#rate').val();
+        $.ajax({
+            type: 'post',
+            url: '/fx/transaction/' + bankcardID + '/' + currencyPairs + '/' + money + '/' + type + '/' + password + '/' + rate,
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'text',
+            success: function (data) {
+                alert(data);
+                $('#transaction').modal('hide');
+            },
+            error: function (err) {
+                console.log('ajax错误码:' + err.status);
+            }
+        });
+    }
+</script>
+</body>
+</html>
