@@ -9,7 +9,7 @@
     <div class="col-10 m-auto">
         <div class="card">
             <div class="card-header bg-info">
-                <p class="m-auto text-center text-light font-weight-bold">外汇兑换</p>
+                <p class="m-auto text-center text-light font-weight-bold">人民币结售汇</p>
             </div>
             <div class="card-body m-auto">
                 <div th:if="${rmbRate['code'] ne 200}" class="alert alert-danger" role="alert">
@@ -31,7 +31,7 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                         <tr th:each="data : ${rmbRate.get('data')}">
                             <td th:text="${data.value.currencyName}"></td>
                             <td th:text="${data.value.currencyCode}"></td>
@@ -124,16 +124,18 @@
         </div>
     </div>
 </main>
+<script type="text/javascript" th:src="@{~/js/sockjs.min.js}"></script>
+<script type="text/javascript" th:src="@{~/js/stomp.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-    var data = [[${rmbRate.get('data')}]];
+    var cnyData = [[${rmbRate.get('data')}]];
     var currency;
     var buyPic;
     var sellPic;
 
     function show(obj) {
         currency = $(obj).attr('id');
-        buyPic = data[currency].fbuyPri;
-        sellPic = data[currency].fsellPri;
+        buyPic = cnyData[currency].fbuyPri;
+        sellPic = cnyData[currency].fsellPri;
         $('#currency').val(currency);
         $('#rate').val(buyPic);
     }
@@ -161,13 +163,94 @@
             contentType: 'application/json;charset=UTF-8',
             dataType: 'text',
             success: function (data) {
-                alert(data);
                 $('#transaction').modal('hide');
+                alert(data);
             },
             error: function (err) {
                 console.log('ajax错误码:' + err.status);
             }
         });
+    }
+
+    // 连接服务器端点
+    var noticeSocket = function () {
+        // 创建stomp客户端
+        var s = new SockJS('/socket');
+        // 创建stomp客户端
+        var stompClient = Stomp.over(s);
+        stompClient.connect({}, function () {
+            // 订阅消息地址
+            stompClient.subscribe('/stomp/sub/cnyRate', function (data) {
+                var cnyRate = JSON.parse(data.body);
+                var dataMap = cnyRate['data'];
+                cnyData = dataMap;
+                // 清空表格内容
+                $('#tbody').empty();
+                // 将数据重新填入表格
+                for (var key in dataMap) {
+                    var row = buildRow(dataMap[key]);
+                    console.log(row);
+                    document.getElementById("tbody").appendChild(row);
+                }
+            });
+        });
+    };
+
+    noticeSocket();
+
+    function buildRow(data) {
+        var row = document.createElement('tr');
+
+        var currencyNameRow = document.createElement('td');
+        currencyNameRow.innerHTML = data['currencyName'];
+        row.appendChild(currencyNameRow);
+
+        var currencyCodeRow = document.createElement('td');
+        currencyCodeRow.innerHTML = data['currencyCode'];
+        row.appendChild(currencyCodeRow);
+
+        var dateRow = document.createElement('td');
+        dateRow.innerHTML = data['date'];
+        row.appendChild(dateRow);
+
+        var timeRow = document.createElement('td');
+        timeRow.innerHTML = data['time'];
+        row.appendChild(timeRow);
+
+        var unitRow = document.createElement('td');
+        unitRow.innerHTML = 100;
+        row.appendChild(unitRow);
+
+        var buyRow = document.createElement('td');
+        buyRow.innerHTML = data['fbuyPri'];
+        row.appendChild(buyRow);
+
+        var sellRow = document.createElement('td');
+        sellRow.innerHTML = data['fsellPri'];
+        row.appendChild(sellRow);
+
+        var conversionRow = document.createElement('td');
+        conversionRow.innerHTML = data['bankConversionPri'];
+        row.appendChild(conversionRow);
+
+        var buttonRow = document.createElement('td');
+        row.appendChild(buttonRow);
+        var opButton = document.createElement('input');
+        opButton.setAttribute('type', 'button');
+        opButton.setAttribute('class', 'btn btn-success btn-sm');
+        opButton.setAttribute('id', data['currencyCode']);
+        opButton.setAttribute('value', '兑换');
+        opButton.setAttribute('data-toggle', 'modal');
+        opButton.setAttribute('data-target', '#transaction');
+        opButton.onclick = function () {
+            currency = $(this).attr('id');
+            buyPic = cnyData[currency].fbuyPri;
+            sellPic = cnyData[currency].fsellPri;
+            $('#currency').val(currency);
+            $('#rate').val(buyPic);
+        };
+        buttonRow.appendChild(opButton);
+        return row;
     }
 </script>
 </body>

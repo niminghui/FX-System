@@ -36,7 +36,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                     <tr th:each="fxdata : ${fxRate.get('data')}">
                         <td th:text="${fxdata.value.currencyPairsName}"></td>
                         <td th:text="${fxdata.value.currencyPairsCode}"></td>
@@ -53,7 +53,8 @@
                         <td th:text="${fxdata.value.sellPic}"></td>
                         <td th:text="${fxdata.value.yesPic}"></td>
                         <td>
-                            <button onclick="show(this)" th:id="${fxdata.value.currencyPairsCode}" type="button"
+                            <button th:if="${fxdata.value.currencyPairsCode} ne 'DINIW'" onclick="show(this)"
+                                    th:id="${fxdata.value.currencyPairsCode}" type="button"
                                     class="btn btn-success btn-sm" data-toggle="modal" data-target="#transaction">
                                 兑换
                             </button>
@@ -134,6 +135,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" th:src="@{~/js/sockjs.min.js}"></script>
+<script type="text/javascript" th:src="@{~/js/stomp.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
     var fxdata = [[${fxRate.get('data')}]];
     var currencyPairs;
@@ -171,13 +174,118 @@
             contentType: 'application/json;charset=UTF-8',
             dataType: 'text',
             success: function (data) {
-                alert(data);
                 $('#transaction').modal('hide');
+                alert(data);
             },
             error: function (err) {
                 console.log('ajax错误码:' + err.status);
             }
         });
+    }
+
+    // 连接服务器端点
+    var noticeSocket = function () {
+        // 创建stomp客户端
+        var s = new SockJS('/socket');
+        // 创建stomp客户端
+        var stompClient = Stomp.over(s);
+        stompClient.connect({}, function () {
+            // 订阅消息地址
+            stompClient.subscribe('/stomp/sub/fxRate', function (data) {
+                var fxRate = JSON.parse(data.body);
+                var dataMap = fxRate['data'];
+                fxdata = dataMap;
+                // 清空表格内容
+                $('#tbody').empty();
+                // 将数据重新填入表格
+                for (var key in dataMap) {
+                    var row = buildRow(dataMap[key]);
+                    console.log(row);
+                    document.getElementById("tbody").appendChild(row);
+                }
+            });
+        });
+    };
+
+    noticeSocket();
+
+    function buildRow(data) {
+        var row = document.createElement('tr');
+
+        var currencyPairsNameRow = document.createElement('td');
+        currencyPairsNameRow.innerHTML = data['currencyPairsName'];
+        row.appendChild(currencyPairsNameRow);
+
+        var currencyPairsCodeRow = document.createElement('td');
+        currencyPairsCodeRow.innerHTML = data['currencyPairsCode'];
+        row.appendChild(currencyPairsCodeRow);
+
+        var dateRow = document.createElement('td');
+        dateRow.innerHTML = data['date'];
+        row.appendChild(dateRow);
+
+        var timeRow = document.createElement('td');
+        timeRow.innerHTML = data['time'];
+        row.appendChild(timeRow);
+
+        var closePriRow = document.createElement('td');
+        closePriRow.innerHTML = data['closePri'];
+        row.appendChild(closePriRow);
+
+        var diffPerRow = document.createElement('td');
+        diffPerRow.innerHTML = data['diffPer'];
+        row.appendChild(diffPerRow);
+
+        var diffAmoRow = document.createElement('td');
+        diffAmoRow.innerHTML = data['diffAmo'];
+        row.appendChild(diffAmoRow);
+
+        var openPriRow = document.createElement('td');
+        openPriRow.innerHTML = data['openPri'];
+        row.appendChild(openPriRow);
+
+        var highPicRow = document.createElement('td');
+        highPicRow.innerHTML = data['highPic'];
+        row.appendChild(highPicRow);
+
+        var lowPicRow = document.createElement('td');
+        lowPicRow.innerHTML = data['lowPic'];
+        row.appendChild(lowPicRow);
+
+        var rangeRow = document.createElement('td');
+        rangeRow.innerHTML = data['range'];
+        row.appendChild(rangeRow);
+
+        var buyPicRow = document.createElement('td');
+        buyPicRow.innerHTML = data['buyPic'];
+        row.appendChild(buyPicRow);
+
+        var sellPicRow = document.createElement('td');
+        sellPicRow.innerHTML = data['sellPic'];
+        row.appendChild(sellPicRow);
+
+        var yesPicRow = document.createElement('td');
+        yesPicRow.innerHTML = data['yesPic'];
+        row.appendChild(yesPicRow);
+
+        var buttonRow = document.createElement('td');
+        row.appendChild(buttonRow);
+        var opButton = document.createElement('input');
+        opButton.setAttribute('type', 'button');
+        opButton.setAttribute('class', 'btn btn-success btn-sm');
+        opButton.setAttribute('id', data['currencyPairsCode']);
+        opButton.setAttribute('value', '兑换');
+        opButton.setAttribute('data-toggle', 'modal');
+        opButton.setAttribute('data-target', '#transaction');
+        opButton.onclick = function () {
+            currencyPairs = $(this).attr('id');
+            buyPic = fxdata[currencyPairs].buyPic;
+            sellPic = fxdata[currencyPairs].sellPic;
+            $('#currencyPairs').val(currencyPairs);
+            $('#rate').val(buyPic);
+        };
+        buttonRow.appendChild(opButton);
+        return row;
     }
 </script>
 </body>

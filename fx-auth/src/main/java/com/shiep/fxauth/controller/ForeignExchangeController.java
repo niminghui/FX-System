@@ -9,6 +9,8 @@ import com.shiep.fxauth.utils.CookieUtils;
 import com.shiep.fxauth.utils.JwtTokenUtils;
 import com.shiep.fxauth.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,8 @@ public class ForeignExchangeController {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private ITransactionService transactionService;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @GetMapping("/headlines")
     public ModelAndView showHeadlines() {
@@ -126,5 +130,27 @@ public class ForeignExchangeController {
             return "交易成功";
         }
         return "交易失败";
+    }
+
+    /**
+     * description: 每隔5分钟，使用websocket发送外汇牌价到前端
+     *
+     * @param
+     * @return void
+     */
+    @Scheduled(cron = "0 */5 * * * ?")
+    public void sendFxRate() {
+        simpMessagingTemplate.convertAndSend("/stomp/sub/fxRate", apiService.getFxRate());
+    }
+
+    /**
+     * description: 每隔5分钟，使用websocket发送人民币牌价到前端
+     *
+     * @param
+     * @return void
+     */
+    @Scheduled(cron = "0 */5 * * * ?")
+    public void sendCNYRate() {
+        simpMessagingTemplate.convertAndSend("/stomp/sub/cnyRate", apiService.getRmbRate());
     }
 }

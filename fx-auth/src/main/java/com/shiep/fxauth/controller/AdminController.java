@@ -7,10 +7,8 @@ import com.shiep.fxauth.model.FxAsset;
 import com.shiep.fxauth.model.FxCurrency;
 import com.shiep.fxauth.model.FxCurrencyPairs;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +18,7 @@ import java.util.List;
  * @date: 2019/4/18 16:55
  * @description: admin控制层
  */
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -35,22 +33,31 @@ public class AdminController {
     private IBankCardService bankCardService;
 
     @GetMapping("/init/currency")
+    @ResponseBody
     public List<FxCurrency> initCurrency() {
         return currencyService.initCurrency();
     }
 
     @GetMapping("/init/currencyPairs")
+    @ResponseBody
     public List<FxCurrencyPairs> initCurrencyPairs() {
         return currencyPairsService.initCurrencyPairs();
     }
 
     @GetMapping("/init/asset/{bankcardID}")
+    @ResponseBody
     public List<FxAsset> initDefaultAsset(@PathVariable("bankcardID") String bankcardID) {
         return bankCardService.initAsset(bankcardID, new BigDecimal("10000"));
     }
 
     @GetMapping("/init/asset/{bankcardID}/{money}")
+    @ResponseBody
     public List<FxAsset> initAsset(@PathVariable("bankcardID") String bankcardID, @PathVariable("money") String money) {
         return bankCardService.initAsset(bankcardID, new BigDecimal(money));
+    }
+
+    @GetMapping("/a/druid/login")
+    public String toAccountDruidPage() {
+        return "redirect:/a/druid/login.html";
     }
 }

@@ -27,7 +27,7 @@ public class StompController {
     }
 
     /**
-     * description: 每隔分钟发送一次消息
+     * description: 每隔5分钟发送一次消息
      *
      * @param
      * @return void
