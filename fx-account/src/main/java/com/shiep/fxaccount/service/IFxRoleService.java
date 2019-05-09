@@ -15,7 +15,7 @@ public interface IFxRoleService {
     /**
      * description: 通过角色名创建FxRole
      *
-     * @param roleName
+     * @param roleName 角色名
      * @return com.shiep.fxaccount.entity.FxRole
      */
     FxRole create(String roleName);
@@ -23,8 +23,8 @@ public interface IFxRoleService {
     /**
      * description: 通过角色名和描述创建FxRole
      *
-     * @param roleName
-     * @param describe
+     * @param roleName 角色名
+     * @param describe 角色描述
      * @return com.shiep.fxaccount.entity.FxRole
      */
     FxRole create(String roleName,String describe);

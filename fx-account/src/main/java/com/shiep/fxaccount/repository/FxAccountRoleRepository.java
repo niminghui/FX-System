@@ -15,7 +15,7 @@ public interface FxAccountRoleRepository extends JpaRepository<FxAccountRole,Str
     /**
      * description: 通过账户名查找该账户具有的角色列表
      *
-     * @param accountName
+     * @param accountName 账户名
      * @return com.shiep.fxaccount.entity.FxAccountRole
      */
     List<FxAccountRole> findByAccountName(String accountName);
@@ -23,7 +23,7 @@ public interface FxAccountRoleRepository extends JpaRepository<FxAccountRole,Str
     /**
      * description: 通过角色名查找具有该角色的所有账户
      *
-     * @param roleName
+     * @param roleName 角色名
      * @return java.util.List<com.shiep.fxaccount.entity.FxAccountRole>
      */
     List<FxAccountRole> findByRoleName(String roleName);

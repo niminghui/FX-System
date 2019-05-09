@@ -12,7 +12,7 @@ public interface FxRoleRepository extends JpaRepository<FxRole,String> {
     /**
      * description: 通过角色名查找FxRole
      *
-     * @param roleName
+     * @param roleName 角色名
      * @return com.shiep.fxaccount.entity.FxRole
      */
     FxRole findByName(String roleName);
