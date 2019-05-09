@@ -2,6 +2,8 @@ package com.shiep.fxbankcard.controller;
 
 import com.shiep.fxbankcard.entity.FxTransactionRecord;
 import com.shiep.fxbankcard.service.ITransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +20,28 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping(path = "/transaction", produces = "application/json;charset=utf-8")
 public class TransactionController {
+    private Logger logger = LoggerFactory.getLogger(TransactionController.class);
+
     @Autowired
     private ITransactionService transactionService;
 
     @PostMapping("/calculate/interest")
     public FxTransactionRecord calculateCurrentInterest(@RequestParam("bankcardID") String bankcardID,
                                                         @RequestParam("currencyCode") String currencyCode) {
-        return transactionService.calculateCurrentInterest(bankcardID, currencyCode);
+        logger.info("calculate current interest");
+        FxTransactionRecord record = transactionService.calculateCurrentInterest(bankcardID, currencyCode);
+        logger.info(record.toString());
+        return record;
     }
 
     @PostMapping("/deposit")
     public FxTransactionRecord deposit(@RequestParam("bankcardID") String bankcardID,
                                        @RequestParam("currencyCode") String currencyCode,
                                        @RequestParam("money") BigDecimal money) {
-        return transactionService.deposit(bankcardID, currencyCode, money);
+        logger.info("begin deposit");
+        FxTransactionRecord record = transactionService.deposit(bankcardID, currencyCode, money);
+        logger.info(record.toString());
+        return record;
     }
 
     @PostMapping("/transfer")
@@ -39,7 +49,10 @@ public class TransactionController {
                                         @RequestParam("currencyCode") String currencyCode,
                                         @RequestParam("money") BigDecimal money,
                                         @RequestParam("otherBankcardID") String otherBankcardID) {
-        return transactionService.transfer(bankcardID, currencyCode, money, otherBankcardID);
+        logger.info("begin transfer");
+        FxTransactionRecord record = transactionService.transfer(bankcardID, currencyCode, money, otherBankcardID);
+        logger.info(record.toString());
+        return record;
     }
 
     @PostMapping("/fx/trading")
@@ -49,7 +62,9 @@ public class TransactionController {
                                           @RequestParam("money") BigDecimal money,
                                           @RequestParam("rate") BigDecimal rate,
                                           @RequestParam("buy") Boolean buy) {
-        return transactionService.foreignExchangeTrading(bankcardID, basicCurrency, secondaryCurrency, money, rate, buy);
+        Boolean result = transactionService.foreignExchangeTrading(bankcardID, basicCurrency, secondaryCurrency, money, rate, buy);
+        logger.info("foreign exchange trading : " + result);
+        return result;
     }
 
     @PostMapping("/fx/settlement")
@@ -57,7 +72,9 @@ public class TransactionController {
                                              @RequestParam("currencyCode") String currencyCode,
                                              @RequestParam("money") BigDecimal money,
                                              @RequestParam("rate") BigDecimal rate) {
-        return transactionService.foreignExchangeSettlement(bankcardID, currencyCode, money, rate);
+        Boolean result = transactionService.foreignExchangeSettlement(bankcardID, currencyCode, money, rate);
+        logger.info("foreign exchange settlement : " + result);
+        return result;
     }
 
     @PostMapping("/fx/purchase")
@@ -65,6 +82,8 @@ public class TransactionController {
                                            @RequestParam("currencyCode") String currencyCode,
                                            @RequestParam("money") BigDecimal money,
                                            @RequestParam("rate") BigDecimal rate) {
-        return transactionService.foreignExchangePurchase(bankcardID, currencyCode, money, rate);
+        Boolean result = transactionService.foreignExchangePurchase(bankcardID, currencyCode, money, rate);
+        logger.info("foreign exchange purchase : " + result);
+        return result;
     }
 }

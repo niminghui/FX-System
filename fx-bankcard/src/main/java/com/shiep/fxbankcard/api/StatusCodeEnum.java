@@ -60,7 +60,7 @@ public enum StatusCodeEnum {
     /**
      * description: 通过code返回message
      *
-     * @param code
+     * @param code 状态码
      * @return com.shiep.fxbankcard.api.StatusCodeEnum
      */
     public static StatusCodeEnum parse(int code) {
@@ -76,7 +76,7 @@ public enum StatusCodeEnum {
     /**
      * description: 通过code返回message
      *
-     * @param code
+     * @param code 状态码
      * @return java.lang.String
      */
     public static String getMsgByCode(int code) {

@@ -3,6 +3,8 @@ package com.shiep.fxbankcard.controller;
 import com.shiep.fxbankcard.entity.FxTransactionRecord;
 import com.shiep.fxbankcard.model.TransactionRecordPage;
 import com.shiep.fxbankcard.service.IFxTransactionRecordService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,7 @@ import java.sql.Timestamp;
 @RestController
 @RequestMapping(path = "/record", produces = "application/json;charset=utf-8")
 public class FxTransactionRecordController {
+    private Logger logger = LoggerFactory.getLogger(FxTransactionRecordController.class);
 
     @Autowired
     private IFxTransactionRecordService transactionRecordService;
@@ -27,6 +30,7 @@ public class FxTransactionRecordController {
     public TransactionRecordPage findByType(@RequestParam("type") Integer type,
                                             @RequestParam("page") Integer page,
                                             @RequestParam("size") Integer size) {
+        logger.info("query transaction");
         Pageable pageable = new PageRequest(page - 1, size);
         Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByType(type, pageable);
         TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
@@ -42,6 +46,7 @@ public class FxTransactionRecordController {
     public TransactionRecordPage findByCurrency(@RequestParam("currencyCode") String currencyCode,
                                                 @RequestParam("page") Integer page,
                                                 @RequestParam("size") Integer size) {
+        logger.info("query transaction");
         Pageable pageable = new PageRequest(page - 1, size);
         Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByCurrency(currencyCode, pageable);
         TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
@@ -58,6 +63,7 @@ public class FxTransactionRecordController {
                                                        @RequestParam(value = "endTime", required = false) Timestamp endTime,
                                                        @RequestParam("page") Integer page,
                                                        @RequestParam("size") Integer size) {
+        logger.info("query transaction");
         Pageable pageable = new PageRequest(page - 1, size);
         Page<FxTransactionRecord> transactionRecords = transactionRecordService.findByTransactionTime(beginTime, endTime, pageable);
         TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
@@ -77,6 +83,7 @@ public class FxTransactionRecordController {
                                        @RequestParam(value = "endTime", required = false) Timestamp endTime,
                                        @RequestParam("page") Integer page,
                                        @RequestParam("size") Integer size) {
+        logger.info("query transaction");
         Pageable pageable = new PageRequest(page - 1, size);
         Page<FxTransactionRecord> transactionRecords = transactionRecordService.query(bankcardID, currencyCode, type, beginTime, endTime, pageable);
         TransactionRecordPage transactionRecordPage = new TransactionRecordPage();
@@ -90,6 +97,7 @@ public class FxTransactionRecordController {
 
     @PostMapping
     public FxTransactionRecord create(@RequestBody FxTransactionRecord transactionRecord) {
+        logger.info("create transaction");
         return transactionRecordService.create(transactionRecord);
     }
 }
