@@ -7,7 +7,6 @@ import com.shiep.fxauth.handler.UnAuthorizedEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -68,8 +67,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(new UnAuthorizedEntryPoint())
                 .and()
                 .authorizeRequests()
+                .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 // 需要角色为ADMIN才能操作该资源
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                // 银行卡操作业务需要USER权限==》用户创建银行卡
+                .antMatchers("/deposit/**", "/fx/**").hasRole("USER")
+                // 用户主页操作需要VISITOR角色权限
+                .antMatchers("/home/**").hasRole("VISITOR")
                 // 账户微服务和银行卡微服务需要认证的用户才能访问
                 .antMatchers("/b/**","/a/**").authenticated()
                 // 其他都放行了
