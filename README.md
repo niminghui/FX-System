@@ -3,16 +3,15 @@
 #### 介绍
 外汇业务管理系统（FX-System），采用微服务架构设计。功能包含银行卡开户、转账、存款、结算活期利息、外汇兑换、人民币结售汇等。
 
-#### 数据库
-数据库：MYSQL
-
+#### 数据库：MYSQL
 ER图
 ![ER图](https://images.gitee.com/uploads/images/2019/0509/172751_d4f2c18a_2276680.jpeg "ER图.JPG")
 
 #### 软件架构
 软件架构说明
 ![微服务架构图](https://images.gitee.com/uploads/images/2019/0509/172939_eafca58a_2276680.jpeg "系统架构图.JPG")
-1、总架构：采用Spring Cloud作为微服务架构技术。并将系统拆分成fx-server、fx-account、fx-bankcard、fx-auth四个微服务。
+
+1. 总架构：采用Spring Cloud作为微服务架构技术。并将系统拆分成fx-server、fx-account、fx-bankcard、fx-auth四个微服务。
   1.1 fx-server微服务
     功能：使用Eureka进行服务治理，以此搭建服务注册中心集群；使用Hystrix Dashboard来实时监控Eureka Client的Hystrix各项指标信息。
     技术：Eureka、Hystrix Dashboard等。
@@ -20,11 +19,11 @@ ER图
   1.2 fx-account微服务
     功能：基础微服务。负责对FX_ACCOUNT、FX_ROLE、FX_ACCOUNT_ROLE数据表进行CRUD操作。
     所用技术概览：Lombok、Druid、JPA、Spring MVC、Thymeleaf、Feign、Hystrix、Actuator等等。
-    1.2.1 MVC架构：使用lombok简化POJO操作，使用Druid作为连接池，使用JPA（Hibernate实现）设计数据持久层（DAO），Spring MVC设计控制层（Controlelr），Thymeleaf设计界面层（View）。
-        ![MVC架构图](https://images.gitee.com/uploads/images/2019/0509/173402_fd7e01a3_2276680.png "屏幕截图.png")
-    1.2.2 服务调用：使用Feign进行声明式服务调用
-    1.2.3 熔断措施：使用Hystrix作为熔断措施，当调用服务失败时，使用服务降级策略。
-    1.2.4 监控：使用Actuator监控和管理Spring Boot应用
+    - MVC架构：使用lombok简化POJO操作，使用Druid作为连接池，使用JPA（Hibernate实现）设计数据持久层（DAO），Spring MVC设计控制层（Controlelr），Thymeleaf设计界面层（View）。
+     ![MVC架构图](https://images.gitee.com/uploads/images/2019/0509/173402_fd7e01a3_2276680.png "屏幕截图.png")
+    - 服务调用：使用Feign进行声明式服务调用
+    - 熔断措施：使用Hystrix作为熔断措施，当调用服务失败时，使用服务降级策略
+    - 监控：使用Actuator监控和管理Spring Boot应用
 
   1.3 fx-bankcard微服务
     功能：
