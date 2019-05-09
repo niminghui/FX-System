@@ -2,6 +2,8 @@ package com.shiep.fxauth.controller;
 
 import com.shiep.fxauth.endpoint.IAccountService;
 import com.shiep.fxauth.vo.RegisterVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+    private Logger logger = LoggerFactory.getLogger(RegisterController.class);
+
     @SuppressWarnings("all")
     @Autowired
     private IAccountService accountService;
@@ -31,7 +35,7 @@ public class RegisterController {
 
     @PostMapping("/validate")
     public ModelAndView registerValidate(HttpServletRequest request, RegisterVo registerVo) {
-        System.out.println(registerVo);
+        logger.info(registerVo.toString());
         ModelAndView mv = new ModelAndView();
         String captcha = request.getSession().getAttribute("captcha").toString();
         if (!captcha.equals(registerVo.getUserCaptcha()) || !registerVo.getPassword().equals(registerVo.getConfirmPassword())) {
@@ -47,7 +51,9 @@ public class RegisterController {
     @GetMapping("/check/{accountName}")
     @ResponseBody
     public Boolean checkAccountNameExist(@PathVariable("accountName") String accountName) {
-        return accountService.getAccountVo(accountName) != null;
+        Boolean result = accountService.getAccountVo(accountName) != null;
+        logger.info("check account name is exist : " + result);
+        return result;
     }
 
 }
