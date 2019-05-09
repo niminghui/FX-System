@@ -97,7 +97,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     /**
-     * description: 登录验证失败后调用，这里直接Json返回，实际上可以重定向到错误界面等
+     * description: 登录验证失败后调用，重定向到错误界面(请求超时)
      * 与AuthenticationFailureHandler作用相同
      *
      * @param request 请求
@@ -107,7 +107,7 @@ public class JwtLoginAuthFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        Map<String, Object> map = ResultVo.result(HttpStatusEnum.USER_LOGIN_FAILED, false);
+        Map<String, Object> map = ResultVo.result(HttpStatusEnum.REQUEST_TIMEOUT, false);
         request.setAttribute("code",map.get("code"));
         request.setAttribute("msg",map.get("messageCN"));
         request.getRequestDispatcher("/error").forward(request,response);

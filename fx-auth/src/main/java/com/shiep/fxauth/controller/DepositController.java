@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -261,6 +262,33 @@ public class DepositController {
             mv.addObject("recordPage", transactionRecordPage);
             mv.addObject("show", true);
         }
+        return mv;
+    }
+
+    @GetMapping("/asset")
+    public ModelAndView toAssetQueryPage() {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("currencyList", CurrencyEnum.values());
+        mv.setViewName("assetQuery");
+        return mv;
+    }
+
+    @GetMapping("/asset/query")
+    public ModelAndView queryAsset(@RequestParam("currency") String currency, HttpServletRequest request) {
+        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
+        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+        ModelAndView mv = new ModelAndView();
+        List<FxAsset> assetList;
+        if (StringUtils.isEmpty(currency)) {
+            assetList = assetService.getAll(bankcardID);
+        } else {
+            assetList = new ArrayList<>();
+            assetList.add(assetService.get(bankcardID, currency));
+        }
+        mv.addObject("assetList", assetList);
+        mv.addObject("currencyList", CurrencyEnum.values());
+        mv.setViewName("assetQuery");
         return mv;
     }
 }

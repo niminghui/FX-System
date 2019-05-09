@@ -52,7 +52,7 @@ public class RegisterController {
     @ResponseBody
     public Boolean checkAccountNameExist(@PathVariable("accountName") String accountName) {
         Boolean result = accountService.getAccountVo(accountName) != null;
-        logger.info("check account name is exist : " + result);
+        logger.info("check account name " + accountName + " is exist : " + result);
         return result;
     }
 

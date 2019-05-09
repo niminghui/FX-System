@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHeader('交易记录查询')">
+</head>
+<body>
+<nav th:replace="common::commonNav"></nav>
+
+<main role="main" class="container">
+    <div class="col-6 m-auto">
+        <div class="card">
+            <div class="card-header bg-info">
+                <p class="m-auto text-center text-light font-weight-bold">查询个人资产</p>
+            </div>
+            <div class="card-body m-auto">
+                <form th:action="@{~/deposit/asset/query}" class="form-inline">
+                    <fieldset class="form-group">
+                        <label class="mr-sm-4 mb-0" for="currency">货币种类</label>
+                        <select class="form-control mr-sm-4 mb-2 mb-sm-0" id="currency" name="currency">
+                            <option value="">
+                                <span>全部</span>
+                            </option>
+                            <option th:each="currency : ${currencyList}" th:value="${currency.code}">
+                                <span th:text="${currency.name}"></span>
+                            </option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group ml-5 mt-4">
+                        <button type="submit" class="btn btn-info">点击查询</button>
+                    </fieldset>
+                </form>
+
+                <hr class="featurette-divider bg-info">
+
+                <div th:if="${assetList ne null}" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-default">
+                        <tr>
+                            <th>币种</th>
+                            <th>余额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="asset : ${assetList}">
+                            <td th:text="${asset.currencyCode}"></td>
+                            <td th:text="${asset.balance}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
