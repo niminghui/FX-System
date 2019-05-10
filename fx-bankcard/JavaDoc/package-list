@@ -1,0 +1,11 @@
+com.shiep.fxbankcard
+com.shiep.fxbankcard.api
+com.shiep.fxbankcard.api.model
+com.shiep.fxbankcard.config
+com.shiep.fxbankcard.controller
+com.shiep.fxbankcard.entity
+com.shiep.fxbankcard.model
+com.shiep.fxbankcard.repository
+com.shiep.fxbankcard.service
+com.shiep.fxbankcard.service.impl
+com.shiep.fxbankcard.utils
