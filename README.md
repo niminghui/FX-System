@@ -1,11 +1,14 @@
 # FX-System
 
+### CSDN地址
+[CSDN地址](https://blog.csdn.net/qq_37771475)  里面有本人整理的Spring、Spring Boot教程，欢迎讨论交流。
+
 #### 介绍
 外汇业务管理系统（FX-System），采用微服务架构设计。功能包含银行卡开户、转账、存款、结算活期利息、外汇兑换、人民币结售汇等。
 
 #### 数据库：MYSQL
 ER图
-![ER图](https://images.gitee.com/uploads/images/2019/0509/172751_d4f2c18a_2276680.jpeg "ER图.JPG")
+![ER图](https://images.gitee.com/uploads/images/2019/0510/153351_6286278a_2276680.jpeg "ER图.JPG")
 
 #### 软件架构
 软件架构说明
@@ -69,38 +72,35 @@ ER图
     本系统通过setFilterProcessesUrl("/login/auth")设置该过滤器访问地址，然后客户端登录界面先提交数据到后端进行数据校验（Spring Validation），校验无误后再提交登录信息到本过滤器。
     UsernamePasswordAuthenticationFilter接着获取客户的Username和Password将其封装成UsernamePasswordAuthenticationToken对象（Authentication的一个实现类），这个对象中封装了我们需要认证的信息。之后通过调用AuthenticationManager的authenticate方法进行认证。然而实际上认证并不是由AuthenticationManager做的，而是由AuthenticationProvider去实现的，AuthenticationManager的作用是管理一组AuthenticationProvider集合，通过for循环遍历的方式去寻找合适的Provider。这里AuthenticationManager调用DaoAuthenticationProvider去认证。
 
-![ DaoAuthenticationProvider的类图](https://images.gitee.com/uploads/images/2019/0510/112829_742d47d7_2276680.jpeg "DaoAuthenticationProvider的类图.jpg")
+    ![ DaoAuthenticationProvider的类图](https://images.gitee.com/uploads/images/2019/0510/112829_742d47d7_2276680.jpeg "DaoAuthenticationProvider的类图.jpg")
 
-    DaoAuthenticationProvider通过调用UserDetailsService的loadUserByUsername方法（本系统是通过Feign调用fx-account的endpoint服务接口来获取账户信息）来获取UserDetails对象。然后把用户信息放在一个已经认证了的Authentication里面。最后Authentication则会沿着调用线最后返回到UsernamePasswordAuthenticationFilter。
-    本系统实现了UsernamePasswordAuthenticationFilter的successfulAuthentication和unsuccessfulAuthentication方法（也可使用Handler）来对认证结果进行操作。successfulAuthentication方法当认证成功时会调用，这里采用JWT将认证信息封装成Token，存入Redis，并将此Token返回给客户端存入Cookie。而unsuccessfulAuthentication方法是在认证失败时调用，这里将请求forward到Error界面，并对错误结果进行渲染。
+    DaoAuthenticationProvider通过调用UserDetailsService的loadUserByUsername方法来获取UserDetails对象。然后比对UserDetails的密码与认证请求的密码是否一致，一致则表示认证通过。在认证成功以后会使用加载的UserDetails（包含用户权限等信息）来封装要返回的Authentication对象，并保存在SecurityContextHolder所持有的SecurityContext中，供后续的程序进行调用，如访问权限的鉴定等。然后此Authentication会沿着调用线返回给UsernamePasswordAuthenticationFilter。
+    最后就是认证结果的处理部分了。本系统是通过实现UsernamePasswordAuthenticationFilter的successfulAuthentication和unsuccessfulAuthentication方法（也可使用Handler）来对认证结果进行操作。successfulAuthentication方法当认证成功时会调用，这里采用JWT将认证信息封装成Token，存入Redis，并将此Token返回给客户端存入Cookie。而unsuccessfulAuthentication方法是在认证失败时调用，这里将请求forward到Error界面，并对错误结果进行渲染。
 
-    2.3 用户访问服务流程（Basic）
+
+3. ELK（ElasticSearch+Logstash+Kibana）实时日志收集分析系统
+    
+    ![ELK架构图](https://images.gitee.com/uploads/images/2019/0510/151431_c7aca490_2276680.jpeg "ELK架构图.JPG")
+
+    3.1 ElasticSearch是实时全文搜索和分析引擎，提供搜集、分析、存储数据三大功能；是一套开放REST和JAVA API等结构,提供高效搜索功能，可扩展的分布式系统。它构建于Apache Lucene搜索引擎库之上。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。
+    
+    3.2 Logstash主要是用来日志的搜集、分析、过滤日志的工具，支持大量的数据获取方式。一般工作方式为c/s架构，client端安装在需要收集日志的主机上，server端负责将收到的各节点日志进行过滤、修改等操作在一并发往ElasticSearch上去。
+
+    3.3 Kibana是一个开源的分析和可视化平台。使用Kibana来搜索，查看，并和存储在ElasticSearch索引中的数据进行交互。可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示ElasticSearch查询的变化。
+
+    3.4 架构改进：由于Logstash消耗性能，所以高并发场景容易遇到流量上的瓶颈，因此可以搭建Logstash集群。另一方面，可以添加中间件进行日志缓存处理。由于Logstash数据源具有多种方式，所有中间件也可以很多选择，常见的有kafka，redis。
+
+    ![高并发时ELK架构图](https://images.gitee.com/uploads/images/2019/0510/152049_0f55fd71_2276680.png "屏幕截图.png")
+
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 数据库安装：从fx-account和fx-bankcard微服务的resources目录下找到schema.sql文件，执行它即可创建数据表。
+2. Redis安装：网上关于Redis安装的教程挺多的，就不赘述了。
+3. ELK安装：同2。
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. 登录界面：localhost:8080/login
+2. Druid监控界面：http://localhost:8001/druid/login.html （用户名：admin 密码：123456）
+3. Hystrix-Dashboard监控界面：http://localhost:7001/hystrix（http://localhost:8001/actuator/hystrix.stream）
