@@ -11,6 +11,7 @@ import com.shiep.fxauth.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -61,10 +62,9 @@ public class ForeignExchangeController {
     }
 
     @GetMapping("/transaction")
-    public ModelAndView toFxTransactionPage(HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+    public ModelAndView toFxTransactionPage() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("foreignExchange");
         mv.addObject("fxRate", apiService.getFxRate());
@@ -95,10 +95,9 @@ public class ForeignExchangeController {
     }
 
     @GetMapping("/cny")
-    public ModelAndView toCNYPage(HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+    public ModelAndView toCNYPage() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         ModelAndView mv = new ModelAndView();
         mv.addObject("rmbRate", apiService.getRmbRate());
         mv.addObject("bankcardID", bankcardID);

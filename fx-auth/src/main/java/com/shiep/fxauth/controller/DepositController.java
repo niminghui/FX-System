@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +73,7 @@ public class DepositController {
     }
 
     @GetMapping("/transaction/record/query")
-    public ModelAndView queryTransactionRecord(TransactionRecordQueryVo queryVo, HttpServletRequest request) {
+    public ModelAndView queryTransactionRecord(TransactionRecordQueryVo queryVo) {
         Integer type = null;
         String currency = null;
         Integer page = 1;
@@ -87,9 +88,8 @@ public class DepositController {
         }
         Timestamp beginTime = TimestampUtils.parse(queryVo.getBeginTime());
         Timestamp endTime = TimestampUtils.parse(queryVo.getEndTime());
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("transactionRecord");
         mv.addObject("currencyList", CurrencyEnum.values());
@@ -107,10 +107,9 @@ public class DepositController {
     }
 
     @GetMapping("/currentInterest")
-    public ModelAndView toCurrentInterestPage(HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+    public ModelAndView toCurrentInterestPage() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("currentInterest");
         mv.addObject("currencyList", CurrencyEnum.values());
@@ -126,10 +125,9 @@ public class DepositController {
     }
 
     @PostMapping("/currentInterest/settlement")
-    public ModelAndView settlementCurrentInterest(@RequestParam("currency") String currency, HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+    public ModelAndView settlementCurrentInterest(@RequestParam("currency") String currency) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         // 结算全部币种的活期利息
         if (StringUtils.isEmpty(currency)) {
             List<FxAsset> assetList = assetService.getAll(bankcardID);
@@ -204,10 +202,9 @@ public class DepositController {
     }
 
     @GetMapping("/transfer")
-    public ModelAndView toTransferPage(HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
+    public ModelAndView toTransferPage() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
         ModelAndView mv = new ModelAndView();
         mv.addObject("bankcardID", bankcardID);
         mv.addObject("currencyList", CurrencyEnum.values());

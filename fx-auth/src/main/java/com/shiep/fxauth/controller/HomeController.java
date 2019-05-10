@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,7 @@ public class HomeController {
 
     @GetMapping
     public ModelAndView toHomePage() {
+        logger.info("toHomePage:" + SecurityContextHolder.getContext().getAuthentication().getName());
         ModelAndView mv = new ModelAndView();
         mv.addObject("fxRate", apiService.getFxRate());
         mv.addObject("rmbRate", apiService.getRmbRate());
@@ -73,12 +75,11 @@ public class HomeController {
     }
 
     @GetMapping("/bankcard/active")
-    public ModelAndView activeBankCard(HttpServletRequest request) {
+    public ModelAndView activeBankCard() {
         ModelAndView mv = new ModelAndView();
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
-        String email = (String) RedisUtils.get(JwtTokenUtils.getUsername(userToken));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
+        String email = (String) RedisUtils.get(username);
         // 如果bankcardID和email为空，表示当前用户还未进行身份认证
         if (StringUtils.isEmpty(bankcardID) || StringUtils.isEmpty(email)) {
             mv.addObject("error", 2);
@@ -90,12 +91,11 @@ public class HomeController {
     }
 
     @GetMapping("/bankcard/bind")
-    public ModelAndView bindBankCard(HttpServletRequest request) {
+    public ModelAndView bindBankCard() {
         ModelAndView mv = new ModelAndView();
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String bankcardID = (String) RedisUtils.hGet("bankcardID", JwtTokenUtils.getUsername(userToken));
-        String email = (String) RedisUtils.get(JwtTokenUtils.getUsername(userToken));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String bankcardID = (String) RedisUtils.hGet("bankcardID", username);
+        String email = (String) RedisUtils.get(username);
         // 如果bankcardID和email为空，表示当前用户还未进行身份认证
         if (StringUtils.isEmpty(bankcardID) || StringUtils.isEmpty(email)) {
             mv.addObject("error", 1);
@@ -114,11 +114,9 @@ public class HomeController {
     }
 
     @GetMapping("/myBankCard")
-    public ModelAndView toMyBankCardPage(HttpServletRequest request) {
+    public ModelAndView toMyBankCardPage() {
         ModelAndView mv = new ModelAndView();
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String accountName = JwtTokenUtils.getUsername(userToken);
+        String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
         String bankcardID = (String) RedisUtils.hGet("bankcardID", accountName);
         // 如果银行卡号码为空，表示还未办理银行卡
         if (StringUtils.isEmpty(bankcardID)) {
@@ -147,10 +145,8 @@ public class HomeController {
 
     @GetMapping("/showUserInfo")
     @ResponseBody
-    public FxUser getUserInfo(HttpServletRequest request) {
-        String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-        String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        String accountName = JwtTokenUtils.getUsername(userToken);
+    public FxUser getUserInfo() {
+        String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
         String email = (String) RedisUtils.get(accountName);
         return userInfoService.getByEmail(email);
     }
@@ -159,9 +155,10 @@ public class HomeController {
     @ResponseBody
     public Boolean updateBankCardPassword(@PathVariable("bankcardID") String bankcardID, @RequestParam String oldPassword,
                                           @RequestParam String newPassword, @RequestParam String status) {
+        String unActive = "0";
         if (bankCardService.updatePassword(bankcardID, oldPassword, newPassword) != null) {
             // 如果银行卡未激活，修改密码后将激活
-            if ("0".equals(status)) {
+            if (unActive.equals(status)) {
                 bankCardService.activeBankCard(bankcardID);
             }
             return true;
@@ -209,10 +206,9 @@ public class HomeController {
             // 发送初始密码到用户邮箱
             mailService.sendThymeleafMail(userInfo.getEmail(), "FX-System：激活银行卡", "mailActive", value);
             // 将银行卡号码存入redis
-            String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-            String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-            RedisUtils.hPut("bankcardID", JwtTokenUtils.getUsername(userToken), bankCard.getId());
-            RedisUtils.set(JwtTokenUtils.getUsername(userToken), userInfo.getEmail());
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            RedisUtils.hPut("bankcardID", username, bankCard.getId());
+            RedisUtils.set(username, userInfo.getEmail());
             // 跳转到激活银行卡界面
             mv.addObject("bankcardID", bankCard.getId());
             mv.addObject("email", userInfo.getEmail());
@@ -231,8 +227,7 @@ public class HomeController {
     public ModelAndView activeBankCard(@RequestParam("email") String email,
                                        @RequestParam("bankcardID") String bankcardID,
                                        @RequestParam("initPassword") String initPassword,
-                                       @RequestParam("password") String newPassword,
-                                       HttpServletRequest request) {
+                                       @RequestParam("password") String newPassword) {
         ModelAndView mv = new ModelAndView();
         FxBankCard bankCard = bankCardService.findByBankCardId(bankcardID);
         // 如果用户初始密码匹配
@@ -242,9 +237,7 @@ public class HomeController {
             // 修改密码
             bankCardService.updatePassword(bankcardID, initPassword, newPassword);
             // 当激活银行卡后，为用户授予“USER”角色==》可进行银行卡业务操作
-            String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-            String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-            String accountName = JwtTokenUtils.getUsername(userToken);
+            String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
             accountService.authorization(accountName, "ROLE_USER");
             mv.setViewName("bindBankcard");
             return mv;
@@ -262,15 +255,14 @@ public class HomeController {
     }
 
     @PostMapping("/bankcard/bind")
-    public ModelAndView bindBankCard(String bankcardID, String reservedMail, HttpServletRequest request) {
+    public ModelAndView bindBankCard(String bankcardID, String reservedMail) {
         ModelAndView mv = new ModelAndView();
         FxUser user = userInfoService.getByEmail(reservedMail);
         if (user != null) {
-            String tokenHeader = URLDecoder.decode(CookieUtils.getCookie(request, "token").getValue());
-            String userToken = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
             // 将银行卡绑定到账户==>先判断该银行卡是否存在
             if ((bankCardService.findByBankCardId(bankcardID) != null) &&
-                    (accountService.bindBankCard(JwtTokenUtils.getUsername(userToken), bankcardID))) {
+                    (accountService.bindBankCard(username, bankcardID))) {
                 mv.setViewName("redirect:/home");
                 return mv;
             }
