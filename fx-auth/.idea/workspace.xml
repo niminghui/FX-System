@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="FX-Auth：完善Spring Security权限访问配置">
+    <list default="true" id="61a81449-bc57-47c0-9f8d-027925311df3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/ForeignExchangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/ForeignExchangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -53,9 +49,10 @@
           <entry key="class" value="1" />
           <entry key="css" value="15" />
           <entry key="html" value="241" />
-          <entry key="java" value="496" />
+          <entry key="java" value="498" />
           <entry key="jpg" value="1" />
           <entry key="js" value="19" />
+          <entry key="md" value="1" />
           <entry key="png" value="1" />
           <entry key="properties" value="9" />
           <entry key="xml" value="15" />
@@ -68,8 +65,9 @@
           <entry key="CSS" value="15" />
           <entry key="HTML" value="241" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="496" />
+          <entry key="JAVA" value="498" />
           <entry key="JavaScript" value="19" />
+          <entry key="Markdown" value="1" />
           <entry key="Properties" value="9" />
           <entry key="XML" value="15" />
           <entry key="YAML" value="13" />
@@ -80,10 +78,10 @@
           <entry key="css" value="101" />
           <entry key="dummy" value="26" />
           <entry key="html" value="11351" />
-          <entry key="java" value="23594" />
+          <entry key="java" value="23596" />
           <entry key="js" value="260" />
           <entry key="properties" value="104" />
-          <entry key="txt" value="675" />
+          <entry key="txt" value="687" />
           <entry key="xml" value="49" />
           <entry key="yml" value="133" />
         </counts>
@@ -92,9 +90,9 @@
         <counts>
           <entry key="CSS" value="103" />
           <entry key="HTML" value="11346" />
-          <entry key="JAVA" value="23594" />
+          <entry key="JAVA" value="23596" />
           <entry key="JavaScript" value="260" />
-          <entry key="PLAIN_TEXT" value="701" />
+          <entry key="PLAIN_TEXT" value="713" />
           <entry key="Properties" value="104" />
           <entry key="SQL" value="22" />
           <entry key="ThymeleafExpressions" value="3" />
@@ -107,19 +105,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/SecurityConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-810">
-              <caret line="206" column="75" selection-start-line="206" selection-start-column="75" selection-end-line="206" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/ForeignExchangeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-586">
-              <caret line="99" column="75" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
+            <state relative-caret-position="-160">
+              <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,20 +125,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-535">
-              <caret line="75" column="56" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/RegisterController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="36" column="67" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="67" />
+            <state relative-caret-position="-382">
+              <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -222,7 +205,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/PageImplement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/common/TransactionRecordPage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/endpoint/ITransactionRecordService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/TransactionRecordQueryVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/FxAuthApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/model/FxAsset.java" />
@@ -256,6 +238,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/ForeignExchangeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java" />
       </list>
     </option>
   </component>
@@ -470,6 +453,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fx-auth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fx-auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -489,7 +481,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557468434947" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557474813679" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -700,7 +692,7 @@
       <workItem from="1557192664141" duration="24855000" />
       <workItem from="1557278878482" duration="4396000" />
       <workItem from="1557379878229" duration="11850000" />
-      <workItem from="1557451000566" duration="9484000" />
+      <workItem from="1557451000566" duration="12316000" />
     </task>
     <task id="LOCAL-00001" summary="fx-auth:实现Token登录认证流程">
       <created>1553498069215</created>
@@ -954,7 +946,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557391410412</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="FX-Auth：优化获取当前账户名方法">
+      <created>1557468576997</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1557468576997</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -990,7 +989,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="469847000" />
+    <option name="totallyTimeSpent" value="472679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -1005,7 +1004,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3385269" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3385269" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1017,7 +1016,7 @@
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3286119" />
       <window_info anchor="bottom" id="Problems" order="13" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.29036826" />
       <window_info anchor="bottom" id="Statistic" order="15" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1038,7 +1037,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fx-auth: 完善Token认证流程" />
     <MESSAGE value="fx-auth: 优化Token认证流程，采用cookie取Token" />
     <MESSAGE value="fx-auth: 新增异步发送邮件服务，并通过测试" />
     <MESSAGE value="fx-auth: 修正loginPage数据绑定及错误回传BUG" />
@@ -1063,17 +1061,11 @@
     <MESSAGE value="FX-Auth：搭建ELK分布式日志系统" />
     <MESSAGE value="FX-Auth：实现查询个人资产功能" />
     <MESSAGE value="FX-Auth：完善Spring Security权限访问配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="FX-Auth：完善Spring Security权限访问配置" />
+    <MESSAGE value="FX-Auth：优化获取当前账户名方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="FX-Auth：优化获取当前账户名方法" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/deposit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="54" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/depositRate.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-405">
@@ -1299,23 +1291,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/SecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="88" column="26" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="31" column="63" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/vo/LoginVo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1375,13 +1350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="261" column="95" lean-forward="true" selection-start-line="261" selection-start-column="12" selection-end-line="261" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/DepositController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-810">
@@ -1405,8 +1373,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/RegisterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="146">
           <caret line="36" column="67" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/config/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160">
+          <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/controller/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="261" column="95" lean-forward="true" selection-start-line="261" selection-start-column="12" selection-end-line="261" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-663" />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shiep/fxauth/filter/JwtPreAuthFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-382">
+          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
         </state>
       </provider>
     </entry>
