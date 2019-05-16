@@ -77,18 +77,46 @@ ER图
     DaoAuthenticationProvider通过调用UserDetailsService的loadUserByUsername方法来获取UserDetails对象。然后比对UserDetails的密码与认证请求的密码是否一致，一致则表示认证通过。在认证成功以后会使用加载的UserDetails（包含用户权限等信息）来封装要返回的Authentication对象，并保存在SecurityContextHolder所持有的SecurityContext中，供后续的程序进行调用，如访问权限的鉴定等。然后此Authentication会沿着调用线返回给UsernamePasswordAuthenticationFilter。
     最后就是认证结果的处理部分了。本系统是通过实现UsernamePasswordAuthenticationFilter的successfulAuthentication和unsuccessfulAuthentication方法（也可使用Handler）来对认证结果进行操作。successfulAuthentication方法当认证成功时会调用，这里采用JWT将认证信息封装成Token，存入Redis，并将此Token返回给客户端存入Cookie。而unsuccessfulAuthentication方法是在认证失败时调用，这里将请求forward到Error界面，并对错误结果进行渲染。
 
+3. STOMP over Websocket实现B/S全双工通信
 
-3. ELK（ElasticSearch+Logstash+Kibana）实时日志收集分析系统
+    ![OSI七层模型](https://images.gitee.com/uploads/images/2019/0516/153157_65f4091a_2276680.png "屏幕截图.png")
+    ![作用](https://images.gitee.com/uploads/images/2019/0516/153223_7f017d3e_2276680.png "屏幕截图.png")
+    
+    3.1 Http协议：HTTP协议即超文本传送协议(Hypertext Transfer Protocol )，是一个应用层协议，由请求（request）和响应（response）构成，是一个标准的客户端服务器模型。特点：单工、无状态、一个request一个response。
+
+    3.2 WebSocket协议：WebSocket是一种在单个TCP连接上进行全双工通信的协议。
+
+    3.3 STOMP协议：STOMP即Simple (or Streaming) Text Orientated Messaging Protocol，简单(流)文本定向消息协议，它提供了一个可互操作的连接格式，允许STOMP客户端与任意STOMP消息代理（Broker）进行交互。
+
+    3.4 实现B/S通信的方式
+    - Ajax轮询：客户端定时向服务器发送Ajax请求，服务器接到请求后马上返回响应信息并关闭连接。缺点：请求中有大半是无用，浪费带宽和服务器资源。
+    - 长轮询（long poll）：客户端向服务器发送Ajax请求，服务器接到请求后hold住连接，直到有新消息才返回响应信息并关闭连接，客户端处理完响应信息后再向服务器发送新的请求。（Http1.1协议中的长连接Persistent Connection）
+    注意：Ajax轮询与长轮询都是采用Http协议，而Http协议本身是无状态的，并且是被动的（即服务端不能主动发送消息）
+
+    - WebSocket长连接：WebSocket协议被设计来取代现有的使用HTTP作为传输层的双向通信技术。它通过发送一次Http请求进行握手，然后协议切换成WebSocket，数据就直接从TCP通道进行传输，而与Http无关了。
+
+    3.5 STOMP over WebSocket：STOMP在WebSocket之上提供了一个基于帧的线路格式（frame-based wire format）层，用来定义消息的语义。STOMP帧由命令、一个或多个头信息以及负载所组成。例如，如下就是发送数据的一个STOMP帧：
+
+```
+     SEND
+     destination:/request/sendUser
+     content-length:8
+ 
+     user2,hi
+```
+
+
+4. ELK（ElasticSearch+Logstash+Kibana）实时日志收集分析系统
     
     ![ELK架构图](https://images.gitee.com/uploads/images/2019/0510/151431_c7aca490_2276680.jpeg "ELK架构图.JPG")
 
-    3.1 ElasticSearch是实时全文搜索和分析引擎，提供搜集、分析、存储数据三大功能；是一套开放REST和JAVA API等结构,提供高效搜索功能，可扩展的分布式系统。它构建于Apache Lucene搜索引擎库之上。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。
+    4.1 ElasticSearch是实时全文搜索和分析引擎，提供搜集、分析、存储数据三大功能；是一套开放REST和JAVA API等结构,提供高效搜索功能，可扩展的分布式系统。它构建于Apache Lucene搜索引擎库之上。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。
     
-    3.2 Logstash主要是用来日志的搜集、分析、过滤日志的工具，支持大量的数据获取方式。一般工作方式为c/s架构，client端安装在需要收集日志的主机上，server端负责将收到的各节点日志进行过滤、修改等操作在一并发往ElasticSearch上去。
+    4.2 Logstash主要是用来日志的搜集、分析、过滤日志的工具，支持大量的数据获取方式。一般工作方式为c/s架构，client端安装在需要收集日志的主机上，server端负责将收到的各节点日志进行过滤、修改等操作在一并发往ElasticSearch上去。
 
-    3.3 Kibana是一个开源的分析和可视化平台。使用Kibana来搜索，查看，并和存储在ElasticSearch索引中的数据进行交互。可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示ElasticSearch查询的变化。
+    4.3 Kibana是一个开源的分析和可视化平台。使用Kibana来搜索，查看，并和存储在ElasticSearch索引中的数据进行交互。可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示ElasticSearch查询的变化。
 
-    3.4 架构改进：由于Logstash消耗性能，所以高并发场景容易遇到流量上的瓶颈，因此可以搭建Logstash集群。另一方面，可以添加中间件进行日志缓存处理。由于Logstash数据源具有多种方式，所有中间件也可以很多选择，常见的有kafka，redis。
+    4.4 架构改进：由于Logstash消耗性能，所以高并发场景容易遇到流量上的瓶颈，因此可以搭建Logstash集群。另一方面，可以添加中间件进行日志缓存处理。由于Logstash数据源具有多种方式，所有中间件也可以很多选择，常见的有kafka，redis。
 
     ![高并发时ELK架构图](https://images.gitee.com/uploads/images/2019/0510/152049_0f55fd71_2276680.png "屏幕截图.png")
 
